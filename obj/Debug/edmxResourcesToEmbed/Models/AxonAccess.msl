@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities">
+    <EntitySetMapping Name="Mae_Comuna">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Comuna">
+        <MappingFragment StoreEntitySet="Mae_Comuna">
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="id_region" ColumnName="id_region" />
+          <ScalarProperty Name="desc_comuna" ColumnName="desc_comuna" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Empresa">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Empresa">
+        <MappingFragment StoreEntitySet="Mae_Empresa">
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="desc_empresa" ColumnName="desc_empresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Puerta">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Puerta">
+        <MappingFragment StoreEntitySet="Mae_Puerta">
+          <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Region">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Region">
+        <MappingFragment StoreEntitySet="Mae_Region">
+          <ScalarProperty Name="id_region" ColumnName="id_region" />
+          <ScalarProperty Name="desc_region" ColumnName="desc_region" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Usuario">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
+        <MappingFragment StoreEntitySet="Mae_Usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+          <ScalarProperty Name="dv" ColumnName="dv" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="app_pater" ColumnName="app_pater" />
+          <ScalarProperty Name="app_mater" ColumnName="app_mater" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_DetalleAcceso">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_DetalleAcceso">
+        <MappingFragment StoreEntitySet="Ref_DetalleAcceso">
+          <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+          <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
+          <ScalarProperty Name="fecha_detalle" ColumnName="fecha_detalle" />
+          <ScalarProperty Name="conteo_ingreso" ColumnName="conteo_ingreso" />
+          <ScalarProperty Name="desc_detalle" ColumnName="desc_detalle" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Estado">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_Estado">
+        <MappingFragment StoreEntitySet="Ref_Estado">
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="desc_estado" ColumnName="desc_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Role">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_Role">
+        <MappingFragment StoreEntitySet="Ref_Role">
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="desc_role" ColumnName="desc_role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_UserAccess">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_UserAccess">
+        <MappingFragment StoreEntitySet="Ref_UserAccess">
+          <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+          <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
+          <ScalarProperty Name="fecha_acceso" ColumnName="fecha_acceso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="axonAccessModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="axonAccessModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="axonAccessModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="axonAccessModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="axonAccessModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="axonAccessModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="axonAccessModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="axonAccessModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_INS_USUARIO_MASS" FunctionName="axonAccessModel.Store.SP_INS_USUARIO_MASS" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
+  </EntityContainerMapping>
+</Mapping>

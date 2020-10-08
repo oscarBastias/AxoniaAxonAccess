@@ -1,0 +1,30 @@
+﻿@model List<AxonAccessMVC.Models.Clases.Ref_Role>
+@{
+    ViewBag.Title = "Axonia";
+}
+
+<div class="jumbotron">
+    <h1>AxonAcces</h1>
+    <p class="lead">AxonAccess</p>
+    <p><a href="https://www.axonia.cl" class="btn btn-primary btn-lg">Visite Axonia &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Id</th>
+                <th>Descripcion role</th>
+            </tr>
+            @foreach (var oElemento in Model)
+            {
+                <tr>
+                    <td>@oElemento.id_role</td>
+                    <td>@oElemento.desc_role</td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>

@@ -1,0 +1,833 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="axonAccessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mae_Comuna">
+          <Key>
+            <PropertyRef Name="id_comuna" />
+          </Key>
+          <Property Name="id_comuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_region" Type="int" />
+          <Property Name="desc_comuna" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mae_Empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_comuna" Type="int" />
+          <Property Name="desc_empresa" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mae_Puerta">
+          <Key>
+            <PropertyRef Name="id_puerta" />
+          </Key>
+          <Property Name="id_puerta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="desc_puerta" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mae_Region">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_region" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Mae_Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_role" Type="int" />
+          <Property Name="id_estado" Type="int" />
+          <Property Name="id_comuna" Type="int" />
+          <Property Name="id_empresa" Type="int" />
+          <Property Name="rut" Type="int" />
+          <Property Name="dv" Type="char" MaxLength="1" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="app_pater" Type="varchar" MaxLength="50" />
+          <Property Name="app_mater" Type="varchar" MaxLength="50" />
+          <Property Name="direccion" Type="varchar" MaxLength="100" />
+          <Property Name="telefono" Type="int" />
+          <Property Name="mail" Type="varchar" MaxLength="100" />
+          <Property Name="pass" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ref_DetalleAcceso">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_acceso" Type="int" />
+          <Property Name="fecha_detalle" Type="datetime" />
+          <Property Name="conteo_ingreso" Type="int" />
+          <Property Name="desc_detalle" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Ref_Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_estado" Type="char" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Ref_Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_role" Type="char" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Ref_UserAccess">
+          <Key>
+            <PropertyRef Name="id_acceso" />
+          </Key>
+          <Property Name="id_acceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="id_puerta" Type="int" />
+          <Property Name="desc_puerta" Type="varchar" MaxLength="100" />
+          <Property Name="fecha_acceso" Type="datetime" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Comuna_Region">
+          <End Role="Mae_Region" Type="Self.Mae_Region" Multiplicity="0..1" />
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Mae_Comuna">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleAcceso_UserAccess">
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="0..1" />
+          <End Role="Ref_DetalleAcceso" Type="Self.Ref_DetalleAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_UserAccess">
+              <PropertyRef Name="id_acceso" />
+            </Principal>
+            <Dependent Role="Ref_DetalleAcceso">
+              <PropertyRef Name="id_acceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Comuna">
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Comuna">
+              <PropertyRef Name="id_comuna" />
+            </Principal>
+            <Dependent Role="Mae_Empresa">
+              <PropertyRef Name="id_comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Puerta_Empresa">
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+          <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="Mae_Puerta">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccess_Puerta">
+          <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="0..1" />
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Puerta">
+              <PropertyRef Name="id_puerta" />
+            </Principal>
+            <Dependent Role="Ref_UserAccess">
+              <PropertyRef Name="id_puerta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccess_Usuario">
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="0..1" />
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Ref_UserAccess">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Comuna">
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Comuna">
+              <PropertyRef Name="id_comuna" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Empresa">
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Role="Ref_Estado" Type="Self.Ref_Estado" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Role">
+          <End Role="Ref_Role" Type="Self.Ref_Role" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_INS_USUARIO_MASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_ROLE" Type="int" Mode="In" />
+          <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+          <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+          <Parameter Name="RUT" Type="int" Mode="In" />
+          <Parameter Name="DV" Type="char" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="APP_PATER" Type="varchar" Mode="In" />
+          <Parameter Name="APP_MATER" Type="varchar" Mode="In" />
+          <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="TELEFONO" Type="int" Mode="In" />
+          <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Sp_LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mail" Type="varchar" Mode="In" />
+          <Parameter Name="Pass" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="axonAccessModelStoreContainer">
+          <EntitySet Name="Mae_Comuna" EntityType="Self.Mae_Comuna" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mae_Puerta" EntityType="Self.Mae_Puerta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mae_Region" EntityType="Self.Mae_Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_Role" EntityType="Self.Ref_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_UserAccess" EntityType="Self.Ref_UserAccess" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comuna_Region" Association="Self.FK_Comuna_Region">
+            <End Role="Mae_Region" EntitySet="Mae_Region" />
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleAcceso_UserAccess" Association="Self.FK_DetalleAcceso_UserAccess">
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+            <End Role="Ref_DetalleAcceso" EntitySet="Ref_DetalleAcceso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Comuna" Association="Self.FK_Empresa_Comuna">
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Puerta_Empresa" Association="Self.FK_Puerta_Empresa">
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+            <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccess_Puerta" Association="Self.FK_UserAccess_Puerta">
+            <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccess_Usuario" Association="Self.FK_UserAccess_Usuario">
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Comuna" Association="Self.FK_Usuario_Comuna">
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Empresa" Association="Self.FK_Usuario_Empresa">
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
+            <End Role="Ref_Estado" EntitySet="Ref_Estado" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Role" Association="Self.FK_Usuario_Role">
+            <End Role="Ref_Role" EntitySet="Ref_Role" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="axonAccessModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mae_Comuna">
+          <Key>
+            <PropertyRef Name="id_comuna" />
+          </Key>
+          <Property Name="id_comuna" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_region" Type="Int32" />
+          <Property Name="desc_comuna" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Region" Relationship="Self.FK_Comuna_Region" FromRole="Mae_Comuna" ToRole="Mae_Region" />
+          <NavigationProperty Name="Mae_Empresa" Relationship="Self.FK_Empresa_Comuna" FromRole="Mae_Comuna" ToRole="Mae_Empresa" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="Self.FK_Usuario_Comuna" FromRole="Mae_Comuna" ToRole="Mae_Usuario" />
+        </EntityType>
+        <EntityType Name="Mae_Empresa">
+          <Key>
+            <PropertyRef Name="id_empresa" />
+          </Key>
+          <Property Name="id_empresa" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_comuna" Type="Int32" />
+          <Property Name="desc_empresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Comuna" Relationship="Self.FK_Empresa_Comuna" FromRole="Mae_Empresa" ToRole="Mae_Comuna" />
+          <NavigationProperty Name="Mae_Puerta" Relationship="Self.FK_Puerta_Empresa" FromRole="Mae_Empresa" ToRole="Mae_Puerta" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="Self.FK_Usuario_Empresa" FromRole="Mae_Empresa" ToRole="Mae_Usuario" />
+        </EntityType>
+        <EntityType Name="Mae_Puerta">
+          <Key>
+            <PropertyRef Name="id_puerta" />
+          </Key>
+          <Property Name="id_puerta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="desc_puerta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Empresa" Relationship="Self.FK_Puerta_Empresa" FromRole="Mae_Puerta" ToRole="Mae_Empresa" />
+          <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Puerta" FromRole="Mae_Puerta" ToRole="Ref_UserAccess" />
+        </EntityType>
+        <EntityType Name="Mae_Region">
+          <Key>
+            <PropertyRef Name="id_region" />
+          </Key>
+          <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Comuna" Relationship="Self.FK_Comuna_Region" FromRole="Mae_Region" ToRole="Mae_Comuna" />
+        </EntityType>
+        <EntityType Name="Mae_Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_role" Type="Int32" />
+          <Property Name="id_estado" Type="Int32" />
+          <Property Name="id_comuna" Type="Int32" />
+          <Property Name="id_empresa" Type="Int32" />
+          <Property Name="rut" Type="Int32" />
+          <Property Name="dv" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="app_pater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="app_mater" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="Int32" />
+          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Comuna" Relationship="Self.FK_Usuario_Comuna" FromRole="Mae_Usuario" ToRole="Mae_Comuna" />
+          <NavigationProperty Name="Mae_Empresa" Relationship="Self.FK_Usuario_Empresa" FromRole="Mae_Usuario" ToRole="Mae_Empresa" />
+          <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Usuario" FromRole="Mae_Usuario" ToRole="Ref_UserAccess" />
+          <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Mae_Usuario" ToRole="Ref_Estado" />
+          <NavigationProperty Name="Ref_Role" Relationship="Self.FK_Usuario_Role" FromRole="Mae_Usuario" ToRole="Ref_Role" />
+        </EntityType>
+        <EntityType Name="Ref_DetalleAcceso">
+          <Key>
+            <PropertyRef Name="id_detalle" />
+          </Key>
+          <Property Name="id_detalle" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_acceso" Type="Int32" />
+          <Property Name="fecha_detalle" Type="DateTime" Precision="3" />
+          <Property Name="conteo_ingreso" Type="Int32" />
+          <Property Name="desc_detalle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_DetalleAcceso_UserAccess" FromRole="Ref_DetalleAcceso" ToRole="Ref_UserAccess" />
+        </EntityType>
+        <EntityType Name="Ref_Estado">
+          <Key>
+            <PropertyRef Name="id_estado" />
+          </Key>
+          <Property Name="id_estado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_estado" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="Self.FK_Usuario_Estado" FromRole="Ref_Estado" ToRole="Mae_Usuario" />
+        </EntityType>
+        <EntityType Name="Ref_Role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_role" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="Self.FK_Usuario_Role" FromRole="Ref_Role" ToRole="Mae_Usuario" />
+        </EntityType>
+        <EntityType Name="Ref_UserAccess">
+          <Key>
+            <PropertyRef Name="id_acceso" />
+          </Key>
+          <Property Name="id_acceso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="id_puerta" Type="Int32" />
+          <Property Name="desc_puerta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="fecha_acceso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Mae_Puerta" Relationship="Self.FK_UserAccess_Puerta" FromRole="Ref_UserAccess" ToRole="Mae_Puerta" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="Self.FK_UserAccess_Usuario" FromRole="Ref_UserAccess" ToRole="Mae_Usuario" />
+          <NavigationProperty Name="Ref_DetalleAcceso" Relationship="Self.FK_DetalleAcceso_UserAccess" FromRole="Ref_UserAccess" ToRole="Ref_DetalleAcceso" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Comuna_Region">
+          <End Role="Mae_Region" Type="Self.Mae_Region" Multiplicity="0..1" />
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Region">
+              <PropertyRef Name="id_region" />
+            </Principal>
+            <Dependent Role="Mae_Comuna">
+              <PropertyRef Name="id_region" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empresa_Comuna">
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Comuna">
+              <PropertyRef Name="id_comuna" />
+            </Principal>
+            <Dependent Role="Mae_Empresa">
+              <PropertyRef Name="id_comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Comuna">
+          <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Comuna">
+              <PropertyRef Name="id_comuna" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_comuna" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Puerta_Empresa">
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+          <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="Mae_Puerta">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Empresa">
+          <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Empresa">
+              <PropertyRef Name="id_empresa" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_empresa" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccess_Puerta">
+          <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="0..1" />
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Puerta">
+              <PropertyRef Name="id_puerta" />
+            </Principal>
+            <Dependent Role="Ref_UserAccess">
+              <PropertyRef Name="id_puerta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccess_Usuario">
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="0..1" />
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Ref_UserAccess">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Estado">
+          <End Role="Ref_Estado" Type="Self.Ref_Estado" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Estado">
+              <PropertyRef Name="id_estado" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_Role">
+          <End Role="Ref_Role" Type="Self.Ref_Role" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_Role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleAcceso_UserAccess">
+          <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="0..1" />
+          <End Role="Ref_DetalleAcceso" Type="Self.Ref_DetalleAcceso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_UserAccess">
+              <PropertyRef Name="id_acceso" />
+            </Principal>
+            <Dependent Role="Ref_DetalleAcceso">
+              <PropertyRef Name="id_acceso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="axonAccessEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mae_Comuna" EntityType="Self.Mae_Comuna" />
+          <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" />
+          <EntitySet Name="Mae_Puerta" EntityType="Self.Mae_Puerta" />
+          <EntitySet Name="Mae_Region" EntityType="Self.Mae_Region" />
+          <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" />
+          <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" />
+          <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" />
+          <EntitySet Name="Ref_Role" EntityType="Self.Ref_Role" />
+          <EntitySet Name="Ref_UserAccess" EntityType="Self.Ref_UserAccess" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Comuna_Region" Association="Self.FK_Comuna_Region">
+            <End Role="Mae_Region" EntitySet="Mae_Region" />
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empresa_Comuna" Association="Self.FK_Empresa_Comuna">
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Comuna" Association="Self.FK_Usuario_Comuna">
+            <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Puerta_Empresa" Association="Self.FK_Puerta_Empresa">
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+            <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Empresa" Association="Self.FK_Usuario_Empresa">
+            <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccess_Puerta" Association="Self.FK_UserAccess_Puerta">
+            <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccess_Usuario" Association="Self.FK_UserAccess_Usuario">
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
+            <End Role="Ref_Estado" EntitySet="Ref_Estado" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_Role" Association="Self.FK_Usuario_Role">
+            <End Role="Ref_Role" EntitySet="Ref_Role" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleAcceso_UserAccess" Association="Self.FK_DetalleAcceso_UserAccess">
+            <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+            <End Role="Ref_DetalleAcceso" EntitySet="Ref_DetalleAcceso" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(axonAccessModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(axonAccessModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INS_USUARIO_MASS">
+            <Parameter Name="ID_ROLE" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="RUT" Mode="In" Type="Int32" />
+            <Parameter Name="DV" Mode="In" Type="String" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="APP_PATER" Mode="In" Type="String" />
+            <Parameter Name="APP_MATER" Mode="In" Type="String" />
+            <Parameter Name="DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="Sp_LoginUsuario" ReturnType="Collection(Int32)">
+            <Parameter Name="mail" Mode="In" Type="String" />
+            <Parameter Name="Pass" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities">
+          <EntitySetMapping Name="Mae_Comuna">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Comuna">
+              <MappingFragment StoreEntitySet="Mae_Comuna">
+                <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+                <ScalarProperty Name="desc_comuna" ColumnName="desc_comuna" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mae_Empresa">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Empresa">
+              <MappingFragment StoreEntitySet="Mae_Empresa">
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+                <ScalarProperty Name="desc_empresa" ColumnName="desc_empresa" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mae_Puerta">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Puerta">
+              <MappingFragment StoreEntitySet="Mae_Puerta">
+                <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mae_Region">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Region">
+              <MappingFragment StoreEntitySet="Mae_Region">
+                <ScalarProperty Name="id_region" ColumnName="id_region" />
+                <ScalarProperty Name="desc_region" ColumnName="desc_region" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mae_Usuario">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
+              <MappingFragment StoreEntitySet="Mae_Usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="dv" ColumnName="dv" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="app_pater" ColumnName="app_pater" />
+                <ScalarProperty Name="app_mater" ColumnName="app_mater" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_DetalleAcceso">
+            <EntityTypeMapping TypeName="axonAccessModel.Ref_DetalleAcceso">
+              <MappingFragment StoreEntitySet="Ref_DetalleAcceso">
+                <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
+                <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
+                <ScalarProperty Name="fecha_detalle" ColumnName="fecha_detalle" />
+                <ScalarProperty Name="conteo_ingreso" ColumnName="conteo_ingreso" />
+                <ScalarProperty Name="desc_detalle" ColumnName="desc_detalle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Estado">
+            <EntityTypeMapping TypeName="axonAccessModel.Ref_Estado">
+              <MappingFragment StoreEntitySet="Ref_Estado">
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="desc_estado" ColumnName="desc_estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_Role">
+            <EntityTypeMapping TypeName="axonAccessModel.Ref_Role">
+              <MappingFragment StoreEntitySet="Ref_Role">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="desc_role" ColumnName="desc_role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ref_UserAccess">
+            <EntityTypeMapping TypeName="axonAccessModel.Ref_UserAccess">
+              <MappingFragment StoreEntitySet="Ref_UserAccess">
+                <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+                <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
+                <ScalarProperty Name="fecha_acceso" ColumnName="fecha_acceso" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="axonAccessModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="axonAccessModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="axonAccessModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="axonAccessModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="axonAccessModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="axonAccessModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="axonAccessModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="axonAccessModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_INS_USUARIO_MASS" FunctionName="axonAccessModel.Store.SP_INS_USUARIO_MASS" />
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

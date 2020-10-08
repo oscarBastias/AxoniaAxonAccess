@@ -1,0 +1,158 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Dynamic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Web;
+using System.IO;
+
+namespace AxonAccessMVC.Models.Clases
+{
+    public class Usuario
+    {
+        public int Id { get; set; }
+        public int Id_Role { get; set; }
+        public int Id_Estado { get; set; }
+        public int Id_Comuna { get; set; }
+        public int Id_Empresa { get; set; }
+        public int Rut { get; set; }
+        public string Dv { get; set; }
+        public string Nombre { get; set; }
+        public string App_Pater { get; set; }
+        public string App_Mater { get; set; }
+        public string Direccion { get; set; }
+        public int Telefono { get; set; }
+        public string Mail { get; set; }
+        public string Pass { get; set; }
+        public string Desc_Role { get; set; }
+
+ 
+
+
+        axonAccessEntities db = new axonAccessEntities();
+        AxonAccessMVC.Controllers.AuthController au = new Controllers.AuthController();
+        
+        
+        public List<Usuario> ReadAll()
+        {
+            string userMail = HttpContext.Current.User.Identity.Name;
+            AxonAccessMVC.Models.Mae_Usuario resss = db.Mae_Usuario.FirstOrDefault
+                    (u => u.mail == userMail);
+            if (resss.id_role == 4 || resss.id_role == 5)
+            {
+                return (from us in db.Mae_Usuario
+                        join ro in db.Ref_Role
+                        on us.id_role equals ro.id_role
+                        where us.id_role==4 || us.id_role==5
+                        select new Models.Clases.Usuario
+                        {
+                            Id = (int)us.id_usuario,
+                            Id_Role = (int)us.id_role,
+                            Desc_Role = ro.desc_role,
+                            Id_Estado = (int)us.id_estado,
+                            Id_Comuna = (int)us.id_comuna,
+                            Id_Empresa = (int)us.id_empresa,
+                            Rut = (int)us.rut,
+                            Dv = us.dv,
+                            Nombre = us.nombre,
+                            App_Pater = us.app_pater,
+                            App_Mater = us.app_mater,
+                            Direccion = us.direccion,
+                            Telefono = (int)us.telefono,
+                            Mail = us.mail,
+                            Pass = us.pass
+                        }).ToList();
+            }
+            else
+            {
+                return (from us in db.Mae_Usuario
+                        join ro in db.Ref_Role
+                        on us.id_role equals ro.id_role
+                        select new Models.Clases.Usuario
+                        {
+                            Id = (int)us.id_usuario,
+                            Id_Role = (int)us.id_role,
+                            Desc_Role = ro.desc_role,
+                            Id_Estado = (int)us.id_estado,
+                            Id_Comuna = (int)us.id_comuna,
+                            Id_Empresa = (int)us.id_empresa,
+                            Rut = (int)us.rut,
+                            Dv = us.dv,
+                            Nombre = us.nombre,
+                            App_Pater = us.app_pater,
+                            App_Mater = us.app_mater,
+                            Direccion = us.direccion,
+                            Telefono = (int)us.telefono,
+                            Mail = us.mail,
+                            Pass = us.pass
+                        }).ToList();
+            }
+           
+        }
+
+        public List<Usuario> ReadOne()
+        {
+            
+            string userMail = HttpContext.Current.User.Identity.Name;
+            return (from us in db.Mae_Usuario
+                    join ro in db.Ref_Role
+                    on us.id_role equals ro.id_role
+                    where us.mail == userMail
+                    select new Models.Clases.Usuario
+                    {
+                        Id = (int)us.id_usuario,
+                        Desc_Role = ro.desc_role,
+                        Id_Estado = (int)us.id_estado,
+                        Id_Comuna = (int)us.id_comuna,
+                        Id_Empresa = (int)us.id_empresa,
+                        Rut = (int)us.rut,
+                        Dv = us.dv,
+                        Nombre = us.nombre,
+                        App_Pater = us.app_pater,
+                        App_Mater = us.app_mater,
+                        Direccion = us.direccion,
+                        Telefono = (int)us.telefono,
+                        Mail = us.mail,
+                        Pass = us.pass
+                    }).ToList();
+        }
+
+           public bool Save()
+        {
+            try
+            {
+                db.SP_INS_USUARIO_MASS(this.Id_Role, this.Id_Estado, this.Id_Comuna, this.Id_Empresa, this.Rut, this.Dv, this.Nombre, this.App_Pater,
+                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass);
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public class SimpleFileMove
+        {
+            public static void Main()
+            {
+                string sourceFile = @"C:\Users\Axonia02\Desktop\Proyecto AxonAcces\web\AxonAccess\AxonAccessMVC\CargasMasivas\CargaMasiva.csv";
+                string destinationFile = @"C:\Users\Axonia02\Desktop\Proyecto AxonAcces\web\AxonAccess\AxonAccessMVC\CargasMasivas\Cargadas\CargaMasiva_Movida.csv";
+
+                // To move a file or folder to a new location:
+                System.IO.File.Move(sourceFile, destinationFile);
+            }
+        }
+
+        public bool Autenticar()
+        {
+
+            return db.Mae_Usuario
+                .Where(u => u.mail == this.Mail
+                && u.pass == this.Pass)
+                .FirstOrDefault() != null;
+        }
+
+    }
+}
+    

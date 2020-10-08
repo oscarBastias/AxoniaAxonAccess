@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="axonAccessModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Mae_Comuna">
+    <Key>
+      <PropertyRef Name="id_comuna" />
+    </Key>
+    <Property Name="id_comuna" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_region" Type="int" />
+    <Property Name="desc_comuna" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mae_Empresa">
+    <Key>
+      <PropertyRef Name="id_empresa" />
+    </Key>
+    <Property Name="id_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_comuna" Type="int" />
+    <Property Name="desc_empresa" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mae_Puerta">
+    <Key>
+      <PropertyRef Name="id_puerta" />
+    </Key>
+    <Property Name="id_puerta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_empresa" Type="int" />
+    <Property Name="desc_puerta" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mae_Region">
+    <Key>
+      <PropertyRef Name="id_region" />
+    </Key>
+    <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_region" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mae_Usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_role" Type="int" />
+    <Property Name="id_estado" Type="int" />
+    <Property Name="id_comuna" Type="int" />
+    <Property Name="id_empresa" Type="int" />
+    <Property Name="rut" Type="int" />
+    <Property Name="dv" Type="char" MaxLength="1" />
+    <Property Name="nombre" Type="varchar" MaxLength="50" />
+    <Property Name="app_pater" Type="varchar" MaxLength="50" />
+    <Property Name="app_mater" Type="varchar" MaxLength="50" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" />
+    <Property Name="telefono" Type="int" />
+    <Property Name="mail" Type="varchar" MaxLength="100" />
+    <Property Name="pass" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Ref_DetalleAcceso">
+    <Key>
+      <PropertyRef Name="id_detalle" />
+    </Key>
+    <Property Name="id_detalle" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_acceso" Type="int" />
+    <Property Name="fecha_detalle" Type="datetime" />
+    <Property Name="conteo_ingreso" Type="int" />
+    <Property Name="desc_detalle" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Ref_Estado">
+    <Key>
+      <PropertyRef Name="id_estado" />
+    </Key>
+    <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_estado" Type="char" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Ref_Role">
+    <Key>
+      <PropertyRef Name="id_role" />
+    </Key>
+    <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_role" Type="char" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Ref_UserAccess">
+    <Key>
+      <PropertyRef Name="id_acceso" />
+    </Key>
+    <Property Name="id_acceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_usuario" Type="int" />
+    <Property Name="id_puerta" Type="int" />
+    <Property Name="desc_puerta" Type="varchar" MaxLength="100" />
+    <Property Name="fecha_acceso" Type="datetime" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Comuna_Region">
+    <End Role="Mae_Region" Type="Self.Mae_Region" Multiplicity="0..1" />
+    <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Region">
+        <PropertyRef Name="id_region" />
+      </Principal>
+      <Dependent Role="Mae_Comuna">
+        <PropertyRef Name="id_region" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DetalleAcceso_UserAccess">
+    <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="0..1" />
+    <End Role="Ref_DetalleAcceso" Type="Self.Ref_DetalleAcceso" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_UserAccess">
+        <PropertyRef Name="id_acceso" />
+      </Principal>
+      <Dependent Role="Ref_DetalleAcceso">
+        <PropertyRef Name="id_acceso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Empresa_Comuna">
+    <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Comuna">
+        <PropertyRef Name="id_comuna" />
+      </Principal>
+      <Dependent Role="Mae_Empresa">
+        <PropertyRef Name="id_comuna" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Puerta_Empresa">
+    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+    <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Empresa">
+        <PropertyRef Name="id_empresa" />
+      </Principal>
+      <Dependent Role="Mae_Puerta">
+        <PropertyRef Name="id_empresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccess_Puerta">
+    <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="0..1" />
+    <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Puerta">
+        <PropertyRef Name="id_puerta" />
+      </Principal>
+      <Dependent Role="Ref_UserAccess">
+        <PropertyRef Name="id_puerta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserAccess_Usuario">
+    <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="0..1" />
+    <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="Ref_UserAccess">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Comuna">
+    <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+    <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Comuna">
+        <PropertyRef Name="id_comuna" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_comuna" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Empresa">
+    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+    <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Empresa">
+        <PropertyRef Name="id_empresa" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_empresa" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Estado">
+    <End Role="Ref_Estado" Type="Self.Ref_Estado" Multiplicity="0..1" />
+    <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Role">
+    <End Role="Ref_Role" Type="Self.Ref_Role" Multiplicity="0..1" />
+    <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Role">
+        <PropertyRef Name="id_role" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_role" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_INS_USUARIO_MASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_ROLE" Type="int" Mode="In" />
+    <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+    <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+    <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+    <Parameter Name="RUT" Type="int" Mode="In" />
+    <Parameter Name="DV" Type="char" Mode="In" />
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+    <Parameter Name="APP_PATER" Type="varchar" Mode="In" />
+    <Parameter Name="APP_MATER" Type="varchar" Mode="In" />
+    <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+    <Parameter Name="TELEFONO" Type="int" Mode="In" />
+    <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+    <Parameter Name="PASS" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Sp_LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="mail" Type="varchar" Mode="In" />
+    <Parameter Name="Pass" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="axonAccessModelStoreContainer">
+    <EntitySet Name="Mae_Comuna" EntityType="Self.Mae_Comuna" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mae_Puerta" EntityType="Self.Mae_Puerta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mae_Region" EntityType="Self.Mae_Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Role" EntityType="Self.Ref_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_UserAccess" EntityType="Self.Ref_UserAccess" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Comuna_Region" Association="Self.FK_Comuna_Region">
+      <End Role="Mae_Region" EntitySet="Mae_Region" />
+      <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DetalleAcceso_UserAccess" Association="Self.FK_DetalleAcceso_UserAccess">
+      <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+      <End Role="Ref_DetalleAcceso" EntitySet="Ref_DetalleAcceso" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Empresa_Comuna" Association="Self.FK_Empresa_Comuna">
+      <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Puerta_Empresa" Association="Self.FK_Puerta_Empresa">
+      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+      <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccess_Puerta" Association="Self.FK_UserAccess_Puerta">
+      <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
+      <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserAccess_Usuario" Association="Self.FK_UserAccess_Usuario">
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+      <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Comuna" Association="Self.FK_Usuario_Comuna">
+      <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Empresa" Association="Self.FK_Usuario_Empresa">
+      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
+      <End Role="Ref_Estado" EntitySet="Ref_Estado" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Role" Association="Self.FK_Usuario_Role">
+      <End Role="Ref_Role" EntitySet="Ref_Role" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

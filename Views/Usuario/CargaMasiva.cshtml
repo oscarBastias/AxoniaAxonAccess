@@ -1,0 +1,66 @@
+﻿@using AxonAccessMVC.Models.Clases
+@model IEnumerable<Usuario>
+@using System.IO;
+@{
+    ViewBag.Title = "CargaMasiva";
+
+}
+
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
+
+<body>
+    <div class="online-w3l-form">
+        @using (Html.BeginForm("CargaMasiva", "Usuario", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <input type="file" name="postedfile" />
+            <input type="submit" value="Importar" />
+        }
+        @if (Model.Count() > 0)
+        {
+            <hr />
+            <table id="mass" runat="server" class="table">
+                <tr>
+                    <th>ID_Role</th>
+                    <th>ID_Estado</th>
+                    <th>ID_Comuna</th>
+                    <th>ID_Empresa</th>
+                    <th>Rut</th>
+                    <th>Dv</th>
+                    <th>Nombre</th>
+                    <th>App_Pater</th>
+                    <th>App_Mater</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Mail</th>
+                    <th>Pass</th>
+                </tr>
+                @foreach (Usuario customer in Model)
+                {
+                    <tr>
+                        <td>@customer.Id_Role</td>
+                        <td>@customer.Id_Estado</td>
+                        <td>@customer.Id_Comuna</td>
+                        <td>@customer.Id_Empresa</td>
+                        <td>@customer.Rut</td>
+                        <td>@customer.Dv</td>
+                        <td>@customer.Nombre</td>
+                        <td>@customer.App_Pater</td>
+                        <td>@customer.App_Mater</td>
+                        <td>@customer.Direccion</td>
+                        <td>@customer.Telefono</td>
+                        <td>@customer.Mail</td>
+                        <td>@customer.Pass</td>
+                    </tr>
+                    customer.Save();
+
+                }
+            </table>
+
+        }
+        @{ Html.EndForm(); }
+
+    </div>
+</body>

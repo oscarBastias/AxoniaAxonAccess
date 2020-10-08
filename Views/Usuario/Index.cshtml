@@ -1,0 +1,68 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@{
+    ViewBag.Title = "Axonia";
+
+}
+<!DOCTYPE html>
+<html>
+<body>
+
+
+
+    @{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
+
+    @foreach (var usuario in usuarios)
+    {
+        <h1>@usuario.Nombre</h1>
+        <h1>@usuario.App_Pater @usuario.App_Mater</h1>
+    }
+    
+
+    <!-- <div class="row">
+         <div class="col-md-12">
+             <table class="table">
+                 <tr>
+                     <th>Id_user</th>
+                     <th>Role</th>
+                     <th>Id_Estado</th>
+                     <th>Id_Comuna</th>
+                     <th>Id_Empresa</th>
+                     <th>Rut</th>
+                     <th>Dv</th>
+                     <th>Nombre</th>
+                     <th>App_Paterno</th>
+                     <th>App_Materno</th>
+                     <th>Direccion</th>
+                     <th>Telefono</th>
+                     <th>Mail</th>
+                     <th>Password</th>
+                 </tr>
+
+                 @foreach (var usuario in usuarios)
+                 {
+                     <tr>
+                         <td>@usuario.Id</td>
+                         <td>@usuario.Desc_Role</td>
+                         <td>@usuario.Id_Estado</td>
+                         <td>@usuario.Id_Comuna</td>
+                         <td>@usuario.Id_Empresa</td>
+                         <td>@usuario.Rut</td>
+                         <td>@usuario.Dv</td>
+                         <td>@usuario.Nombre</td>
+                         <td>@usuario.App_Pater</td>
+                         <td>@usuario.App_Mater</td>
+                         <td>@usuario.Direccion</td>
+                         <td>@usuario.Telefono</td>
+                         <td>@usuario.Mail</td>
+                         <td>@usuario.Pass</td>
+                     </tr>
+                 }
+             </table>
+
+         </div>
+
+     </div>-->
+
+
+</body>
+</html>

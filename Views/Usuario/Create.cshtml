@@ -1,0 +1,115 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Mae_Usuario
+@{
+    ViewBag.Title = "Axonia";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="online-w3l-form">
+
+        <form action="#" method="post">
+            @{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
+
+            <div class="center">
+                <h1 class="header-w3ls">
+                    Registro de Usuario
+                </h1>
+            </div>
+
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <input type="text" class="top-up" name="name" placeholder="Nombre" required="">
+                    </div>
+                    <div class="form-right-w3ls ">
+                        <input type="text" class="top-up" name="rut" placeholder="Rut" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="form-left-w3l">
+
+                        <input type="text" class="top-up" name="app_pater" placeholder="A.paterno" required="">
+                    </div>
+                    <div class="form-right-w3ls ">
+                        <input type="text" class="top-up" name="app_mater" placeholder="A.Materno" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <input type="email" name="email" placeholder="Email" required="">
+                    </div>
+                    <div class="form-right-w3ls ">
+                        <input class="buttom" type="text" name="telefono" placeholder="Phone Number" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="form-add-w3ls">
+                    <input type="text" name="direccion" placeholder="Direccion" required="">
+                </div>
+                <div class="form-add-w3ls">
+                    <input type="text" name="password" placeholder="Password" required="">
+                </div>
+
+
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <select class="form-control buttom">
+                            <option value="">
+                                Select Role
+                            </option>
+                            <option @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "id_role", "desc_role"))</option>
+
+                        </select>
+                    </div>
+                    <div class="form-right-w3ls">
+                        <select class="form-control buttom">
+                            <option value="">
+                                Select Estado
+                            </option>
+                            <option @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "id_estado", "desc_estado"))</option>
+
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <select class="form-control buttom">
+                            <option value="">
+                                Select Comuna
+                            </option>
+                            <option @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "id_comuna", "desc_comuna"))</option>
+
+                        </select>
+                    </div>
+                    <div class="form-right-w3ls">
+                        <select class="form-control buttom">
+                            <option value="">
+                                Select Empresa
+                            </option>
+                            <option @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</option>
+
+                        </select>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="btnn">
+                    <input type="submit" value="Register">
+                </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>
