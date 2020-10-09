@@ -9,6 +9,7 @@ using AxonAccessMVC.Models;
 using AxonAccessMVC.Models.Clases;
 using Usuario= AxonAccessMVC.Models.Clases.Usuario;
 using Ref_Estado = AxonAccessMVC.Models.Clases.Ref_Estado;
+using Ref_Role = AxonAccessMVC.Models.Clases.Ref_Role;
 
 namespace AxonAccessMVC.Controllers
 {
@@ -83,6 +84,44 @@ namespace AxonAccessMVC.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult Create([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass")]Usuario usuario)
+        {
+            List<Ref_Role> lst = null;
+            using(Models.axonAccessEntities db=new Models.axonAccessEntities())
+            {
+                lst = (from d in db.Ref_Role
+                       select new Ref_Role
+                       {
+                           id_role=d.id_role,
+                           desc_role=d.desc_role
+                       }).ToList();
+            }
+
+            List<SelectListItem> items = lst.ConvertAll(d =>
+            {
+                return new SelectListItem()
+                {
+                    Text = d.desc_role.ToString(),
+                    Value = d.id_role.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.items = items;
+
+            try
+            {
+                usuario.Save();
+                TempData["mensaje"] = "Guardado correctamente";
+                return RedirectToAction("Lista");
+            }
+            catch
+            {
+                return View("Create");
+            }
+
+        }
 
         private void EnviarEstados()
         {
