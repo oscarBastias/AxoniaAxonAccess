@@ -62,44 +62,26 @@
 
                 <div class="main">
                     <div class="form-left-w3l">
-                        <select class="form-control buttom">
-                            <option value="id_role">
-                                Select Role
-                            </option>
-                            <option " @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role"))</option>
-
-                        </select>
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
                     </div>
                     <div class="form-right-w3ls">
-                        <select class="form-control buttom">
-                            <option value="Id_Estado">
-                                Select Estado
-                            </option>
-                            <option @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</option>
 
-                        </select>
-                        <div class="clearfix"></div>
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
+
                     </div>
                 </div>
 
                 <div class="main">
                     <div class="form-left-w3l">
-                        <select class="form-control buttom">
-                            <option value="">
-                                Select Comuna
-                            </option>
-                            <option @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</option>
+                            
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
 
-                        </select>
                     </div>
                     <div class="form-right-w3ls">
-                        <select class="form-control buttom">
-                            <option value="">
-                                Select Empresa
-                            </option>
-                            <option @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</option>
 
-                        </select>
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+
                         <div class="clearfix"></div>
                     </div>
                 </div>
