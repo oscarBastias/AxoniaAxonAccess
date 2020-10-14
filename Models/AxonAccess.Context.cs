@@ -37,6 +37,7 @@ namespace AxonAccessMVC.Models
         public virtual DbSet<Ref_Role> Ref_Role { get; set; }
         public virtual DbSet<Ref_UserAccess> Ref_UserAccess { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<USUARIO_AUD> USUARIO_AUD { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -209,6 +210,76 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("Pass", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_LoginUsuario", mailParameter, passParameter);
+        }
+    
+        public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS)
+        {
+            var iD_USUARIOParameter = iD_USUARIO.HasValue ?
+                new ObjectParameter("ID_USUARIO", iD_USUARIO) :
+                new ObjectParameter("ID_USUARIO", typeof(int));
+    
+            var iD_ROLEParameter = iD_ROLE.HasValue ?
+                new ObjectParameter("ID_ROLE", iD_ROLE) :
+                new ObjectParameter("ID_ROLE", typeof(int));
+    
+            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
+                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
+                new ObjectParameter("ID_ESTADO", typeof(int));
+    
+            var iD_COMUNAParameter = iD_COMUNA.HasValue ?
+                new ObjectParameter("ID_COMUNA", iD_COMUNA) :
+                new ObjectParameter("ID_COMUNA", typeof(int));
+    
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var rUTParameter = rUT.HasValue ?
+                new ObjectParameter("RUT", rUT) :
+                new ObjectParameter("RUT", typeof(int));
+    
+            var dVParameter = dV != null ?
+                new ObjectParameter("DV", dV) :
+                new ObjectParameter("DV", typeof(string));
+    
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            var aPP_PATERParameter = aPP_PATER != null ?
+                new ObjectParameter("APP_PATER", aPP_PATER) :
+                new ObjectParameter("APP_PATER", typeof(string));
+    
+            var aPP_MATERParameter = aPP_MATER != null ?
+                new ObjectParameter("APP_MATER", aPP_MATER) :
+                new ObjectParameter("APP_MATER", typeof(string));
+    
+            var dIRECCIONParameter = dIRECCION != null ?
+                new ObjectParameter("DIRECCION", dIRECCION) :
+                new ObjectParameter("DIRECCION", typeof(string));
+    
+            var tELEFONOParameter = tELEFONO.HasValue ?
+                new ObjectParameter("TELEFONO", tELEFONO) :
+                new ObjectParameter("TELEFONO", typeof(int));
+    
+            var eMAILParameter = eMAIL != null ?
+                new ObjectParameter("EMAIL", eMAIL) :
+                new ObjectParameter("EMAIL", typeof(string));
+    
+            var pASSParameter = pASS != null ?
+                new ObjectParameter("PASS", pASS) :
+                new ObjectParameter("PASS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter);
+        }
+    
+        public virtual int SVC_DELETED_USUARIO(Nullable<int> iD_USUARIO)
+        {
+            var iD_USUARIOParameter = iD_USUARIO.HasValue ?
+                new ObjectParameter("ID_USUARIO", iD_USUARIO) :
+                new ObjectParameter("ID_USUARIO", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_USUARIO", iD_USUARIOParameter);
         }
     }
 }

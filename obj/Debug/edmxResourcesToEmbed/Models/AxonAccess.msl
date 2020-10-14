@@ -131,5 +131,18 @@
     <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
+    <EntitySetMapping Name="USUARIO_AUD">
+      <EntityTypeMapping TypeName="axonAccessModel.USUARIO_AUD">
+        <MappingFragment StoreEntitySet="USUARIO_AUD">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="concepto" ColumnName="concepto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_registro" ColumnName="id_registro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
+    <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
   </EntityContainerMapping>
 </Mapping>

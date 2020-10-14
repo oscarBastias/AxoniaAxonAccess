@@ -153,6 +153,53 @@ namespace AxonAccessMVC.Models.Clases
                 .FirstOrDefault() != null;
         }
 
+        public Usuario Find(int id)
+        {
+            return this.db.Mae_Usuario.Select(us => new Usuario()
+            {
+                Id = (int)us.id_usuario,
+                Id_Role = (int)us.id_role,
+                Id_Estado = (int)us.id_estado,
+                Id_Comuna = (int)us.id_comuna,
+                Id_Empresa = (int)us.id_empresa,
+                Rut = (int)us.rut,
+                Dv = us.dv,
+                Nombre = us.nombre,
+                App_Pater = us.app_pater,
+                App_Mater = us.app_mater,
+                Direccion = us.direccion,
+                Telefono = (int)us.telefono,
+                Mail = us.mail,
+                Pass = us.pass
+            }).Where(us => us.Id == id).FirstOrDefault();
+        }
+
+        public bool Update()
+        {
+            try
+            {
+                db.sp_upd_user(this.Id,this.Id_Role,this.Id_Estado,this.Id_Comuna,this.Id_Empresa,this.Rut,this.Dv,
+                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                db.SVC_DELETED_USUARIO(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
     }
 }
     

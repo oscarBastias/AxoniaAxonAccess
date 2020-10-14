@@ -1,0 +1,93 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Clases.Usuario
+@{
+    ViewBag.Title = "Axonia";
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="online-w3l-form">
+
+        <form action="#" method="post">
+            @Html.HiddenFor(p=>p.Id)
+
+            <div class="form-left-w3l">
+                @Html.TextBoxFor(p => p.Nombre)
+            </div>
+            <div class="main">
+                <div class="form-left-w3l">
+
+                    @Html.TextBoxFor(p => p.App_Pater)
+                </div>
+                <div class="form-right-w3ls ">
+                    @Html.TextBoxFor(p => p.App_Mater)
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="main">
+                <div class="form-right-w3ls ">
+                    @Html.TextBoxFor(p => p.Rut)
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-left-w3l">
+                    @Html.TextBoxFor(p => p.Dv)
+                </div>
+            </div>
+            <div class="main">
+                <div class="form-left-w3l">
+                    @Html.TextBoxFor(p => p.Mail)
+                </div>
+                <div class="form-right-w3ls ">
+                    @Html.TextBoxFor(p => p.Telefono)
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="form-add-w3ls">
+                @Html.TextBoxFor(p => p.Direccion)
+            </div>
+            <div class="form-add-w3ls">
+                @Html.TextBoxFor(p => p.Pass)
+            </div>
+            <div class="main">
+                <div class="form-left-w3l">
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
+                </div>
+                <div class="form-right-w3ls">
+
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
+
+                </div>
+            </div>
+
+            <div class="main">
+                <div class="form-left-w3l">
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+
+                </div>
+                <div class="form-right-w3ls">
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="btnn">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

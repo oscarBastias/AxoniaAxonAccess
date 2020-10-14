@@ -33,32 +33,31 @@
                 @foreach (var usuario in usuarios)
                 {
 
-                        <tr>
-                            <td>@usuario.Id</td>
-                            <td>@usuario.Desc_Role</td>
-                            <td>@usuario.Id_Estado</td>
-                            <td>@usuario.Id_Comuna</td>
-                            <td>@usuario.Id_Empresa</td>
-                            <td>@usuario.Rut</td>
-                            <td>@usuario.Dv</td>
-                            <td>@usuario.Nombre</td>
-                            <td>@usuario.App_Pater</td>
-                            <td>@usuario.App_Mater</td>
-                            <td>@usuario.Direccion</td>
-                            <td>@usuario.Telefono</td>
-                            <td>@usuario.Mail</td>
-                            <td>@usuario.Pass</td>
-                        </tr>
+            <tr>
+                <td>@usuario.Id</td>
+                <td>@usuario.Desc_Role</td>
+                <td>@usuario.Id_Estado</td>
+                <td>@usuario.Id_Comuna</td>
+                <td>@usuario.Id_Empresa</td>
+                <td>@usuario.Rut</td>
+                <td>@usuario.Dv</td>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.App_Pater</td>
+                <td>@usuario.App_Mater</td>
+                <td>@usuario.Direccion</td>
+                <td>@usuario.Telefono</td>
+                <td>@usuario.Mail</td>
+                <td>@usuario.Pass</td>
+                <td>@Html.ActionLink("Eliminar", "Delete", new { id = usuario.Id })</td>
+                <td>@Html.ActionLink("Modificar", "Edit", new { id = usuario.Id })</td>
+            </tr>
 
-                    
+
                 }
             </table>
-
         </div>
 
     </div>
-   
-
 
 </body>
 </html>

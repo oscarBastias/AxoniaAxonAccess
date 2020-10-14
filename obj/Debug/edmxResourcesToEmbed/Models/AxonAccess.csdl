@@ -334,6 +334,26 @@
       <Parameter Name="mail" Mode="In" Type="String" />
       <Parameter Name="Pass" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="USUARIO_AUD" EntityType="axonAccessModel.USUARIO_AUD" />
+    <FunctionImport Name="sp_upd_user">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ROLE" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+      <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+      <Parameter Name="RUT" Mode="In" Type="Int32" />
+      <Parameter Name="DV" Mode="In" Type="String" />
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
+      <Parameter Name="APP_PATER" Mode="In" Type="String" />
+      <Parameter Name="APP_MATER" Mode="In" Type="String" />
+      <Parameter Name="DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
+      <Parameter Name="EMAIL" Mode="In" Type="String" />
+      <Parameter Name="PASS" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SVC_DELETED_USUARIO">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -346,4 +366,14 @@
     <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
     <Property Type="Int32" Name="OwnerID" Nullable="false" />
   </ComplexType>
+  <EntityType Name="USUARIO_AUD">
+    <Key>
+      <PropertyRef Name="id_registro" />
+    </Key>
+    <Property Name="id_registro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" Precision="3" />
+  </EntityType>
 </Schema>

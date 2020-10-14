@@ -119,5 +119,51 @@ namespace AxonAccessMVC.Controllers
         {
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll();
         }
+
+        public ActionResult Delete(int id)
+        {
+            if(new Usuario().Find(id) == null)
+            {
+                TempData["mensaje"] = "No existe usuario";
+                return RedirectToAction("Lista");
+            }
+            if(new Usuario().Delete(id))
+            {
+                TempData["mensaje"] = "eliminado Correctamente";
+                return RedirectToAction("Lista");
+            }
+            TempData["mensaje"] = "No se ah podido eliminar el usuario";
+            return RedirectToAction("Lista");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Usuario u = new Usuario().Find(id);
+            if (u == null)
+            {
+                TempData["Mensaje"]="El usuario no existe";
+                return RedirectToAction("Lista");
+            }
+            EnviarComuna();
+            EnviarEmpresa();
+            EnviarEstados();
+            EnviarRoeles();
+            return View(u);
+        }
+        [HttpPost]
+        public ActionResult Edit(Usuario usuario)
+        {
+            try
+            {
+                usuario.Update();
+                TempData["mensaje"] = "Modificado correctamente";
+                return RedirectToAction("Lista");
+            }
+            catch
+            {
+                return View("Lista");
+            }
+        }
+
     }
 }

@@ -99,6 +99,18 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="USUARIO_AUD">
+          <Key>
+            <PropertyRef Name="id_registro" />
+          </Key>
+          <Property Name="id_registro" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="concepto" Type="varchar" MaxLength="50" />
+          <Property Name="fecha" Type="datetime" />
+        </EntityType>
         <Association Name="FK_Comuna_Region">
           <End Role="Mae_Region" Type="Self.Mae_Region" Multiplicity="0..1" />
           <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="*" />
@@ -268,7 +280,26 @@
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="sp_upd_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+          <Parameter Name="ID_ROLE" Type="int" Mode="In" />
+          <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+          <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+          <Parameter Name="RUT" Type="int" Mode="In" />
+          <Parameter Name="DV" Type="char" Mode="In" />
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+          <Parameter Name="APP_PATER" Type="varchar" Mode="In" />
+          <Parameter Name="APP_MATER" Type="varchar" Mode="In" />
+          <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="TELEFONO" Type="int" Mode="In" />
+          <Parameter Name="EMAIL" Type="varchar" Mode="In" />
+          <Parameter Name="PASS" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SVC_DELETED_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="axonAccessModelStoreContainer">
           <EntitySet Name="Mae_Comuna" EntityType="Self.Mae_Comuna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" Schema="dbo" store:Type="Tables" />
@@ -280,6 +311,15 @@
           <EntitySet Name="Ref_Role" EntityType="Self.Ref_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_UserAccess" EntityType="Self.Ref_UserAccess" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_AUD" EntityType="Self.USUARIO_AUD" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [USUARIO_AUD].[id_registro] AS [id_registro], 
+    [USUARIO_AUD].[id_usuario] AS [id_usuario], 
+    [USUARIO_AUD].[nombre] AS [nombre], 
+    [USUARIO_AUD].[concepto] AS [concepto], 
+    [USUARIO_AUD].[fecha] AS [fecha]
+    FROM [dbo].[USUARIO_AUD] AS [USUARIO_AUD]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_Comuna_Region" Association="Self.FK_Comuna_Region">
             <End Role="Mae_Region" EntitySet="Mae_Region" />
             <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
@@ -659,6 +699,26 @@
             <Parameter Name="mail" Mode="In" Type="String" />
             <Parameter Name="Pass" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="USUARIO_AUD" EntityType="axonAccessModel.USUARIO_AUD" />
+          <FunctionImport Name="sp_upd_user">
+            <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ROLE" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="RUT" Mode="In" Type="Int32" />
+            <Parameter Name="DV" Mode="In" Type="String" />
+            <Parameter Name="NOMBRE" Mode="In" Type="String" />
+            <Parameter Name="APP_PATER" Mode="In" Type="String" />
+            <Parameter Name="APP_MATER" Mode="In" Type="String" />
+            <Parameter Name="DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
+            <Parameter Name="EMAIL" Mode="In" Type="String" />
+            <Parameter Name="PASS" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SVC_DELETED_USUARIO">
+          <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -671,6 +731,16 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="USUARIO_AUD">
+          <Key>
+            <PropertyRef Name="id_registro" />
+          </Key>
+          <Property Name="id_registro" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="concepto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -807,6 +877,19 @@
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
           <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
+          <EntitySetMapping Name="USUARIO_AUD">
+            <EntityTypeMapping TypeName="axonAccessModel.USUARIO_AUD">
+              <MappingFragment StoreEntitySet="USUARIO_AUD">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="concepto" ColumnName="concepto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_registro" ColumnName="id_registro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
+          <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
