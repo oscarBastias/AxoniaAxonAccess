@@ -1,0 +1,241 @@
+create PROCEDURE [dbo].[SVC_DELETED_USUARIO]
+--exec SVC_DELETED_USUARIO 1
+(@ID_USUARIO int)
+AS
+	BEGIN
+			delete from mae_usuario where id_usuario=@ID_USUARIO
+	END
+GO
+
+
+
+CREATE TRIGGER [dbo].[TRG_ELIMINACION_USUARIO] ON [dbo].[mae_usuario]
+FOR delete
+AS	declare @v_idUsuario int;
+	declare @v_nombre varchar(100);
+	declare @v_accion varchar(100);
+
+	select @v_idUsuario=d.id_usuario  from deleted d;	
+	select @v_nombre=
+	CONCAT(d.nombre,' ', d.app_pater) from deleted d;	
+	set @v_accion='Registro Eliminado -- Insertado por Trigger.';
+
+	insert into DBO.USUARIO_AUD
+	values(@v_idUsuario,@v_nombre,@v_accion,getdate());
+
+	PRINT 'Trigger Disparado'
+
+
+CREATE PROCEDURE dbo.sp_upd_user
+(
+@ID_USUARIO INT,
+@ID_ROLE INT,
+@ID_ESTADO INT,
+@ID_COMUNA INT,
+@ID_EMPRESA INT,
+@RUT INT,
+@DV CHAR(1),
+@NOMBRE VARCHAR(50),
+@APP_PATER VARCHAR(50),
+@APP_MATER VARCHAR(50),
+@DIRECCION VARCHAR(50),
+@TELEFONO INT,
+@EMAIL VARCHAR(50),
+@PASS VARCHAR(50)
+)
+AS
+	BEGIN
+			UPDATE mae_usuario set id_role=@ID_ROLE,id_estado=@ID_ESTADO,id_comuna=@ID_COMUNA,id_empresa=@ID_EMPRESA,
+			rut=@RUT,dv=@DV,nombre=@NOMBRE,app_pater=@APP_PATER,app_mater=@APP_MATER,direccion=@DIRECCION,telefono=@TELEFONO,mail=@EMAIL,pass=@PASS
+		    where id_usuario=@ID_USUARIO
+	END
+GO
+
+CREATE TRIGGER [dbo].[TRG_UPD_USUARIO] ON [dbo].[mae_usuario]
+FOR UPDATE
+AS	declare @v_idUsuario int;
+	declare @v_nombre varchar(100);
+	declare @v_accion varchar(100);
+
+	select @v_idUsuario=d.id_usuario  from deleted d;	
+	select @v_nombre=
+	CONCAT(d.nombre,' ', d.app_pater) from deleted d;	
+	set @v_accion='Registro Actualizado -- Insertado por Trigger.';
+
+	insert into DBO.USUARIO_AUD
+	values(@v_idUsuario,@v_nombre,@v_accion,getdate());
+
+	PRINT 'Trigger Disparado'
+
+
+
+CREATE PROCEDURE dbo.func_LoginUsuario
+--select dbo.func_LoginUsuario('obaslag@live.com','1234')
+    (@mail varchar(50), 
+    @Pass varchar(50))
+	returns int
+As
+Begin
+    Declare @PassEncode  varchar(300)
+    Declare @PassDecode  varchar(50)
+	declare @resultado	int
+
+    Select @PassEncode = (select pass From Mae_Usuario Where mail = @mail)
+    select @PassDecode = (select cast(DECRYPTBYPASSPHRASE('password',@PassEncode) as varchar(max)) as 'pass' 
+							from Mae_Usuario
+							Where mail = @mail)
+
+	set @resultado = 0
+		If @PassDecode = @Pass
+		set @resultado=1
+			return @resultado
+
+End;
+GO
+
+
+CREATE PROCEDURE [dbo].[SP_INS_USUARIO_MASS]
+(
+@ID_ROLE INT,
+@ID_ESTADO INT,
+@ID_COMUNA INT,
+@ID_EMPRESA INT,
+@RUT INT,
+@DV CHAR(1),
+@NOMBRE VARCHAR(50),
+@APP_PATER VARCHAR(50),
+@APP_MATER VARCHAR(50),
+@DIRECCION VARCHAR(50),
+@TELEFONO INT,
+@EMAIL VARCHAR(50),
+@PASS VARCHAR(50)
+)
+AS
+	BEGIN
+		DECLARE @existe_usuario INT
+		SET @existe_usuario = (SELECT count(*) FROM Mae_Usuario where rut = @RUT)
+		IF @existe_usuario = 0
+			INSERT INTO Mae_Usuario(id_role,id_estado,id_comuna,id_empresa,rut,dv,nombre,app_pater,app_mater,direccion,telefono,mail,pass) 
+			values (@ID_ROLE,@ID_ESTADO,@ID_COMUNA,@ID_EMPRESA,@RUT,@DV,@NOMBRE,@APP_PATER,@APP_MATER,@DIRECCION,@TELEFONO,@EMAIL
+			,ENCRYPTBYPASSPHRASE('password',@PASS))
+	END
+GO
+
+CREATE TABLE USUARIO_AUD
+(
+	id_registro int identity(1,1) NOT NULL,
+	id_usuario  int 		NULL,
+	nombre 		varchar (50)NULL,
+	concepto 	varchar	(50)NULL,
+	fecha 		datetime 	NULL
+)
+CREATE TABLE Ref_Role
+(
+	id_role 		int IDENTITY(1,1) NOT NULL,
+	desc_role 		char(12) NULL,
+ CONSTRAINT [PK_Ref_Role] PRIMARY KEY CLUSTERED 
+(
+	[id_role] ASC
+)
+);
+
+CREATE TABLE Ref_Estado
+(
+	id_estado 		int IDENTITY(1,1) NOT NULL,
+	desc_estado 	char(12) NULL,
+ CONSTRAINT [PK_Ref_Estado] PRIMARY KEY CLUSTERED 
+(
+	[id_estado] ASC
+)
+);
+
+CREATE TABLE Mae_Region
+(
+	id_region 		int IDENTITY(1,1) NOT NULL,
+	desc_region 	varchar(50) NULL,
+ CONSTRAINT [PK_Mae_Region] PRIMARY KEY CLUSTERED 
+(
+	[id_region] ASC
+)
+);
+
+CREATE TABLE Mae_Comuna
+(
+	id_comuna 		int IDENTITY(1,1) NOT NULL,
+	id_region 		int NULL,
+	desc_comuna 	varchar(50) NULL,
+ CONSTRAINT [PK_Mae_Comuna] PRIMARY KEY CLUSTERED 
+(
+	[id_comuna] ASC
+)
+);
+
+CREATE TABLE Mae_Puerta
+(
+	id_puerta 		int IDENTITY(1,1) NOT NULL,
+	id_empresa 		int NULL,
+	desc_puerta 	varchar(50) NULL,
+ CONSTRAINT [PK_Mae_Puerta] PRIMARY KEY CLUSTERED 
+(
+	[id_puerta] ASC
+)
+);
+
+CREATE TABLE Mae_Empresa
+(
+	id_empresa 		int IDENTITY(1,1) NOT NULL,
+	id_comuna 		int NULL,
+	desc_empresa 	varchar(50) NULL,
+ CONSTRAINT [PK_Mae_Empresa] PRIMARY KEY CLUSTERED 
+(
+	[id_empresa] ASC
+)
+);
+
+CREATE TABLE Ref_DetalleAcceso
+(
+	id_detalle 		int IDENTITY(1,1) NOT NULL,
+	id_acceso 		int NULL,
+	fecha_detalle 	datetime NULL,
+	conteo_ingreso 	int null,
+	desc_detalle 	varchar(100) NULL,
+ CONSTRAINT [PK_Ref_DetalleAcceso] PRIMARY KEY CLUSTERED 
+(
+	[id_detalle] ASC
+)
+);
+
+CREATE TABLE Ref_UserAccess
+(
+	id_acceso   	int IDENTITY(1,1) NOT NULL,
+	id_usuario  	int NULL,
+	id_puerta 		int NULL,
+	desc_puerta 	varchar(100)NULL,
+	fecha_acceso 	datetime NULL,
+ CONSTRAINT [PK_Ref_UserAccess] PRIMARY KEY CLUSTERED 
+(
+	[id_acceso] ASC
+)
+);
+
+CREATE TABLE Mae_Usuario
+(
+	id_usuario   	int IDENTITY(1,1) NOT NULL,
+	id_role  	 	int NULL,
+	id_estado	 	int NULL,
+	id_comuna	 	int NULL,
+	id_empresa	 	int NULL,
+	rut			 	int NULL,
+	dv			 	char(1) NULL,
+	nombre		 	varchar(50)NULL,
+	app_pater	 	varchar(50)NULL,
+	app_mater	 	varchar(50)NULL,
+	direccion	 	varchar(100)NULL,
+	telefono	 	int NULL,
+	mail		 	varchar(100)NULL,
+	pass		 	varchar(50)NULL
+ CONSTRAINT [PK_Mae_Usuario] PRIMARY KEY CLUSTERED 
+(
+	[id_usuario] ASC
+)
+);
