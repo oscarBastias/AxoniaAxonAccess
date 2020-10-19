@@ -34,7 +34,6 @@ namespace AxonAccessMVC.Controllers
         public ActionResult IndexRegistrado()
         {
             ViewBag.Message = "AxonAccess.";
-
             return View();
         }
     }
