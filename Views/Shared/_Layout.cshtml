@@ -59,6 +59,16 @@
                                     </ul>
                                 </li>
                                 <li>
+                                    <a><i class="fa fa-lock"></i> Gestion de Accesos <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+                                        <li>@Html.ActionLink("LIsta de Accesos por estamento", "Lista", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+                                        <li>@Html.ActionLink("Crear nuevo Acceso", "Create", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+                                        <li>@Html.ActionLink("Asignacion de Accesos Masiva", "CargaMasiva", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+
+                                    </ul>
+                                </li>
+                                <li>
                                     <a><i class="fa fa-shopping-cart"></i> Gestion personal <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Mis Datos", "Index", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
