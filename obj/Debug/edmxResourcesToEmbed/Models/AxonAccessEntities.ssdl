@@ -64,6 +64,7 @@
     <Property Name="pass" Type="varchar" MaxLength="50" />
     <Property Name="latitud" Type="varchar" MaxLength="100" />
     <Property Name="longitud" Type="varchar" MaxLength="100" />
+    <Property Name="cargo" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Ref_DetalleAcceso">
     <Key>

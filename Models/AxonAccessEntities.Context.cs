@@ -15,10 +15,10 @@ namespace AxonAccessMVC.Models
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class axonAccessEntities : DbContext
+    public partial class axonAccessEntities1 : DbContext
     {
-        public axonAccessEntities()
-            : base("name=axonAccessEntities")
+        public axonAccessEntities1()
+            : base("name=axonAccessEntities1")
         {
         }
     
@@ -31,6 +31,7 @@ namespace AxonAccessMVC.Models
         public virtual DbSet<Mae_Empresa> Mae_Empresa { get; set; }
         public virtual DbSet<Mae_Puerta> Mae_Puerta { get; set; }
         public virtual DbSet<Mae_Region> Mae_Region { get; set; }
+        public virtual DbSet<Mae_Sucursal> Mae_Sucursal { get; set; }
         public virtual DbSet<Mae_Usuario> Mae_Usuario { get; set; }
         public virtual DbSet<Ref_DetalleAcceso> Ref_DetalleAcceso { get; set; }
         public virtual DbSet<Ref_Estado> Ref_Estado { get; set; }
@@ -38,7 +39,6 @@ namespace AxonAccessMVC.Models
         public virtual DbSet<Ref_UserAccess> Ref_UserAccess { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<USUARIO_AUD> USUARIO_AUD { get; set; }
-        public virtual DbSet<Mae_Sucursal> Mae_Sucursal { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -186,6 +186,19 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_USUARIO_MASS", iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter);
         }
     
+        public virtual ObjectResult<Nullable<int>> Sp_LoginUsuario(string mail, string pass)
+        {
+            var mailParameter = mail != null ?
+                new ObjectParameter("mail", mail) :
+                new ObjectParameter("mail", typeof(string));
+    
+            var passParameter = pass != null ?
+                new ObjectParameter("Pass", pass) :
+                new ObjectParameter("Pass", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_LoginUsuario", mailParameter, passParameter);
+        }
+    
         public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
         {
             var diagramnameParameter = diagramname != null ?
@@ -201,24 +214,6 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("new_diagramname", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<Nullable<int>> Sp_LoginUsuario(string mail, string pass)
-        {
-            var mailParameter = mail != null ?
-                new ObjectParameter("mail", mail) :
-                new ObjectParameter("mail", typeof(string));
-    
-            var passParameter = pass != null ?
-                new ObjectParameter("Pass", pass) :
-                new ObjectParameter("Pass", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("Sp_LoginUsuario", mailParameter, passParameter);
         }
     
         public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD)
@@ -288,6 +283,11 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("LONGITUD", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
         public virtual int SVC_DELETED_USUARIO(Nullable<int> iD_USUARIO)

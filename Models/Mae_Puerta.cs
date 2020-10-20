@@ -21,13 +21,11 @@ namespace AxonAccessMVC.Models
         }
     
         public int id_puerta { get; set; }
-        public Nullable<int> id_empresa { get; set; }
-        public string desc_puerta { get; set; }
         public Nullable<int> id_sucursal { get; set; }
+        public string desc_puerta { get; set; }
     
-        public virtual Mae_Empresa Mae_Empresa { get; set; }
+        public virtual Mae_Sucursal Mae_Sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ref_UserAccess> Ref_UserAccess { get; set; }
-        public virtual Mae_Sucursal Mae_Sucursal { get; set; }
     }
 }

@@ -23,9 +23,8 @@ namespace AxonAccessMVC.Models
         public int id_acceso { get; set; }
         public Nullable<int> id_usuario { get; set; }
         public Nullable<int> id_puerta { get; set; }
-        public string desc_puerta { get; set; }
-        public Nullable<System.DateTime> fecha_acceso { get; set; }
         public string desc_access { get; set; }
+        public Nullable<System.DateTime> fecha_acceso { get; set; }
     
         public virtual Mae_Puerta Mae_Puerta { get; set; }
         public virtual Mae_Usuario Mae_Usuario { get; set; }

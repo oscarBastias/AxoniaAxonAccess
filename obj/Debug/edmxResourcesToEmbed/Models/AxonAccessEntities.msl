@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities">
+  <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities1">
     <EntitySetMapping Name="Mae_Comuna">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Comuna">
         <MappingFragment StoreEntitySet="Mae_Comuna">
@@ -22,8 +22,8 @@
     <EntitySetMapping Name="Mae_Puerta">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Puerta">
         <MappingFragment StoreEntitySet="Mae_Puerta">
-          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
           <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
           <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -36,11 +36,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Sucursal">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Sucursal">
+        <MappingFragment StoreEntitySet="Mae_Sucursal">
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Mae_Usuario">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
         <MappingFragment StoreEntitySet="Mae_Usuario">
-          <ScalarProperty Name="longitud" ColumnName="longitud" />
-          <ScalarProperty Name="latitud" ColumnName="latitud" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
           <ScalarProperty Name="id_role" ColumnName="id_role" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
@@ -55,6 +67,9 @@
           <ScalarProperty Name="telefono" ColumnName="telefono" />
           <ScalarProperty Name="mail" ColumnName="mail" />
           <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -88,10 +103,10 @@
     <EntitySetMapping Name="Ref_UserAccess">
       <EntityTypeMapping TypeName="axonAccessModel.Ref_UserAccess">
         <MappingFragment StoreEntitySet="Ref_UserAccess">
-          <ScalarProperty Name="desc_access" ColumnName="desc_access" />
           <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
           <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
+          <ScalarProperty Name="desc_access" ColumnName="desc_access" />
           <ScalarProperty Name="fecha_acceso" ColumnName="fecha_acceso" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -104,6 +119,17 @@
           <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
           <ScalarProperty Name="version" ColumnName="version" />
           <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USUARIO_AUD">
+      <EntityTypeMapping TypeName="axonAccessModel.USUARIO_AUD">
+        <MappingFragment StoreEntitySet="USUARIO_AUD">
+          <ScalarProperty Name="id_registro" ColumnName="id_registro" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="concepto" ColumnName="concepto" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -130,35 +156,10 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_INS_USUARIO_MASS" FunctionName="axonAccessModel.Store.SP_INS_USUARIO_MASS" />
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
-    <EntitySetMapping Name="USUARIO_AUD">
-      <EntityTypeMapping TypeName="axonAccessModel.USUARIO_AUD">
-        <MappingFragment StoreEntitySet="USUARIO_AUD">
-          <ScalarProperty Name="fecha" ColumnName="fecha" />
-          <ScalarProperty Name="concepto" ColumnName="concepto" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-          <ScalarProperty Name="id_registro" ColumnName="id_registro" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
-    <EntitySetMapping Name="Mae_Sucursal">
-      <EntityTypeMapping TypeName="axonAccessModel.Mae_Sucursal">
-        <MappingFragment StoreEntitySet="Mae_Sucursal">
-          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-          <ScalarProperty Name="longitud" ColumnName="longitud" />
-          <ScalarProperty Name="latitud" ColumnName="latitud" />
-          <ScalarProperty Name="direccion" ColumnName="direccion" />
-          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
-          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
-          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

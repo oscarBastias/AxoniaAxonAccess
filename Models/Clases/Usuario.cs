@@ -28,12 +28,14 @@ namespace AxonAccessMVC.Models.Clases
         public string Latitud { get; set; }
 
         public string Longitud { get; set; }
+
+        public string Cargo { get; set; }
         public string Desc_Role { get; set; }
 
  
 
 
-        axonAccessEntities db = new axonAccessEntities();
+        axonAccessEntities1 db = new axonAccessEntities1();
         AxonAccessMVC.Controllers.AuthController au = new Controllers.AuthController();
         
         
@@ -66,7 +68,8 @@ namespace AxonAccessMVC.Models.Clases
                             Mail = us.mail,
                             Pass = us.pass,
                             Latitud=us.latitud,
-                            Longitud=us.longitud
+                            Longitud=us.longitud,
+                            Cargo=us.cargo
                         }).ToList();
             }
             else
@@ -92,7 +95,8 @@ namespace AxonAccessMVC.Models.Clases
                             Mail = us.mail,
                             Pass = us.pass,
                             Latitud = us.latitud,
-                            Longitud = us.longitud
+                            Longitud = us.longitud,
+                            Cargo=us.cargo
                         }).ToList();
             }
            

@@ -17,9 +17,8 @@ namespace AxonAccessMVC.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Mae_Empresa()
         {
-            this.Mae_Puerta = new HashSet<Mae_Puerta>();
-            this.Mae_Usuario = new HashSet<Mae_Usuario>();
             this.Mae_Sucursal = new HashSet<Mae_Sucursal>();
+            this.Mae_Usuario = new HashSet<Mae_Usuario>();
         }
     
         public int id_empresa { get; set; }
@@ -28,10 +27,8 @@ namespace AxonAccessMVC.Models
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mae_Puerta> Mae_Puerta { get; set; }
+        public virtual ICollection<Mae_Sucursal> Mae_Sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mae_Usuario> Mae_Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mae_Sucursal> Mae_Sucursal { get; set; }
     }
 }

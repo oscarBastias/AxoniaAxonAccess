@@ -12,7 +12,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_empresa { get; set; }
 
 
-        axonAccessEntities db = new axonAccessEntities();
+        axonAccessEntities1 db = new axonAccessEntities1();
         public List<Mae_Empresa> ReadAll()
         {
             return db.Mae_Empresa.Select(c => new Mae_Empresa()

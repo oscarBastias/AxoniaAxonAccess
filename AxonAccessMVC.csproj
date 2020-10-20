@@ -138,20 +138,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccess.Context.cs">
+    <Compile Include="Models\AxonAccessEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccess.Context.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccess.cs">
+    <Compile Include="Models\AxonAccessEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccess.Designer.cs">
+    <Compile Include="Models\AxonAccessEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccess.edmx</DependentUpon>
+      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Clases\Mae_Comuna.cs" />
     <Compile Include="Models\Clases\Mae_Empresa.cs" />
@@ -159,46 +159,46 @@
     <Compile Include="Models\Clases\Ref_Role.cs" />
     <Compile Include="Models\Clases\Usuario.cs" />
     <Compile Include="Models\Mae_Comuna.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Empresa.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Puerta.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Region.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Sucursal.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Usuario.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_DetalleAcceso.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_Estado.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_Role.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_UserAccess.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIO_AUD.cs">
-      <DependentUpon>AxonAccess.tt</DependentUpon>
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -3742,25 +3742,18 @@
     <Content Include="images\favicon .ico" />
     <Content Include="images\favicon.png" />
     <Content Include="images\tick.png" />
-    <Content Include="Models\AxonAccess.Context.tt">
+    <Content Include="Models\AxonAccessEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonAccess.edmx</DependentUpon>
-      <LastGenOutput>AxonAccess.Context.cs</LastGenOutput>
+      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
+      <LastGenOutput>AxonAccessEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AxonAccess.tt">
+    <Content Include="Models\AxonAccessEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonAccess.edmx</DependentUpon>
-      <LastGenOutput>AxonAccess.cs</LastGenOutput>
+      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
+      <LastGenOutput>AxonAccessEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\AxonAccess.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AxonAccess.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AxonAccess.edmx.diagram">
-      <DependentUpon>AxonAccess.edmx</DependentUpon>
-    </Content>
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.woff" />
@@ -4649,6 +4642,13 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="CargasMasivas\CargaMasiva.csv" />
+    <EntityDeploy Include="Models\AxonAccessEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AxonAccessEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\AxonAccessEntities.edmx.diagram">
+      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\globalize.js" />
     <Content Include="Scripts\html2canvas.js" />
