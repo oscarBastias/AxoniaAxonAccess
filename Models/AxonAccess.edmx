@@ -54,6 +54,8 @@
           <Property Name="telefono" Type="int" />
           <Property Name="mail" Type="varchar" MaxLength="100" />
           <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="latitud" Type="varchar" MaxLength="100" />
+          <Property Name="longitud" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Ref_DetalleAcceso">
           <Key>
@@ -270,6 +272,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="TELEFONO" Type="int" Mode="In" />
           <Parameter Name="EMAIL" Type="varchar" Mode="In" />
           <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+          <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Sp_LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="mail" Type="varchar" Mode="In" />
@@ -295,6 +299,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="TELEFONO" Type="int" Mode="In" />
           <Parameter Name="EMAIL" Type="varchar" Mode="In" />
           <Parameter Name="PASS" Type="varchar" Mode="In" />
+          <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+          <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SVC_DELETED_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -428,6 +434,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Usuario" FromRole="Mae_Usuario" ToRole="Ref_UserAccess" />
           <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Mae_Usuario" ToRole="Ref_Estado" />
           <NavigationProperty Name="Ref_Role" Relationship="Self.FK_Usuario_Role" FromRole="Mae_Usuario" ToRole="Ref_Role" />
+          <Property Name="latitud" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="longitud" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ref_DetalleAcceso">
           <Key>
@@ -688,6 +696,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
             <Parameter Name="EMAIL" Mode="In" Type="String" />
             <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="LATITUD" Mode="In" Type="String" />
+            <Parameter Name="LONGITUD" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_renamediagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -715,6 +725,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
             <Parameter Name="EMAIL" Mode="In" Type="String" />
             <Parameter Name="PASS" Mode="In" Type="String" />
+            <Parameter Name="LATITUD" Mode="In" Type="String" />
+            <Parameter Name="LONGITUD" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SVC_DELETED_USUARIO">
           <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
@@ -785,6 +797,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <EntitySetMapping Name="Mae_Usuario">
             <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
               <MappingFragment StoreEntitySet="Mae_Usuario">
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_role" ColumnName="id_role" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />

@@ -55,6 +55,16 @@
                 <div class="form-add-w3ls">
                     <input type="text" name="direccion" placeholder="Direccion" required="">
                 </div>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <input type="text" name="latitud" placeholder="Latitud" required="">
+                    </div>
+                    <div class="form-right-w3ls ">
+                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" required="">
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
                 <div class="form-add-w3ls">
                     <input type="text" name="Pass" placeholder="Password" required="">
                 </div>
@@ -74,7 +84,7 @@
 
                 <div class="main">
                     <div class="form-left-w3l">
-                            
+
                         <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
 
                     </div>

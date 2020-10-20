@@ -24,6 +24,10 @@ namespace AxonAccessMVC.Models.Clases
         public int Telefono { get; set; }
         public string Mail { get; set; }
         public string Pass { get; set; }
+
+        public string Latitud { get; set; }
+
+        public string Longitud { get; set; }
         public string Desc_Role { get; set; }
 
  
@@ -60,7 +64,9 @@ namespace AxonAccessMVC.Models.Clases
                             Direccion = us.direccion,
                             Telefono = (int)us.telefono,
                             Mail = us.mail,
-                            Pass = us.pass
+                            Pass = us.pass,
+                            Latitud=us.latitud,
+                            Longitud=us.longitud
                         }).ToList();
             }
             else
@@ -84,7 +90,9 @@ namespace AxonAccessMVC.Models.Clases
                             Direccion = us.direccion,
                             Telefono = (int)us.telefono,
                             Mail = us.mail,
-                            Pass = us.pass
+                            Pass = us.pass,
+                            Latitud = us.latitud,
+                            Longitud = us.longitud
                         }).ToList();
             }
            
@@ -122,7 +130,7 @@ namespace AxonAccessMVC.Models.Clases
             try
             {
                 db.SP_INS_USUARIO_MASS(this.Id_Role, this.Id_Estado, this.Id_Comuna, this.Id_Empresa, this.Rut, this.Dv, this.Nombre, this.App_Pater,
-                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass);
+                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass,this.Latitud,this.Longitud);
                 return true;
 
             }
@@ -170,7 +178,9 @@ namespace AxonAccessMVC.Models.Clases
                 Direccion = us.direccion,
                 Telefono = (int)us.telefono,
                 Mail = us.mail,
-                Pass = us.pass
+                Pass = us.pass,
+                Latitud=us.latitud,
+                Longitud=us.longitud
             }).Where(us => us.Id == id).FirstOrDefault();
         }
 
@@ -179,7 +189,7 @@ namespace AxonAccessMVC.Models.Clases
             try
             {
                 db.sp_upd_user(this.Id,this.Id_Role,this.Id_Estado,this.Id_Comuna,this.Id_Empresa,this.Rut,this.Dv,
-                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass);
+                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass,this.Latitud,this.Longitud);
                 return true;
             }
             catch (Exception)

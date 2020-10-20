@@ -36,6 +36,8 @@
                     <th>Telefono</th>
                     <th>Mail</th>
                     <th>Pass</th>
+                    <th>Latitud</th>     
+                    <th>Longitud</th>
                 </tr>
                 @foreach (Usuario customer in Model)
                 {
@@ -53,6 +55,8 @@
                         <td>@customer.Telefono</td>
                         <td>@customer.Mail</td>
                         <td>@customer.Pass</td>
+                        <td>@customer.Latitud</td>
+                        <td>@customer.Longitud</td>
                     </tr>
                     customer.Save();
 

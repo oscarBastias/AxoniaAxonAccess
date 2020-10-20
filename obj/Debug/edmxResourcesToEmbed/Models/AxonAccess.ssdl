@@ -49,6 +49,8 @@
     <Property Name="telefono" Type="int" />
     <Property Name="mail" Type="varchar" MaxLength="100" />
     <Property Name="pass" Type="varchar" MaxLength="50" />
+    <Property Name="latitud" Type="varchar" MaxLength="100" />
+    <Property Name="longitud" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Ref_DetalleAcceso">
     <Key>
@@ -265,6 +267,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="TELEFONO" Type="int" Mode="In" />
     <Parameter Name="EMAIL" Type="varchar" Mode="In" />
     <Parameter Name="PASS" Type="varchar" Mode="In" />
+    <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+    <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
   </Function>
   <Function Name="Sp_LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="mail" Type="varchar" Mode="In" />
@@ -290,6 +294,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="TELEFONO" Type="int" Mode="In" />
     <Parameter Name="EMAIL" Type="varchar" Mode="In" />
     <Parameter Name="PASS" Type="varchar" Mode="In" />
+    <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+    <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SVC_DELETED_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

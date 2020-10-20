@@ -64,7 +64,9 @@ namespace AxonAccessMVC.Controllers
                             Direccion = row.Split(';')[9],
                             Telefono = Convert.ToInt32(row.Split(';')[10]),
                             Mail = row.Split(';')[11],
-                            Pass = row.Split(';')[12]
+                            Pass = row.Split(';')[12],
+                            Latitud=row.Split(';')[13],
+                            Longitud= row.Split(';')[14],
 
                         });
                     }
@@ -85,7 +87,7 @@ namespace AxonAccessMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass")]Usuario usuario)
+        public ActionResult Create([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud")]Usuario usuario)
         {
             try
             {

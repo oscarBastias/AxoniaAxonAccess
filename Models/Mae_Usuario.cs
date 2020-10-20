@@ -34,6 +34,8 @@ namespace AxonAccessMVC.Models
         public Nullable<int> telefono { get; set; }
         public string mail { get; set; }
         public string pass { get; set; }
+        public string latitud { get; set; }
+        public string longitud { get; set; }
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
         public virtual Mae_Empresa Mae_Empresa { get; set; }

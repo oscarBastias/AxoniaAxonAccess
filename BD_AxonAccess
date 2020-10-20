@@ -26,7 +26,7 @@ AS	declare @v_idUsuario int;
 	PRINT 'Trigger Disparado'
 
 
-CREATE PROCEDURE dbo.sp_upd_user
+ALTER PROCEDURE dbo.sp_upd_user
 (
 @ID_USUARIO INT,
 @ID_ROLE INT,
@@ -41,12 +41,15 @@ CREATE PROCEDURE dbo.sp_upd_user
 @DIRECCION VARCHAR(50),
 @TELEFONO INT,
 @EMAIL VARCHAR(50),
-@PASS VARCHAR(50)
+@PASS VARCHAR(50),
+@LATITUD VARCHAR(100),
+@LONGITUD VARCHAR(100)
 )
 AS
 	BEGIN
-			UPDATE mae_usuario set id_role=@ID_ROLE,id_estado=@ID_ESTADO,id_comuna=@ID_COMUNA,id_empresa=@ID_EMPRESA,
-			rut=@RUT,dv=@DV,nombre=@NOMBRE,app_pater=@APP_PATER,app_mater=@APP_MATER,direccion=@DIRECCION,telefono=@TELEFONO,mail=@EMAIL,pass=@PASS
+			UPDATE mae_usuario set id_role=UPPER(@ID_ROLE),id_estado=UPPER(@ID_ESTADO),id_comuna=UPPER(@ID_COMUNA),id_empresa=UPPER(@ID_EMPRESA),
+			rut=UPPER(@RUT),dv=UPPER(@DV),nombre=UPPER(@NOMBRE),app_pater=UPPER(@APP_PATER),app_mater=UPPER(@APP_MATER),direccion=UPPER(@DIRECCION),
+			telefono=UPPER(@TELEFONO),mail=UPPER(@EMAIL),pass=UPPER(@PASS),latitud=UPPER(@LATITUD),longitud=UPPER(@LONGITUD)
 		    where id_usuario=@ID_USUARIO
 	END
 GO
@@ -94,7 +97,7 @@ End;
 GO
 
 
-CREATE PROCEDURE [dbo].[SP_INS_USUARIO_MASS]
+ALTER PROCEDURE [dbo].[SP_INS_USUARIO_MASS]
 (
 @ID_ROLE INT,
 @ID_ESTADO INT,
@@ -108,18 +111,32 @@ CREATE PROCEDURE [dbo].[SP_INS_USUARIO_MASS]
 @DIRECCION VARCHAR(50),
 @TELEFONO INT,
 @EMAIL VARCHAR(50),
-@PASS VARCHAR(50)
+@PASS VARCHAR(50),
+@LATITUD	VARCHAR(100),
+@LONGITUD	VARCHAR(100)
 )
 AS
 	BEGIN
 		DECLARE @existe_usuario INT
 		SET @existe_usuario = (SELECT count(*) FROM Mae_Usuario where rut = @RUT)
 		IF @existe_usuario = 0
-			INSERT INTO Mae_Usuario(id_role,id_estado,id_comuna,id_empresa,rut,dv,nombre,app_pater,app_mater,direccion,telefono,mail,pass) 
-			values (@ID_ROLE,@ID_ESTADO,@ID_COMUNA,@ID_EMPRESA,@RUT,@DV,@NOMBRE,@APP_PATER,@APP_MATER,@DIRECCION,@TELEFONO,@EMAIL
-			,ENCRYPTBYPASSPHRASE('password',@PASS))
+			INSERT INTO Mae_Usuario(id_role,id_estado,id_comuna,id_empresa,rut,dv,nombre,app_pater,app_mater,direccion,telefono,mail,pass,latitud,longitud) 
+			values (UPPER(@ID_ROLE),UPPER(@ID_ESTADO),UPPER(@ID_COMUNA),UPPER(@ID_EMPRESA),UPPER(@RUT),UPPER(@DV),UPPER(@NOMBRE),UPPER(@APP_PATER),UPPER(@APP_MATER),
+			UPPER(@DIRECCION),UPPER(@TELEFONO),UPPER(@EMAIL),UPPER(@PASS),UPPER(@LATITUD),UPPER(@LONGITUD))
 	END
 GO
+--REATE TABLE Ref_Direccion
+--(
+--	id_direccion		int IDENTITY(1,1) NOT NULL,
+--	direccion			varchar(100) null,
+--	latitud				varchar(100) null,
+--	longitud			varchar(100) null
+-- CONSTRAINT [PK_Ref_Direccion] PRIMARY KEY CLUSTERED 
+--(
+--	[id_direccion] ASC
+--)
+--);
+
 
 CREATE TABLE USUARIO_AUD
 (
@@ -231,6 +248,8 @@ CREATE TABLE Mae_Usuario
 	app_pater	 	varchar(50)NULL,
 	app_mater	 	varchar(50)NULL,
 	direccion	 	varchar(100)NULL,
+	latitud			varchar(100)null,
+	longitud		varchar(100)null,
 	telefono	 	int NULL,
 	mail		 	varchar(100)NULL,
 	pass		 	varchar(50)NULL

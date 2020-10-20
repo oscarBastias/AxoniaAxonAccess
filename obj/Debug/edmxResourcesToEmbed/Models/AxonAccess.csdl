@@ -63,6 +63,8 @@
     <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Usuario" FromRole="Mae_Usuario" ToRole="Ref_UserAccess" />
     <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Mae_Usuario" ToRole="Ref_Estado" />
     <NavigationProperty Name="Ref_Role" Relationship="Self.FK_Usuario_Role" FromRole="Mae_Usuario" ToRole="Ref_Role" />
+    <Property Name="latitud" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="longitud" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Ref_DetalleAcceso">
     <Key>
@@ -323,6 +325,8 @@
       <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
       <Parameter Name="EMAIL" Mode="In" Type="String" />
       <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="LATITUD" Mode="In" Type="String" />
+      <Parameter Name="LONGITUD" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_renamediagram">
       <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -350,6 +354,8 @@
       <Parameter Name="TELEFONO" Mode="In" Type="Int32" />
       <Parameter Name="EMAIL" Mode="In" Type="String" />
       <Parameter Name="PASS" Mode="In" Type="String" />
+      <Parameter Name="LATITUD" Mode="In" Type="String" />
+      <Parameter Name="LONGITUD" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SVC_DELETED_USUARIO">
       <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
