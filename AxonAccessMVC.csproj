@@ -170,6 +170,9 @@
     <Compile Include="Models\Mae_Region.cs">
       <DependentUpon>AxonAccess.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mae_Sucursal.cs">
+      <DependentUpon>AxonAccess.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Mae_Usuario.cs">
       <DependentUpon>AxonAccess.tt</DependentUpon>
     </Compile>

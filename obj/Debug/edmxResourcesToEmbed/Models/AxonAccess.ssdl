@@ -21,7 +21,7 @@
       <PropertyRef Name="id_puerta" />
     </Key>
     <Property Name="id_puerta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_empresa" Type="int" />
+    <Property Name="id_sucursal" Type="int" />
     <Property Name="desc_puerta" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Mae_Region">
@@ -30,6 +30,19 @@
     </Key>
     <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="desc_region" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Mae_Sucursal">
+    <Key>
+      <PropertyRef Name="id_sucursal" />
+    </Key>
+    <Property Name="id_sucursal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_estado" Type="int" />
+    <Property Name="id_comuna" Type="int" />
+    <Property Name="id_empresa" Type="int" />
+    <Property Name="direccion" Type="varchar" MaxLength="100" />
+    <Property Name="latitud" Type="varchar" MaxLength="100" />
+    <Property Name="longitud" Type="varchar" MaxLength="100" />
+    <Property Name="descripcion" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Mae_Usuario">
     <Key>
@@ -51,6 +64,7 @@
     <Property Name="pass" Type="varchar" MaxLength="50" />
     <Property Name="latitud" Type="varchar" MaxLength="100" />
     <Property Name="longitud" Type="varchar" MaxLength="100" />
+    <Property Name="cargo" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Ref_DetalleAcceso">
     <Key>
@@ -83,7 +97,7 @@
     <Property Name="id_acceso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_usuario" Type="int" />
     <Property Name="id_puerta" Type="int" />
-    <Property Name="desc_puerta" Type="varchar" MaxLength="100" />
+    <Property Name="desc_access" Type="varchar" MaxLength="100" />
     <Property Name="fecha_acceso" Type="datetime" />
   </EntityType>
   <EntityType Name="sysdiagrams">
@@ -144,19 +158,55 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Puerta_Empresa">
-    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+  <Association Name="FK_Mae_Puerta_Mae_Sucursal">
+    <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="0..1" />
     <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Sucursal">
+        <PropertyRef Name="id_sucursal" />
+      </Principal>
+      <Dependent Role="Mae_Puerta">
+        <PropertyRef Name="id_sucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mae_Sucursal_Mae_Comuna">
+    <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
+    <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Comuna">
+        <PropertyRef Name="id_comuna" />
+      </Principal>
+      <Dependent Role="Mae_Sucursal">
+        <PropertyRef Name="id_comuna" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mae_Sucursal_Mae_Empresa">
+    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="0..1" />
+    <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Mae_Empresa">
         <PropertyRef Name="id_empresa" />
       </Principal>
-      <Dependent Role="Mae_Puerta">
+      <Dependent Role="Mae_Sucursal">
         <PropertyRef Name="id_empresa" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_UserAccess_Puerta">
+  <Association Name="FK_Mae_Sucursal_Ref_Estado">
+    <End Role="Ref_Estado" Type="Self.Ref_Estado" Multiplicity="0..1" />
+    <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Estado">
+        <PropertyRef Name="id_estado" />
+      </Principal>
+      <Dependent Role="Mae_Sucursal">
+        <PropertyRef Name="id_estado" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ref_UserAccess_Mae_Puerta">
     <End Role="Mae_Puerta" Type="Self.Mae_Puerta" Multiplicity="0..1" />
     <End Role="Ref_UserAccess" Type="Self.Ref_UserAccess" Multiplicity="*" />
     <ReferentialConstraint>
@@ -306,6 +356,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mae_Puerta" EntityType="Self.Mae_Puerta" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mae_Region" EntityType="Self.Mae_Region" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Mae_Sucursal" EntityType="Self.Mae_Sucursal" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" Schema="dbo" store:Type="Tables" />
@@ -333,11 +384,23 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
       <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
       <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
     </AssociationSet>
-    <AssociationSet Name="FK_Puerta_Empresa" Association="Self.FK_Puerta_Empresa">
-      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+    <AssociationSet Name="FK_Mae_Puerta_Mae_Sucursal" Association="Self.FK_Mae_Puerta_Mae_Sucursal">
+      <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
       <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
     </AssociationSet>
-    <AssociationSet Name="FK_UserAccess_Puerta" Association="Self.FK_UserAccess_Puerta">
+    <AssociationSet Name="FK_Mae_Sucursal_Mae_Comuna" Association="Self.FK_Mae_Sucursal_Mae_Comuna">
+      <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+      <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mae_Sucursal_Mae_Empresa" Association="Self.FK_Mae_Sucursal_Mae_Empresa">
+      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+      <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mae_Sucursal_Ref_Estado" Association="Self.FK_Mae_Sucursal_Ref_Estado">
+      <End Role="Ref_Estado" EntitySet="Ref_Estado" />
+      <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ref_UserAccess_Mae_Puerta" Association="Self.FK_Ref_UserAccess_Mae_Puerta">
       <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
       <End Role="Ref_UserAccess" EntitySet="Ref_UserAccess" />
     </AssociationSet>

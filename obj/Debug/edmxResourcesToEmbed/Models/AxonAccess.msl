@@ -22,8 +22,8 @@
     <EntitySetMapping Name="Mae_Puerta">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Puerta">
         <MappingFragment StoreEntitySet="Mae_Puerta">
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
           <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
-          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
           <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -39,6 +39,7 @@
     <EntitySetMapping Name="Mae_Usuario">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
         <MappingFragment StoreEntitySet="Mae_Usuario">
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
           <ScalarProperty Name="longitud" ColumnName="longitud" />
           <ScalarProperty Name="latitud" ColumnName="latitud" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
@@ -88,10 +89,10 @@
     <EntitySetMapping Name="Ref_UserAccess">
       <EntityTypeMapping TypeName="axonAccessModel.Ref_UserAccess">
         <MappingFragment StoreEntitySet="Ref_UserAccess">
+          <ScalarProperty Name="desc_access" ColumnName="desc_access" />
           <ScalarProperty Name="id_acceso" ColumnName="id_acceso" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
           <ScalarProperty Name="id_puerta" ColumnName="id_puerta" />
-          <ScalarProperty Name="desc_puerta" ColumnName="desc_puerta" />
           <ScalarProperty Name="fecha_acceso" ColumnName="fecha_acceso" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -146,5 +147,19 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
     <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
+    <EntitySetMapping Name="Mae_Sucursal">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Sucursal">
+        <MappingFragment StoreEntitySet="Mae_Sucursal">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
