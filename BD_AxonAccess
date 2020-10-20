@@ -252,7 +252,8 @@ CREATE TABLE Mae_Usuario
 	longitud		varchar(100)null,
 	telefono	 	int NULL,
 	mail		 	varchar(100)NULL,
-	pass		 	varchar(50)NULL
+	pass		 	varchar(50)NULL,
+	cargo			varchar(50)null
  CONSTRAINT [PK_Mae_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC

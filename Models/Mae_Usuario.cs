@@ -36,6 +36,7 @@ namespace AxonAccessMVC.Models
         public string pass { get; set; }
         public string latitud { get; set; }
         public string longitud { get; set; }
+        public string cargo { get; set; }
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
         public virtual Mae_Empresa Mae_Empresa { get; set; }

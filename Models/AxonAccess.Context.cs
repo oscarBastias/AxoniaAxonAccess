@@ -38,6 +38,7 @@ namespace AxonAccessMVC.Models
         public virtual DbSet<Ref_UserAccess> Ref_UserAccess { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<USUARIO_AUD> USUARIO_AUD { get; set; }
+        public virtual DbSet<Mae_Sucursal> Mae_Sucursal { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
