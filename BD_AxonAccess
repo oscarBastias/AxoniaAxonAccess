@@ -190,7 +190,7 @@ CREATE TABLE Mae_Comuna
 CREATE TABLE Mae_Puerta
 (
 	id_puerta 		int IDENTITY(1,1) NOT NULL,
-	id_empresa 		int NULL,
+	id_sucursal 	int NULL,
 	desc_puerta 	varchar(50) NULL,
  CONSTRAINT [PK_Mae_Puerta] PRIMARY KEY CLUSTERED 
 (
@@ -227,7 +227,7 @@ CREATE TABLE Ref_UserAccess
 	id_acceso   	int IDENTITY(1,1) NOT NULL,
 	id_usuario  	int NULL,
 	id_puerta 		int NULL,
-	desc_puerta 	varchar(100)NULL,
+	desc_access 	varchar(100)NULL,
 	fecha_acceso 	datetime NULL,
  CONSTRAINT [PK_Ref_UserAccess] PRIMARY KEY CLUSTERED 
 (
@@ -256,5 +256,20 @@ CREATE TABLE Mae_Usuario
  CONSTRAINT [PK_Mae_Usuario] PRIMARY KEY CLUSTERED 
 (
 	[id_usuario] ASC
+)
+);
+CREATE TABLE Mae_Sucursal
+(
+	id_sucursal   	int IDENTITY(1,1) NOT NULL,
+	id_estado	 	int NULL,
+	id_comuna	 	int NULL,
+	id_empresa	 	int NULL,
+	direccion		varchar (100)null,
+	latitud			varchar(100)null,
+	longitud		varchar(100)null,
+	descripcion		varchar(100)null
+ CONSTRAINT [PK_Mae_Sucursal] PRIMARY KEY CLUSTERED 
+(
+	[id_sucursal] ASC
 )
 );
