@@ -30,6 +30,8 @@
         <AssociationConnector Association="axonAccessModel.FK_Usuario_Estado" ManuallyRouted="false" />
         <AssociationConnector Association="axonAccessModel.FK_Usuario_Role" ManuallyRouted="false" />
         <AssociationConnector Association="axonAccessModel.FK_DetalleAcceso_UserAccess" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="axonAccessModel.Ref_Estamento" Width="1.5" PointX="10.375" PointY="3.875" />
+        <AssociationConnector Association="axonAccessModel.FK_Mae_Empresa_Ref_Estamento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

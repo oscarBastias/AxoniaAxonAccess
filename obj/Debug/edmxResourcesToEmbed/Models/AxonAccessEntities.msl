@@ -13,6 +13,7 @@
     <EntitySetMapping Name="Mae_Empresa">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Empresa">
         <MappingFragment StoreEntitySet="Mae_Empresa">
+          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
           <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
           <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
           <ScalarProperty Name="desc_empresa" ColumnName="desc_empresa" />
@@ -161,5 +162,13 @@
     <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
     <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
     <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
+    <EntitySetMapping Name="Ref_Estamento">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_Estamento">
+        <MappingFragment StoreEntitySet="Ref_Estamento">
+          <ScalarProperty Name="desc_estamento" ColumnName="desc_estamento" />
+          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

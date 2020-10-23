@@ -15,6 +15,7 @@
     <Property Name="id_empresa" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="id_comuna" Type="int" />
     <Property Name="desc_empresa" Type="varchar" MaxLength="50" />
+    <Property Name="id_estamento" Type="int" />
   </EntityType>
   <EntityType Name="Mae_Puerta">
     <Key>
@@ -82,6 +83,13 @@
     </Key>
     <Property Name="id_estado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="desc_estado" Type="char" MaxLength="12" />
+  </EntityType>
+  <EntityType Name="Ref_Estamento">
+    <Key>
+      <PropertyRef Name="id_estamento" />
+    </Key>
+    <Property Name="id_estamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="desc_estamento" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="Ref_Role">
     <Key>
@@ -155,6 +163,18 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
       </Principal>
       <Dependent Role="Mae_Empresa">
         <PropertyRef Name="id_comuna" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mae_Empresa_Ref_Estamento">
+    <End Role="Ref_Estamento" Type="Self.Ref_Estamento" Multiplicity="0..1" />
+    <End Role="Mae_Empresa" Type="Self.Mae_Empresa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_Estamento">
+        <PropertyRef Name="id_estamento" />
+      </Principal>
+      <Dependent Role="Mae_Empresa">
+        <PropertyRef Name="id_estamento" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -360,6 +380,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ref_Estamento" EntityType="Self.Ref_Estamento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_Role" EntityType="Self.Ref_Role" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ref_UserAccess" EntityType="Self.Ref_UserAccess" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -382,6 +403,10 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     </AssociationSet>
     <AssociationSet Name="FK_Empresa_Comuna" Association="Self.FK_Empresa_Comuna">
       <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
+      <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mae_Empresa_Ref_Estamento" Association="Self.FK_Mae_Empresa_Ref_Estamento">
+      <End Role="Ref_Estamento" EntitySet="Ref_Estamento" />
       <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
     </AssociationSet>
     <AssociationSet Name="FK_Mae_Puerta_Mae_Sucursal" Association="Self.FK_Mae_Puerta_Mae_Sucursal">

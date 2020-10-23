@@ -1,0 +1,54 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Mae_Empresa
+
+@{
+    ViewBag.Title = "Axonia";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+
+    <form action="#" method="post">
+        <div class="online-w3l-form">
+            @{ List<Mae_Empresa> entidades = (List<Mae_Empresa>)ViewBag.entidades;}
+            <div class="main">
+                <div class="col-md-12">
+                    <table class="table">
+                        <tr>
+                            <th>Id_Entidad</th>
+                            <th>Id_Comuna</th>
+                            <th>Des_comuna</th>
+                            <th>Desc_Estamento</th>
+                            <th>id_estamento</th>
+                            <th>Desc_Entidad</th>
+                        </tr>
+
+                        @foreach (var entidad in entidades)
+                        {
+
+                            <tr>
+                                <td>@entidad.id_empresa</td>
+                                <td>@entidad.id_comuna</td>
+                                <td>@entidad.desc_comuna</td>
+                                <td>@entidad.desc_empresa</td>
+                                <td>@entidad.id_estamento</td>
+                                <td>@entidad.desc_estamento</td>
+                            </tr>
+
+
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

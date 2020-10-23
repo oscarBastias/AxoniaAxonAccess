@@ -58,6 +58,17 @@
 
                                     </ul>
                                 </li>
+
+                                <li>
+                                    <a><i class="fa fa-building-o"></i> Gestion de Estamento <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+
+                                        <li>@Html.ActionLink("Listado de estamentos", "Index", "Mae_Entidad", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+                                        <li>@Html.ActionLink("Crear nuevo Estamento", "Create", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+
+                                    </ul>
+                                </li>
+
                                 <li>
                                     <a><i class="fa fa-lock"></i> Gestion de Accesos <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -69,7 +80,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-shopping-cart"></i> Gestion personal <span class="fa fa-chevron-down"></span></a>
+                                    <a><i class="fa fa-user"></i> Gestion personal <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>@Html.ActionLink("Mis Datos", "Index", "Usuario", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
 

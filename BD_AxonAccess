@@ -146,6 +146,15 @@ CREATE TABLE USUARIO_AUD
 	concepto 	varchar	(50)NULL,
 	fecha 		datetime 	NULL
 )
+CREATE TABLE Ref_Estamento
+(
+	id_estamento 		int IDENTITY(1,1) NOT NULL,
+	desc_estamento 		varchar(20) NULL,
+ CONSTRAINT [PK_Ref_Estamento] PRIMARY KEY CLUSTERED 
+(
+	[id_estamento] ASC
+)
+);
 CREATE TABLE Ref_Role
 (
 	id_role 		int IDENTITY(1,1) NOT NULL,
@@ -202,6 +211,7 @@ CREATE TABLE Mae_Empresa
 (
 	id_empresa 		int IDENTITY(1,1) NOT NULL,
 	id_comuna 		int NULL,
+	id_estamento	int NULL,
 	desc_empresa 	varchar(50) NULL,
  CONSTRAINT [PK_Mae_Empresa] PRIMARY KEY CLUSTERED 
 (

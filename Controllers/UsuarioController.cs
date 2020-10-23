@@ -119,7 +119,7 @@ namespace AxonAccessMVC.Controllers
 
         private void EnviarEmpresa()
         {
-            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(1);
         }
 
         public ActionResult Delete(int id)
