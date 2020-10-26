@@ -1,0 +1,60 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Mae_Sucursal
+
+@{
+    ViewBag.Title = "Axonia";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+
+    <form action="#" method="post">
+        <div class="online-w3l-form">
+            @{ List<Ref_Sucursal> sucursals = (List<Ref_Sucursal>)ViewBag.sucursals;}
+            <div class="main">
+                <div class="col-md-12">
+                    <table class="table">
+                        <tr>
+                            <th>Id_Sucursal</th>
+                            <th>Id_Estado</th>
+                            <th>Id_Comuna</th>
+                            <th>Id_Empresa</th>
+                            <th>Desc_Empresa</th>
+                            <th>Direccion</th>
+                            <th>Latitud</th>
+                            <th>Longitud</th>
+                            <th>Descripcion</th>
+                        </tr>
+
+                        @foreach (var sucursal in sucursals)
+                        {
+
+                    <tr>
+                        <td>@sucursal.id_sucursal</td>
+                        <td>@sucursal.id_estado</td>
+                        <td>@sucursal.id_comuna</td>
+                        <td>@sucursal.id_empresa</td>
+                        <td>@sucursal.desc_empresa</td>
+                        <td>@sucursal.direccion</td>
+                        <td>@sucursal.latitud</td>
+                        <td>@sucursal.longitud</td>
+                        <td>@sucursal.descripcion</td>
+                    </tr>
+
+
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>

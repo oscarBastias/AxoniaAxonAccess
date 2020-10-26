@@ -1,0 +1,50 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Mae_Empresa
+
+
+@{
+    ViewBag.Title = "Axonia";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="online-w3l-form">
+
+        <form action="#" method="post">
+            @{ List<Mae_Empresa> empresa = (List<Mae_Empresa>)ViewBag.empresas;}
+
+
+            <div class="form-left-w3l">
+                <input type="text" class="top-up" name="Desc_Empresa" placeholder="Nombre de la nueva entidad" required="">
+            </div>
+
+            <div class="main">
+                <div class="form-left-w3l">
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+
+                </div>
+                <div class="form-left-w3l">
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estamento, new SelectList(ViewBag.estamentos, "Id_Estamento", "desc_estamento"))</select>
+
+                </div>
+            </div>
+
+            <div class="btnn">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

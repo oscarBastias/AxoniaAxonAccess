@@ -170,5 +170,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Sp_List_Emp" FunctionName="axonAccessModel.Store.Sp_List_Emp">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="axonAccessModel.Sp_List_Emp_Result">
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="desc_empresa" ColumnName="desc_empresa" />
+          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
+          <ScalarProperty Name="id_estamento1" ColumnName="id_estamento1" />
+          <ScalarProperty Name="desc_estamento" ColumnName="desc_estamento" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_INS_EMPRESA" FunctionName="axonAccessModel.Store.SP_INS_EMPRESA" />
+    <FunctionImportMapping FunctionImportName="SP_INS_SUCURSAL" FunctionName="axonAccessModel.Store.SP_INS_SUCURSAL" />
   </EntityContainerMapping>
 </Mapping>

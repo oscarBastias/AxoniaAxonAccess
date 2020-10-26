@@ -299,5 +299,64 @@ namespace AxonAccessMVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_USUARIO", iD_USUARIOParameter);
         }
+    
+        public virtual ObjectResult<Sp_List_Emp_Result> Sp_List_Emp(Nullable<int> var1)
+        {
+            var var1Parameter = var1.HasValue ?
+                new ObjectParameter("Var1", var1) :
+                new ObjectParameter("Var1", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Sp_List_Emp_Result>("Sp_List_Emp", var1Parameter);
+        }
+    
+        public virtual int SP_INS_EMPRESA(Nullable<int> iD_COMUNA, Nullable<int> iD_ESTAMENTO, string dESC_EMPRESA)
+        {
+            var iD_COMUNAParameter = iD_COMUNA.HasValue ?
+                new ObjectParameter("ID_COMUNA", iD_COMUNA) :
+                new ObjectParameter("ID_COMUNA", typeof(int));
+    
+            var iD_ESTAMENTOParameter = iD_ESTAMENTO.HasValue ?
+                new ObjectParameter("ID_ESTAMENTO", iD_ESTAMENTO) :
+                new ObjectParameter("ID_ESTAMENTO", typeof(int));
+    
+            var dESC_EMPRESAParameter = dESC_EMPRESA != null ?
+                new ObjectParameter("DESC_EMPRESA", dESC_EMPRESA) :
+                new ObjectParameter("DESC_EMPRESA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_EMPRESA", iD_COMUNAParameter, iD_ESTAMENTOParameter, dESC_EMPRESAParameter);
+        }
+    
+        public virtual int SP_INS_SUCURSAL(Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, string dIRECCION, string lATITUD, string lONGITUD, string dESCRIPCION)
+        {
+            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
+                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
+                new ObjectParameter("ID_ESTADO", typeof(int));
+    
+            var iD_COMUNAParameter = iD_COMUNA.HasValue ?
+                new ObjectParameter("ID_COMUNA", iD_COMUNA) :
+                new ObjectParameter("ID_COMUNA", typeof(int));
+    
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var dIRECCIONParameter = dIRECCION != null ?
+                new ObjectParameter("DIRECCION", dIRECCION) :
+                new ObjectParameter("DIRECCION", typeof(string));
+    
+            var lATITUDParameter = lATITUD != null ?
+                new ObjectParameter("LATITUD", lATITUD) :
+                new ObjectParameter("LATITUD", typeof(string));
+    
+            var lONGITUDParameter = lONGITUD != null ?
+                new ObjectParameter("LONGITUD", lONGITUD) :
+                new ObjectParameter("LONGITUD", typeof(string));
+    
+            var dESCRIPCIONParameter = dESCRIPCION != null ?
+                new ObjectParameter("DESCRIPCION", dESCRIPCION) :
+                new ObjectParameter("DESCRIPCION", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_SUCURSAL", iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, dIRECCIONParameter, lATITUDParameter, lONGITUDParameter, dESCRIPCIONParameter);
+        }
     }
 }

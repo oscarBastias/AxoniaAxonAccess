@@ -134,6 +134,7 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Mae_EntidadController.cs" />
+    <Compile Include="Controllers\Mae_SucursalController.cs" />
     <Compile Include="Controllers\Ref_RoleController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -159,6 +160,7 @@
     <Compile Include="Models\Clases\Ref_Estado.cs" />
     <Compile Include="Models\Clases\Ref_Estamento.cs" />
     <Compile Include="Models\Clases\Ref_Role.cs" />
+    <Compile Include="Models\Clases\Ref_Sucursal.cs" />
     <Compile Include="Models\Clases\Usuario.cs" />
     <Compile Include="Models\Mae_Comuna.cs">
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
@@ -197,6 +199,9 @@
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Sp_List_Emp_Result.cs">
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
@@ -4774,6 +4779,11 @@
     <Content Include="Views\Usuario\Edit.cshtml" />
     <Content Include="Views\Mae_Entidad\Index.cshtml" />
     <Content Include="Views\Mae_Entidad\IndexSelect1.cshtml" />
+    <Content Include="Views\Usuario\CreateSeleccion.cshtml" />
+    <Content Include="Views\Mae_Entidad\CreateEstamento.cshtml" />
+    <Content Include="Views\Mae_Entidad\Create.cshtml" />
+    <Content Include="Views\Mae_Sucursal\Create.cshtml" />
+    <Content Include="Views\Mae_Sucursal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

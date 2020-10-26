@@ -1,6 +1,6 @@
 ﻿@using AxonAccessMVC.Models.Clases;
-@model AxonAccessMVC.Models.Mae_Empresa
 
+@model AxonAccessMVC.Models.Mae_Empresa
 @{
     ViewBag.Title = "Axonia";
 }
@@ -20,19 +20,18 @@
     </script>
 </head>
 <body>
-    
+
     <form method="post">
         <div class="online-w3l-form">
             <div class="form-left-w3l">
                 <select name="id_valor" id="ddselect" onchange="ddlselect();" class="form-control buttom" @Html.DropDownListFor(p => p.id_estamento, new SelectList(ViewBag.estamentos, "Id_Estamento", "desc_estamento")) </select>
             </div>
             <div class="btnn">
-                <input type="submit" value="Lista">
+                <input type="submit" value="Seleccione tipo de usuario a crear">
             </div>
         </div>
-        
+
     </form>
 
 </body>
 </html>
-

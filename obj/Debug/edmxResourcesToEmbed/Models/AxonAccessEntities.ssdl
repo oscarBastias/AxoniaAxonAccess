@@ -323,6 +323,20 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
     <Parameter Name="owner_id" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_INS_EMPRESA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+    <Parameter Name="ID_ESTAMENTO" Type="int" Mode="In" />
+    <Parameter Name="DESC_EMPRESA" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_INS_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+    <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+    <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+    <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+    <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+    <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
+    <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_INS_USUARIO_MASS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID_ROLE" Type="int" Mode="In" />
     <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
@@ -339,6 +353,9 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="PASS" Type="varchar" Mode="In" />
     <Parameter Name="LATITUD" Type="varchar" Mode="In" />
     <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="Sp_List_Emp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Var1" Type="int" Mode="In" />
   </Function>
   <Function Name="Sp_LoginUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="mail" Type="varchar" Mode="In" />

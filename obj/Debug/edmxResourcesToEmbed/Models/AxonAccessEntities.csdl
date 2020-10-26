@@ -446,6 +446,23 @@
       <End Role="Ref_Estamento" EntitySet="Ref_Estamento" />
       <End Role="Mae_Empresa" EntitySet="Mae_Empresa" />
     </AssociationSet>
+    <FunctionImport Name="Sp_List_Emp" ReturnType="Collection(axonAccessModel.Sp_List_Emp_Result)">
+      <Parameter Name="Var1" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INS_EMPRESA">
+      <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ESTAMENTO" Mode="In" Type="Int32" />
+      <Parameter Name="DESC_EMPRESA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INS_SUCURSAL">
+      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+      <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+      <Parameter Name="DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="LATITUD" Mode="In" Type="String" />
+      <Parameter Name="LONGITUD" Mode="In" Type="String" />
+      <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />
@@ -478,4 +495,12 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="Sp_List_Emp_Result">
+    <Property Type="Int32" Name="id_empresa" Nullable="false" />
+    <Property Type="Int32" Name="id_comuna" Nullable="true" />
+    <Property Type="String" Name="desc_empresa" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_estamento" Nullable="true" />
+    <Property Type="Int32" Name="id_estamento1" Nullable="false" />
+    <Property Type="String" Name="desc_estamento" Nullable="true" MaxLength="20" />
+  </ComplexType>
 </Schema>

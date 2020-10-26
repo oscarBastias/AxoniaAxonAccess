@@ -3,82 +3,73 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using AxonAccessMVC.Models;
-using AxonAccessMVC.Models.Clases;
 using Mae_Empresa = AxonAccessMVC.Models.Clases.Mae_Empresa;
 using Ref_Estamento = AxonAccessMVC.Models.Clases.Ref_Estamento;
+using Ref_Sucursal = AxonAccessMVC.Models.Clases.Ref_Sucursal;
 
 namespace AxonAccessMVC.Controllers
 {
-    public class Mae_EntidadController : Controller
+    public class Mae_SucursalController : Controller
     {
-        public Mae_Empresa entidad;
-        // GET: Mae_Entidad
+        // GET: Mae_Sucursal
         public ActionResult Index()
         {
-            EnviarEstamento();
-
+            EnviarComuna();
+            EnviarEstado();
+            EnviarEmpresa();
+            ViewBag.sucursals = new Ref_Sucursal().ReadAllSinFiltro();
             return View();
         }
-        [HttpPost]
 
-        public ActionResult Index(int id_valor)
-        {
-            EnviarEstamento();
-
-                ViewBag.entidades = new Mae_Empresa().ReadAll(id_valor);
-
-                return View("IndexSelect1");
-
-        }
-
-        private void EnviarEstamento()
-        {
-            ViewBag.estamentos = new Ref_Estamento().ReadAll();
-        }
-        private void EnviarComuna()
-        {
-            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAll();
-        }
-
-        // GET: Mae_Entidad/Details/5
+        // GET: Mae_Sucursal/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Mae_Entidad/Create
+        // GET: Mae_Sucursal/Create
         public ActionResult Create()
         {
             EnviarComuna();
-            EnviarEstamento();
+            EnviarEstado();
+            EnviarEmpresa();
             return View();
         }
 
-        // POST: Mae_Entidad/Create
+        // POST: Mae_Sucursal/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id_Comuna,Id_Estamento,Desc_Empresa")] Mae_Empresa empresa)
+        public ActionResult Create([Bind(Include = "Id_Estado,Id_Comuna,Id_Empresa,Direccion,Latitud,Longitud,Descripcion")] Ref_Sucursal sucursal)
         {
             try
             {
-                empresa.Save();
+                sucursal.Save();
                 TempData["mensaje"] = "Guardado correctamente";
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
             catch
             {
                 return View("Create");
             }
         }
-
-        // GET: Mae_Entidad/Edit/5
+        private void EnviarComuna()
+        {
+            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAll();
+        }
+        private void EnviarEstado()
+        {
+            ViewBag.estados = new Models.Clases.Ref_Estado().ReadAll();
+        }
+        private void EnviarEmpresa()
+        {
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(2);
+        }
+        // GET: Mae_Sucursal/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Mae_Entidad/Edit/5
+        // POST: Mae_Sucursal/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -94,13 +85,13 @@ namespace AxonAccessMVC.Controllers
             }
         }
 
-        // GET: Mae_Entidad/Delete/5
+        // GET: Mae_Sucursal/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Mae_Entidad/Delete/5
+        // POST: Mae_Sucursal/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

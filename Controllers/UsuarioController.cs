@@ -10,6 +10,8 @@ using AxonAccessMVC.Models.Clases;
 using Usuario= AxonAccessMVC.Models.Clases.Usuario;
 using Ref_Estado = AxonAccessMVC.Models.Clases.Ref_Estado;
 using Ref_Role = AxonAccessMVC.Models.Clases.Ref_Role;
+using Ref_Estamento = AxonAccessMVC.Models.Clases.Ref_Estamento;
+using Mae_Empresa = AxonAccessMVC.Models.Clases.Mae_Empresa;
 
 namespace AxonAccessMVC.Controllers
 {
@@ -79,15 +81,24 @@ namespace AxonAccessMVC.Controllers
 
         public ActionResult Create()
         {
+
+            EnviarEstamento();
+            return View("CreateSeleccion");
+        }
+        [HttpPost]
+        public ActionResult Create(int id_valor)
+        {
             EnviarEstados();
             EnviarRoeles();
+            EnviarEstamento();
             EnviarComuna();
-            EnviarEmpresa();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(id_valor);
+
             return View();
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud")]Usuario usuario)
+        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud")]Usuario usuario)
         {
             try
             {
@@ -117,6 +128,10 @@ namespace AxonAccessMVC.Controllers
             ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAll();
         }
 
+        private void EnviarEstamento()
+        {
+            ViewBag.estamentos = new Models.Clases.Ref_Estamento().ReadAll();
+        }
         private void EnviarEmpresa()
         {
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(1);
@@ -147,7 +162,7 @@ namespace AxonAccessMVC.Controllers
                 return RedirectToAction("Lista");
             }
             EnviarComuna();
-            EnviarEmpresa();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAllSinFiltro();
             EnviarEstados();
             EnviarRoeles();
             return View(u);
