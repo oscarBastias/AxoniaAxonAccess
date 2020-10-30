@@ -14,6 +14,7 @@
     <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
     <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
 
+
 </head>
 <body>
 
@@ -47,61 +48,64 @@
             </div>
             <div class="main">
                 <div class="form-left-w3l">
-                    <input type="email" name="Mail" placeholder="Email" required="">
+                    <select name="Cod_Pais" class="form-control buttom" @Html.DropDownListFor(p => p.Mae_Comuna.Mae_Region.Mae_Pais.cod_pais, new SelectList(ViewBag.pais, "Cod_Pais", "cod_pais")) </select>
                 </div>
                 <div class="form-right-w3ls ">
                     <input class="buttom" type="text" name="telefono" placeholder="Phone Number" required="">
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="form-add-w3ls">
-                <input type="text" name="direccion" placeholder="Direccion" required="">
-            </div>
-            <div class="main">
                 <div class="form-left-w3l">
-                    <input type="text" name="latitud" placeholder="Latitud" required="">
+                    <input type="email" name="Mail" placeholder="Email" required="">
                 </div>
-                <div class="form-right-w3ls ">
-                    <input class="buttom" type="text" name="longitud" placeholder="Longitud" required="">
-                    <div class="clearfix"></div>
+                <div class="form-add-w3ls">
+                    <input type="text" name="direccion" placeholder="Direccion" required="">
                 </div>
-            </div>
-
-            <div class="form-add-w3ls">
-                <input type="text" name="Pass" placeholder="Password" required="">
-            </div>
-
-
-            <div class="main">
-                <div class="form-left-w3l">
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <input type="text" name="latitud" placeholder="Latitud" required="">
+                    </div>
+                    <div class="form-right-w3ls ">
+                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" required="">
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-                <div class="form-right-w3ls">
 
-
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
-
+                <div class="form-add-w3ls">
+                    <input type="text" name="Pass" placeholder="Password" required="">
                 </div>
-            </div>
 
-            <div class="main">
-                <div class="form-left-w3l">
 
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
+                    </div>
+                    <div class="form-right-w3ls">
 
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
+
+                    </div>
                 </div>
-                <div class="form-right-w3ls">
 
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+                <div class="main">
+                    <div class="form-left-w3l">
 
-                    <div class="clearfix"></div>
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+
+                    </div>
+                    <div class="form-right-w3ls">
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+
+                        <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="btnn">
-                <input type="submit" value="Register">
-            </div>
-        </form>
+                <div class="btnn">
+                    <input type="submit" value="Register">
+                </div>
+</form>
     </div>
     </div>
 </body>

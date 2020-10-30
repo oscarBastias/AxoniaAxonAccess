@@ -26,14 +26,18 @@
                             <th>Id_Comuna</th>
                             <th>Id_Empresa</th>
                             <th>Desc_Empresa</th>
+                            <th>Estamento</th>
+                            <th>Pais</th>
                             <th>Direccion</th>
                             <th>Latitud</th>
                             <th>Longitud</th>
                             <th>Descripcion</th>
+                            <th>Accion</th>
+                            <th>Accion</th>
                         </tr>
 
                         @foreach (var sucursal in sucursals)
-                        {
+                         {
 
                     <tr>
                         <td>@sucursal.id_sucursal</td>
@@ -41,14 +45,16 @@
                         <td>@sucursal.id_comuna</td>
                         <td>@sucursal.id_empresa</td>
                         <td>@sucursal.desc_empresa</td>
+                        <td>@sucursal.desc_estamento</td>
+                        <td>@sucursal.desc_pais</td>
                         <td>@sucursal.direccion</td>
                         <td>@sucursal.latitud</td>
                         <td>@sucursal.longitud</td>
                         <td>@sucursal.descripcion</td>
+                        <td>@Html.ActionLink("Eliminar", "Delete", new { id = sucursal.id_sucursal })</td>
+                        <td>@Html.ActionLink("Modificar", "Edit", new { id = sucursal.id_sucursal })</td>
                     </tr>
-
-
-                        }
+                         }
                     </table>
                 </div>
 

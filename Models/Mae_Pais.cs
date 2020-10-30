@@ -12,20 +12,19 @@ namespace AxonAccessMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Mae_Region
+    public partial class Mae_Pais
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mae_Region()
+        public Mae_Pais()
         {
-            this.Mae_Comuna = new HashSet<Mae_Comuna>();
+            this.Mae_Region = new HashSet<Mae_Region>();
         }
     
-        public int id_region { get; set; }
-        public string desc_region { get; set; }
-        public Nullable<int> id_pais { get; set; }
+        public int id_pais { get; set; }
+        public string desc_pais { get; set; }
+        public string cod_pais { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mae_Comuna> Mae_Comuna { get; set; }
-        public virtual Mae_Pais Mae_Pais { get; set; }
+        public virtual ICollection<Mae_Region> Mae_Region { get; set; }
     }
 }

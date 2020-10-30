@@ -32,6 +32,11 @@
         <AssociationConnector Association="axonAccessModel.FK_DetalleAcceso_UserAccess" ManuallyRouted="false" />
         <EntityTypeShape EntityType="axonAccessModel.Ref_Estamento" Width="1.5" PointX="10.375" PointY="3.875" />
         <AssociationConnector Association="axonAccessModel.FK_Mae_Empresa_Ref_Estamento" />
+        <EntityTypeShape EntityType="axonAccessModel.Ref_accessTipo" Width="1.5" PointX="10.375" PointY="9.875" />
+        <AssociationConnector Association="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo" />
+        <EntityTypeShape EntityType="axonAccessModel.Mae_Pais" Width="1.5" PointX="13.125" PointY="4.5" />
+        <AssociationConnector Association="axonAccessModel.FK_Mae_Region_Mae_Pais" />
+        <AssociationConnector Association="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

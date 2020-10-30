@@ -22,6 +22,14 @@
           <Property Name="desc_empresa" Type="varchar" MaxLength="50" />
           <Property Name="id_estamento" Type="int" />
         </EntityType>
+        <EntityType Name="Mae_Pais">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_pais" Type="varchar" MaxLength="50" />
+          <Property Name="cod_pais" Type="varchar" MaxLength="4" />
+        </EntityType>
         <EntityType Name="Mae_Puerta">
           <Key>
             <PropertyRef Name="id_puerta" />
@@ -36,6 +44,7 @@
           </Key>
           <Property Name="id_region" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="desc_region" Type="varchar" MaxLength="50" />
+          <Property Name="id_pais" Type="int" />
         </EntityType>
         <EntityType Name="Mae_Sucursal">
           <Key>
@@ -71,6 +80,16 @@
           <Property Name="latitud" Type="varchar" MaxLength="100" />
           <Property Name="longitud" Type="varchar" MaxLength="100" />
           <Property Name="cargo" Type="varchar" MaxLength="50" />
+          <Property Name="id_access_tipo" Type="int" />
+          <Property Name="id_sucursal" Type="int" />
+          <Property Name="cod_pais" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Ref_accessTipo">
+          <Key>
+            <PropertyRef Name="id_access_tipo" />
+          </Key>
+          <Property Name="id_access_tipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="desc_Access_tipo" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Ref_DetalleAcceso">
           <Key>
@@ -195,6 +214,18 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Mae_Region_Mae_Pais">
+          <End Role="Mae_Pais" Type="Self.Mae_Pais" Multiplicity="0..1" />
+          <End Role="Mae_Region" Type="Self.Mae_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Pais">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="Mae_Region">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Mae_Sucursal_Mae_Comuna">
           <End Role="Mae_Comuna" Type="Self.Mae_Comuna" Multiplicity="0..1" />
           <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="*" />
@@ -228,6 +259,30 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             </Principal>
             <Dependent Role="Mae_Sucursal">
               <PropertyRef Name="id_estado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mae_Usuario_Mae_Sucursal">
+          <End Role="Mae_Sucursal" Type="Self.Mae_Sucursal" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mae_Usuario_Ref_accessTipo">
+          <End Role="Ref_accessTipo" Type="Self.Ref_accessTipo" Multiplicity="0..1" />
+          <End Role="Mae_Usuario" Type="Self.Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_accessTipo">
+              <PropertyRef Name="id_access_tipo" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_access_tipo" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -358,6 +413,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="PASS" Type="varchar" Mode="In" />
           <Parameter Name="LATITUD" Type="varchar" Mode="In" />
           <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
+          <Parameter Name="COD_PAIS" Type="varchar" Mode="In" />
         </Function>
         <Function Name="Sp_List_Emp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Var1" Type="int" Mode="In" />
@@ -370,6 +426,25 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upd_estamento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+          <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+          <Parameter Name="ID_ESTAMENTO" Type="int" Mode="In" />
+          <Parameter Name="DESC_EMPRESA" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upd_insersion_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_upd_sucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
+          <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
+          <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+          <Parameter Name="DIRECCION" Type="varchar" Mode="In" />
+          <Parameter Name="LATITUD" Type="varchar" Mode="In" />
+          <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
+          <Parameter Name="DESCRIPCION" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_upd_user" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
@@ -388,18 +463,27 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="PASS" Type="varchar" Mode="In" />
           <Parameter Name="LATITUD" Type="varchar" Mode="In" />
           <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
+          <Parameter Name="COD_PAIS" Type="varchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SVC_DELETED_ESTAMENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SVC_DELETED_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
+        </Function>
         <Function Name="SVC_DELETED_USUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="axonAccessModelStoreContainer">
           <EntitySet Name="Mae_Comuna" EntityType="Self.Mae_Comuna" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Empresa" EntityType="Self.Mae_Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mae_Pais" EntityType="Self.Mae_Pais" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Puerta" EntityType="Self.Mae_Puerta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Region" EntityType="Self.Mae_Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Sucursal" EntityType="Self.Mae_Sucursal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mae_Usuario" EntityType="Self.Mae_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ref_accessTipo" EntityType="Self.Ref_accessTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_DetalleAcceso" EntityType="Self.Ref_DetalleAcceso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_Estado" EntityType="Self.Ref_Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ref_Estamento" EntityType="Self.Ref_Estamento" Schema="dbo" store:Type="Tables" />
@@ -435,6 +519,10 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
             <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
           </AssociationSet>
+          <AssociationSet Name="FK_Mae_Region_Mae_Pais" Association="Self.FK_Mae_Region_Mae_Pais">
+            <End Role="Mae_Pais" EntitySet="Mae_Pais" />
+            <End Role="Mae_Region" EntitySet="Mae_Region" />
+          </AssociationSet>
           <AssociationSet Name="FK_Mae_Sucursal_Mae_Comuna" Association="Self.FK_Mae_Sucursal_Mae_Comuna">
             <End Role="Mae_Comuna" EntitySet="Mae_Comuna" />
             <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
@@ -446,6 +534,14 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <AssociationSet Name="FK_Mae_Sucursal_Ref_Estado" Association="Self.FK_Mae_Sucursal_Ref_Estado">
             <End Role="Ref_Estado" EntitySet="Ref_Estado" />
             <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mae_Usuario_Mae_Sucursal" Association="Self.FK_Mae_Usuario_Mae_Sucursal">
+            <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mae_Usuario_Ref_accessTipo" Association="Self.FK_Mae_Usuario_Ref_accessTipo">
+            <End Role="Ref_accessTipo" EntitySet="Ref_accessTipo" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Ref_UserAccess_Mae_Puerta" Association="Self.FK_Ref_UserAccess_Mae_Puerta">
             <End Role="Mae_Puerta" EntitySet="Mae_Puerta" />
@@ -518,6 +614,8 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="desc_region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Mae_Comuna" Relationship="Self.FK_Comuna_Region" FromRole="Mae_Region" ToRole="Mae_Comuna" />
+          <Property Name="id_pais" Type="Int32" />
+          <NavigationProperty Name="Mae_Pais" Relationship="axonAccessModel.FK_Mae_Region_Mae_Pais" FromRole="Mae_Region" ToRole="Mae_Pais" />
         </EntityType>
         <EntityType Name="Mae_Sucursal">
           <Key>
@@ -535,6 +633,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <NavigationProperty Name="Mae_Empresa" Relationship="Self.FK_Mae_Sucursal_Mae_Empresa" FromRole="Mae_Sucursal" ToRole="Mae_Empresa" />
           <NavigationProperty Name="Mae_Puerta" Relationship="Self.FK_Mae_Puerta_Mae_Sucursal" FromRole="Mae_Sucursal" ToRole="Mae_Puerta" />
           <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Mae_Sucursal_Ref_Estado" FromRole="Mae_Sucursal" ToRole="Ref_Estado" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal" FromRole="Mae_Sucursal" ToRole="Mae_Usuario" />
         </EntityType>
         <EntityType Name="Mae_Usuario">
           <Key>
@@ -562,6 +661,11 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Usuario" FromRole="Mae_Usuario" ToRole="Ref_UserAccess" />
           <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Mae_Usuario" ToRole="Ref_Estado" />
           <NavigationProperty Name="Ref_Role" Relationship="Self.FK_Usuario_Role" FromRole="Mae_Usuario" ToRole="Ref_Role" />
+          <Property Name="id_access_tipo" Type="Int32" />
+          <NavigationProperty Name="Ref_accessTipo" Relationship="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo" FromRole="Mae_Usuario" ToRole="Ref_accessTipo" />
+          <Property Name="id_sucursal" Type="Int32" />
+          <NavigationProperty Name="Mae_Sucursal" Relationship="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal" FromRole="Mae_Usuario" ToRole="Mae_Sucursal" />
+          <Property Name="cod_pais" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Ref_DetalleAcceso">
           <Key>
@@ -885,6 +989,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="PASS" Mode="In" Type="String" />
             <Parameter Name="LATITUD" Mode="In" Type="String" />
             <Parameter Name="LONGITUD" Mode="In" Type="String" />
+            <Parameter Name="COD_PAIS" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="Sp_LoginUsuario" ReturnType="Collection(Int32)">
             <Parameter Name="mail" Mode="In" Type="String" />
@@ -912,6 +1017,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="PASS" Mode="In" Type="String" />
             <Parameter Name="LATITUD" Mode="In" Type="String" />
             <Parameter Name="LONGITUD" Mode="In" Type="String" />
+            <Parameter Name="COD_PAIS" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="SVC_DELETED_USUARIO">
@@ -938,6 +1044,45 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="LATITUD" Mode="In" Type="String" />
             <Parameter Name="LONGITUD" Mode="In" Type="String" />
             <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Ref_accessTipo" EntityType="axonAccessModel.Ref_accessTipo" />
+          <AssociationSet Name="FK_Mae_Usuario_Ref_accessTipo" Association="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo">
+            <End Role="Ref_accessTipo" EntitySet="Ref_accessTipo" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <FunctionImport Name="sp_upd_sucursal">
+            <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+            <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="DIRECCION" Mode="In" Type="String" />
+            <Parameter Name="LATITUD" Mode="In" Type="String" />
+            <Parameter Name="LONGITUD" Mode="In" Type="String" />
+            <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SVC_DELETED_SUCURSAL">
+          <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upd_estamento">
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_ESTAMENTO" Mode="In" Type="Int32" />
+            <Parameter Name="DESC_EMPRESA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SVC_DELETED_ESTAMENTO">
+          <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Mae_Pais" EntityType="axonAccessModel.Mae_Pais" />
+          <AssociationSet Name="FK_Mae_Region_Mae_Pais" Association="axonAccessModel.FK_Mae_Region_Mae_Pais">
+            <End Role="Mae_Pais" EntitySet="Mae_Pais" />
+            <End Role="Mae_Region" EntitySet="Mae_Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mae_Usuario_Mae_Sucursal" Association="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal">
+            <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+            <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+          </AssociationSet>
+          <FunctionImport Name="sp_upd_insersion_user">
+            <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -979,6 +1124,59 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Property Type="Int32" Name="id_estamento1" Nullable="false" />
           <Property Type="String" Name="desc_estamento" Nullable="true" MaxLength="20" />
         </ComplexType>
+        <EntityType Name="Ref_accessTipo">
+          <Key>
+            <PropertyRef Name="id_access_tipo" />
+          </Key>
+          <Property Name="id_access_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_Access_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Usuario" Relationship="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo" FromRole="Ref_accessTipo" ToRole="Mae_Usuario" />
+        </EntityType>
+        <Association Name="FK_Mae_Usuario_Ref_accessTipo">
+          <End Type="axonAccessModel.Ref_accessTipo" Role="Ref_accessTipo" Multiplicity="0..1" />
+          <End Type="axonAccessModel.Mae_Usuario" Role="Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ref_accessTipo">
+              <PropertyRef Name="id_access_tipo" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_access_tipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Mae_Pais">
+          <Key>
+            <PropertyRef Name="id_pais" />
+          </Key>
+          <Property Name="id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="desc_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Mae_Region" Relationship="axonAccessModel.FK_Mae_Region_Mae_Pais" FromRole="Mae_Pais" ToRole="Mae_Region" />
+          <Property Name="cod_pais" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Mae_Region_Mae_Pais">
+          <End Type="axonAccessModel.Mae_Pais" Role="Mae_Pais" Multiplicity="0..1" />
+          <End Type="axonAccessModel.Mae_Region" Role="Mae_Region" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Pais">
+              <PropertyRef Name="id_pais" />
+            </Principal>
+            <Dependent Role="Mae_Region">
+              <PropertyRef Name="id_pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mae_Usuario_Mae_Sucursal">
+          <End Type="axonAccessModel.Mae_Sucursal" Role="Mae_Sucursal" Multiplicity="0..1" />
+          <End Type="axonAccessModel.Mae_Usuario" Role="Mae_Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mae_Sucursal">
+              <PropertyRef Name="id_sucursal" />
+            </Principal>
+            <Dependent Role="Mae_Usuario">
+              <PropertyRef Name="id_sucursal" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1016,6 +1214,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <EntitySetMapping Name="Mae_Region">
             <EntityTypeMapping TypeName="axonAccessModel.Mae_Region">
               <MappingFragment StoreEntitySet="Mae_Region">
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
                 <ScalarProperty Name="id_region" ColumnName="id_region" />
                 <ScalarProperty Name="desc_region" ColumnName="desc_region" />
               </MappingFragment>
@@ -1038,6 +1237,9 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <EntitySetMapping Name="Mae_Usuario">
             <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
               <MappingFragment StoreEntitySet="Mae_Usuario">
+                <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+                <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="id_role" ColumnName="id_role" />
                 <ScalarProperty Name="id_estado" ColumnName="id_estado" />
@@ -1168,6 +1370,28 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_INS_EMPRESA" FunctionName="axonAccessModel.Store.SP_INS_EMPRESA" />
           <FunctionImportMapping FunctionImportName="SP_INS_SUCURSAL" FunctionName="axonAccessModel.Store.SP_INS_SUCURSAL" />
+          <EntitySetMapping Name="Ref_accessTipo">
+            <EntityTypeMapping TypeName="axonAccessModel.Ref_accessTipo">
+              <MappingFragment StoreEntitySet="Ref_accessTipo">
+                <ScalarProperty Name="desc_Access_tipo" ColumnName="desc_Access_tipo" />
+                <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_upd_sucursal" FunctionName="axonAccessModel.Store.sp_upd_sucursal" />
+          <FunctionImportMapping FunctionImportName="SVC_DELETED_SUCURSAL" FunctionName="axonAccessModel.Store.SVC_DELETED_SUCURSAL" />
+          <FunctionImportMapping FunctionImportName="sp_upd_estamento" FunctionName="axonAccessModel.Store.sp_upd_estamento" />
+          <FunctionImportMapping FunctionImportName="SVC_DELETED_ESTAMENTO" FunctionName="axonAccessModel.Store.SVC_DELETED_ESTAMENTO" />
+          <EntitySetMapping Name="Mae_Pais">
+            <EntityTypeMapping TypeName="axonAccessModel.Mae_Pais">
+              <MappingFragment StoreEntitySet="Mae_Pais">
+                <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+                <ScalarProperty Name="desc_pais" ColumnName="desc_pais" />
+                <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_upd_insersion_user" FunctionName="axonAccessModel.Store.sp_upd_insersion_user" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

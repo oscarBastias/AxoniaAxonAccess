@@ -18,20 +18,32 @@
         }
         ddlselect();
     </script>
+    <script>
+        function ddlselect2() {
+            var d = document.getElementById("ddselect2").value;
+            console.log(d);
+        }
+        ddlselect2();
+    </script>
 </head>
 <body>
 
     <form method="post">
         <div class="online-w3l-form">
-            <div class="form-left-w3l">
-                <select name="id_valor" id="ddselect" onchange="ddlselect();" class="form-control buttom" @Html.DropDownListFor(p => p.id_estamento, new SelectList(ViewBag.estamentos, "Id_Estamento", "desc_estamento")) </select>
+            <div class="main">
+                <div class="form-left-w3l">
+                    <select name="id_valor" id="ddselect" onchange="ddlselect();" class="form-control buttom" @Html.DropDownListFor(p => p.id_estamento, new SelectList(ViewBag.estamentos, "Id_Estamento", "desc_estamento")) </select>
+                </div>
+                <div class="form-left-w3l">
+                    <select name="id_valor2" id="ddselect2" onchange="ddlselect2();" class="form-control buttom" @Html.DropDownListFor(p => p.Mae_Comuna.Mae_Region.id_pais, new SelectList(ViewBag.pais, "id_pais", "desc_pais")) </select>
+                </div>
+                </div>
+                <div class="btnn">
+                    <input type="submit" value="Seleccione tipo de usuario a crear">
+                </div>
             </div>
-            <div class="btnn">
-                <input type="submit" value="Seleccione tipo de usuario a crear">
-            </div>
-        </div>
 
-    </form>
+</form>
 
 </body>
 </html>

@@ -17,20 +17,21 @@ namespace AxonAccessMVC.Controllers
             EnviarComuna();
             EnviarEstado();
             EnviarEmpresa();
-            ViewBag.sucursals = new Ref_Sucursal().ReadAllSinFiltro();
+            ViewBag.sucursals = new Ref_Sucursal().ReadAll();
             return View();
         }
 
         // GET: Mae_Sucursal/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Mae_Sucursal/Create
         public ActionResult Create()
         {
-            EnviarComuna();
+            EnviarPais();
+            return View("SelectPais");
+        }
+        [HttpPost]
+        public ActionResult Create(int id_valor)
+        {
+            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAllFiltrado(id_valor);
+            EnviarPais();
             EnviarEstado();
             EnviarEmpresa();
             return View();
@@ -38,7 +39,7 @@ namespace AxonAccessMVC.Controllers
 
         // POST: Mae_Sucursal/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id_Estado,Id_Comuna,Id_Empresa,Direccion,Latitud,Longitud,Descripcion")] Ref_Sucursal sucursal)
+        public ActionResult Create2([Bind(Include = "Id_Estado,Id_Comuna,Id_Empresa,Direccion,Latitud,Longitud,Descripcion")] Ref_Sucursal sucursal)
         {
             try
             {
@@ -51,6 +52,10 @@ namespace AxonAccessMVC.Controllers
                 return View("Create");
             }
         }
+        private void EnviarPais()
+        {
+            ViewBag.pais = new Models.Clases.Mae_Pais().ReadAll();
+        }
         private void EnviarComuna()
         {
             ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAll();
@@ -61,50 +66,53 @@ namespace AxonAccessMVC.Controllers
         }
         private void EnviarEmpresa()
         {
-            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(2);
-        }
-        // GET: Mae_Sucursal/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAllSinFiltro();
         }
 
-        // POST: Mae_Sucursal/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Mae_Sucursal/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (new Ref_Sucursal().Find(id) == null)
+            {
+                TempData["mensaje"] = "No existe usuario";
+                return RedirectToAction("Index");
+            }
+            if (new Ref_Sucursal().Delete(id))
+            {
+                TempData["mensaje"] = "eliminado Correctamente";
+                return RedirectToAction("Index");
+            }
+            TempData["mensaje"] = "No se ah podido eliminar el usuario";
+            return RedirectToAction("Index");
         }
 
-        // POST: Mae_Sucursal/Delete/5
+        public ActionResult Edit(int id)
+        {
+            Ref_Sucursal u = new Ref_Sucursal().Find(id);
+            if (u == null)
+            {
+                TempData["Mensaje"] = "El usuario no existe";
+                return RedirectToAction("Index");
+            }
+            EnviarComuna();
+            EnviarEstado();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAllSinFiltro();
+
+            return View(u);
+        }
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Edit(Ref_Sucursal sucursal)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                sucursal.Update();
+                TempData["mensaje"] = "Modificado correctamente";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
+
     }
 }

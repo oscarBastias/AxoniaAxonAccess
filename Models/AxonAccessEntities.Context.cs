@@ -40,6 +40,8 @@ namespace AxonAccessMVC.Models
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<USUARIO_AUD> USUARIO_AUD { get; set; }
         public virtual DbSet<Ref_Estamento> Ref_Estamento { get; set; }
+        public virtual DbSet<Ref_accessTipo> Ref_accessTipo { get; set; }
+        public virtual DbSet<Mae_Pais> Mae_Pais { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -122,7 +124,7 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual int SP_INS_USUARIO_MASS(Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD)
+        public virtual int SP_INS_USUARIO_MASS(Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS)
         {
             var iD_ROLEParameter = iD_ROLE.HasValue ?
                 new ObjectParameter("ID_ROLE", iD_ROLE) :
@@ -184,7 +186,11 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("LONGITUD", lONGITUD) :
                 new ObjectParameter("LONGITUD", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_USUARIO_MASS", iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter);
+            var cOD_PAISParameter = cOD_PAIS != null ?
+                new ObjectParameter("COD_PAIS", cOD_PAIS) :
+                new ObjectParameter("COD_PAIS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_USUARIO_MASS", iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Sp_LoginUsuario(string mail, string pass)
@@ -217,7 +223,7 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
         }
     
-        public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD)
+        public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS)
         {
             var iD_USUARIOParameter = iD_USUARIO.HasValue ?
                 new ObjectParameter("ID_USUARIO", iD_USUARIO) :
@@ -283,7 +289,11 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("LONGITUD", lONGITUD) :
                 new ObjectParameter("LONGITUD", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter);
+            var cOD_PAISParameter = cOD_PAIS != null ?
+                new ObjectParameter("COD_PAIS", cOD_PAIS) :
+                new ObjectParameter("COD_PAIS", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter);
         }
     
         public virtual int sp_upgraddiagrams()
@@ -357,6 +367,91 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("DESCRIPCION", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_SUCURSAL", iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, dIRECCIONParameter, lATITUDParameter, lONGITUDParameter, dESCRIPCIONParameter);
+        }
+    
+        public virtual int sp_upd_sucursal(Nullable<int> iD_SUCURSAL, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, string dIRECCION, string lATITUD, string lONGITUD, string dESCRIPCION)
+        {
+            var iD_SUCURSALParameter = iD_SUCURSAL.HasValue ?
+                new ObjectParameter("ID_SUCURSAL", iD_SUCURSAL) :
+                new ObjectParameter("ID_SUCURSAL", typeof(int));
+    
+            var iD_ESTADOParameter = iD_ESTADO.HasValue ?
+                new ObjectParameter("ID_ESTADO", iD_ESTADO) :
+                new ObjectParameter("ID_ESTADO", typeof(int));
+    
+            var iD_COMUNAParameter = iD_COMUNA.HasValue ?
+                new ObjectParameter("ID_COMUNA", iD_COMUNA) :
+                new ObjectParameter("ID_COMUNA", typeof(int));
+    
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var dIRECCIONParameter = dIRECCION != null ?
+                new ObjectParameter("DIRECCION", dIRECCION) :
+                new ObjectParameter("DIRECCION", typeof(string));
+    
+            var lATITUDParameter = lATITUD != null ?
+                new ObjectParameter("LATITUD", lATITUD) :
+                new ObjectParameter("LATITUD", typeof(string));
+    
+            var lONGITUDParameter = lONGITUD != null ?
+                new ObjectParameter("LONGITUD", lONGITUD) :
+                new ObjectParameter("LONGITUD", typeof(string));
+    
+            var dESCRIPCIONParameter = dESCRIPCION != null ?
+                new ObjectParameter("DESCRIPCION", dESCRIPCION) :
+                new ObjectParameter("DESCRIPCION", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_sucursal", iD_SUCURSALParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, dIRECCIONParameter, lATITUDParameter, lONGITUDParameter, dESCRIPCIONParameter);
+        }
+    
+        public virtual int SVC_DELETED_SUCURSAL(Nullable<int> iD_SUCURSAL)
+        {
+            var iD_SUCURSALParameter = iD_SUCURSAL.HasValue ?
+                new ObjectParameter("ID_SUCURSAL", iD_SUCURSAL) :
+                new ObjectParameter("ID_SUCURSAL", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_SUCURSAL", iD_SUCURSALParameter);
+        }
+    
+        public virtual int sp_upd_estamento(Nullable<int> iD_EMPRESA, Nullable<int> iD_COMUNA, Nullable<int> iD_ESTAMENTO, string dESC_EMPRESA)
+        {
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            var iD_COMUNAParameter = iD_COMUNA.HasValue ?
+                new ObjectParameter("ID_COMUNA", iD_COMUNA) :
+                new ObjectParameter("ID_COMUNA", typeof(int));
+    
+            var iD_ESTAMENTOParameter = iD_ESTAMENTO.HasValue ?
+                new ObjectParameter("ID_ESTAMENTO", iD_ESTAMENTO) :
+                new ObjectParameter("ID_ESTAMENTO", typeof(int));
+    
+            var dESC_EMPRESAParameter = dESC_EMPRESA != null ?
+                new ObjectParameter("DESC_EMPRESA", dESC_EMPRESA) :
+                new ObjectParameter("DESC_EMPRESA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_estamento", iD_EMPRESAParameter, iD_COMUNAParameter, iD_ESTAMENTOParameter, dESC_EMPRESAParameter);
+        }
+    
+        public virtual int SVC_DELETED_ESTAMENTO(Nullable<int> iD_EMPRESA)
+        {
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_ESTAMENTO", iD_EMPRESAParameter);
+        }
+    
+        public virtual int sp_upd_insersion_user(Nullable<int> iD_EMPRESA)
+        {
+            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
+                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
+                new ObjectParameter("ID_EMPRESA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_insersion_user", iD_EMPRESAParameter);
         }
     }
 }

@@ -1,10 +1,9 @@
 ﻿@using AxonAccessMVC.Models.Clases;
-@model AxonAccessMVC.Models.Mae_Sucursal
+@model AxonAccessMVC.Models.Clases.Ref_Sucursal
 
 
 @{
     ViewBag.Title = "Axonia";
-    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
 
 }
 
@@ -19,31 +18,30 @@
 
     <div class="online-w3l-form">
 
-        <form action="~/Mae_Sucursal/Create2" method="post">
-            @{ List<AxonAccessMVC.Models.Mae_Sucursal> sucursal = (List<AxonAccessMVC.Models.Mae_Sucursal>)ViewBag.sucursals;}
+        <form action="#" method="post">
+            @Html.HiddenFor(p => p.id_sucursal)
 
             <div class="main">
                 <div class="form-left-w3l">
-                    <input type="text" class="top-up" name="Direccion" placeholder="Direccion" required="">
+                    @Html.TextBoxFor(p => p.direccion)
                 </div>
                 <div class="form-left-w3l">
-                    <input type="text" class="top-up" name="Descripcion" placeholder="Descripcion" required="">
+                    @Html.TextBoxFor(p => p.descripcion)
                 </div>
             </div>
             <div class="main">
                 <div class="form-left-w3l">
 
-                    <input type="text" class="top-up" name="Latitud" placeholder="Latitud" required="">
+                    @Html.TextBoxFor(p => p.latitud)
                 </div>
                 <div class="form-right-w3ls ">
-                    <input type="text" class="top-up" name="Longitud" placeholder="Longitud" required="">
+                    @Html.TextBoxFor(p => p.longitud)
                     <div class="clearfix"></div>
                 </div>
             </div>
-
-                <div class="form-left-w3l">
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
-                </div>
+            <div class="form-left-w3l">
+                <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+            </div>
             <div class="main">
                 <div class="form-left-w3l">
                     <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "Id_Empresa", "desc_empresa"))</select>
@@ -53,10 +51,9 @@
                 </div>
             </div>
 
-
-                <div class="btnn">
-                    <input type="submit" value="Registrar Sucursal">
-                </div>
+            <div class="btnn">
+                <input type="submit" value="Registrar Sucursal">
+            </div>
         </form>
     </div>
 

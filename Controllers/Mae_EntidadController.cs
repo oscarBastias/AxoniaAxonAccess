@@ -25,7 +25,8 @@ namespace AxonAccessMVC.Controllers
 
         public ActionResult Index(int id_valor)
         {
-            EnviarEstamento();
+                EnviarEstamento();
+                EnviarPais();
 
                 ViewBag.entidades = new Mae_Empresa().ReadAll(id_valor);
 
@@ -41,24 +42,29 @@ namespace AxonAccessMVC.Controllers
         {
             ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAll();
         }
-
-        // GET: Mae_Entidad/Details/5
-        public ActionResult Details(int id)
+        private void EnviarPais()
         {
-            return View();
+            ViewBag.pais = new Models.Clases.Mae_Pais().ReadAll();
         }
 
-        // GET: Mae_Entidad/Create
         public ActionResult Create()
         {
-            EnviarComuna();
+            EnviarPais();
+            return View("SelectPaisEst");
+        }
+
+        [HttpPost]
+        public ActionResult Create(int id_valor)
+        {
+            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAllFiltrado(id_valor);
             EnviarEstamento();
+            EnviarPais();
             return View();
         }
 
         // POST: Mae_Entidad/Create
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id_Comuna,Id_Estamento,Desc_Empresa")] Mae_Empresa empresa)
+        public ActionResult Create2([Bind(Include = "Id_Comuna,Id_Estamento,Desc_Empresa")] Mae_Empresa empresa)
         {
             try
             {
@@ -72,48 +78,50 @@ namespace AxonAccessMVC.Controllers
             }
         }
 
-        // GET: Mae_Entidad/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Mae_Entidad/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Mae_Entidad/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (new Mae_Empresa().Find(id) == null)
+            {
+                TempData["mensaje"] = "No existe usuario";
+                return RedirectToAction("Index");
+            }
+            if (new Mae_Empresa().Delete(id))
+            {
+                TempData["mensaje"] = "eliminado Correctamente";
+                return RedirectToAction("Index");
+            }
+            TempData["mensaje"] = "No se ah podido eliminar el usuario";
+            return RedirectToAction("Index");
         }
 
-        // POST: Mae_Entidad/Delete/5
+        public ActionResult Edit(int id)
+        {
+            Mae_Empresa u = new Mae_Empresa().Find(id);
+            if (u == null)
+            {
+                TempData["Mensaje"] = "El usuario no existe";
+                return RedirectToAction("Index");
+            }
+            EnviarComuna();
+            EnviarEstamento();
+            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAllSinFiltro();
+
+            return View(u);
+        }
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Edit(Mae_Empresa empresa)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                empresa.Update();
+                TempData["mensaje"] = "Modificado correctamente";
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View("Index");
             }
         }
+
     }
 }

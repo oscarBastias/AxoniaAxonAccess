@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="Models\Clases\Mae_Comuna.cs" />
     <Compile Include="Models\Clases\Mae_Empresa.cs" />
+    <Compile Include="Models\Clases\Mae_Pais.cs" />
     <Compile Include="Models\Clases\Ref_Estado.cs" />
     <Compile Include="Models\Clases\Ref_Estamento.cs" />
     <Compile Include="Models\Clases\Ref_Role.cs" />
@@ -166,6 +167,9 @@
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Empresa.cs">
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Mae_Pais.cs">
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Puerta.cs">
@@ -178,6 +182,9 @@
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Usuario.cs">
+      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ref_accessTipo.cs">
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_DetalleAcceso.cs">
@@ -4784,6 +4791,10 @@
     <Content Include="Views\Mae_Entidad\Create.cshtml" />
     <Content Include="Views\Mae_Sucursal\Create.cshtml" />
     <Content Include="Views\Mae_Sucursal\Index.cshtml" />
+    <Content Include="Views\Mae_Sucursal\Edit.cshtml" />
+    <Content Include="Views\Mae_Entidad\Edit.cshtml" />
+    <Content Include="Views\Mae_Sucursal\SelectPais.cshtml" />
+    <Content Include="Views\Mae_Entidad\SelectPaisEst.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

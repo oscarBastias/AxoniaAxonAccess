@@ -81,24 +81,25 @@ namespace AxonAccessMVC.Controllers
 
         public ActionResult Create()
         {
-
+            EnviarPais();
             EnviarEstamento();
             return View("CreateSeleccion");
         }
         [HttpPost]
-        public ActionResult Create(int id_valor)
+        public ActionResult Create(int id_valor,int id_valor2)
         {
             EnviarEstados();
             EnviarRoeles();
             EnviarEstamento();
-            EnviarComuna();
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(id_valor);
+            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAllFiltrado(id_valor2);
+            ViewBag.pais = new Models.Clases.Mae_Pais().ReadAllFiltrado(id_valor2);
 
             return View();
         }
-
+        
         [HttpPost]
-        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud")]Usuario usuario)
+        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud,Cod_Pais,Id_Sucursal")]Usuario usuario)
         {
             try
             {
@@ -111,6 +112,10 @@ namespace AxonAccessMVC.Controllers
                 return View("Create");
             }
 
+        }
+        private void EnviarPais()
+        {
+            ViewBag.pais = new Models.Clases.Mae_Pais().ReadAll();
         }
 
         private void EnviarEstados()

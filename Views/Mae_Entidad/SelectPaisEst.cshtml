@@ -1,0 +1,37 @@
+﻿@using AxonAccessMVC.Models.Clases;
+
+@model AxonAccessMVC.Models.Mae_Empresa
+@{
+    ViewBag.Title = "Axonia";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script>
+        function ddlselect() {
+            var d = document.getElementById("ddselect").value;
+            console.log(d);
+        }
+        ddlselect();
+    </script>
+</head>
+<body>
+
+    <form method="post">
+        <div class="online-w3l-form">
+            <div class="form-left-w3l">
+                <select name="id_valor" id="ddselect" onchange="ddlselect();" class="form-control buttom" @Html.DropDownListFor(p => p.Mae_Comuna.Mae_Region.id_pais, new SelectList(ViewBag.pais, "id_pais", "desc_pais")) </select>
+            </div>
+            <div class="btnn">
+                <input type="submit" value="Seleccione Pais de origen">
+            </div>
+        </div>
+
+    </form>
+
+</body>
+</html>

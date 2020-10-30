@@ -1,11 +1,9 @@
 ﻿@using AxonAccessMVC.Models.Clases;
-@model AxonAccessMVC.Models.Mae_Empresa
+@model AxonAccessMVC.Models.Clases.Mae_Empresa
 
 
 @{
     ViewBag.Title = "Axonia";
-    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
-
 }
 
 <!DOCTYPE html>
@@ -19,13 +17,14 @@
 
     <div class="online-w3l-form">
 
-        <form action="~/Mae_Entidad/Create2" method="post">
-            @{ List<Mae_Empresa> empresa = (List<Mae_Empresa>)ViewBag.empresas;}
+        <form action="#" method="post">
+            @Html.HiddenFor(p => p.id_empresa)
 
 
             <div class="form-left-w3l">
-                <input type="text" class="top-up" name="Desc_Empresa" placeholder="Nombre de la nueva entidad" required="">
+                @Html.TextBoxFor(p => p.desc_empresa)
             </div>
+
             <div class="main">
                 <div class="form-left-w3l">
 

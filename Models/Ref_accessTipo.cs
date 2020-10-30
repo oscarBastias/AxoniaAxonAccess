@@ -12,29 +12,17 @@ namespace AxonAccessMVC.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Mae_Sucursal
+    public partial class Ref_accessTipo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Mae_Sucursal()
+        public Ref_accessTipo()
         {
-            this.Mae_Puerta = new HashSet<Mae_Puerta>();
             this.Mae_Usuario = new HashSet<Mae_Usuario>();
         }
     
-        public int id_sucursal { get; set; }
-        public Nullable<int> id_estado { get; set; }
-        public Nullable<int> id_comuna { get; set; }
-        public Nullable<int> id_empresa { get; set; }
-        public string direccion { get; set; }
-        public string latitud { get; set; }
-        public string longitud { get; set; }
-        public string descripcion { get; set; }
+        public int id_access_tipo { get; set; }
+        public string desc_Access_tipo { get; set; }
     
-        public virtual Mae_Comuna Mae_Comuna { get; set; }
-        public virtual Mae_Empresa Mae_Empresa { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Mae_Puerta> Mae_Puerta { get; set; }
-        public virtual Ref_Estado Ref_Estado { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mae_Usuario> Mae_Usuario { get; set; }
     }

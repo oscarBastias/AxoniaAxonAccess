@@ -42,6 +42,8 @@
     <Property Name="id_region" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="desc_region" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Mae_Comuna" Relationship="Self.FK_Comuna_Region" FromRole="Mae_Region" ToRole="Mae_Comuna" />
+    <Property Name="id_pais" Type="Int32" />
+    <NavigationProperty Name="Mae_Pais" Relationship="axonAccessModel.FK_Mae_Region_Mae_Pais" FromRole="Mae_Region" ToRole="Mae_Pais" />
   </EntityType>
   <EntityType Name="Mae_Sucursal">
     <Key>
@@ -59,6 +61,7 @@
     <NavigationProperty Name="Mae_Empresa" Relationship="Self.FK_Mae_Sucursal_Mae_Empresa" FromRole="Mae_Sucursal" ToRole="Mae_Empresa" />
     <NavigationProperty Name="Mae_Puerta" Relationship="Self.FK_Mae_Puerta_Mae_Sucursal" FromRole="Mae_Sucursal" ToRole="Mae_Puerta" />
     <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Mae_Sucursal_Ref_Estado" FromRole="Mae_Sucursal" ToRole="Ref_Estado" />
+    <NavigationProperty Name="Mae_Usuario" Relationship="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal" FromRole="Mae_Sucursal" ToRole="Mae_Usuario" />
   </EntityType>
   <EntityType Name="Mae_Usuario">
     <Key>
@@ -86,6 +89,11 @@
     <NavigationProperty Name="Ref_UserAccess" Relationship="Self.FK_UserAccess_Usuario" FromRole="Mae_Usuario" ToRole="Ref_UserAccess" />
     <NavigationProperty Name="Ref_Estado" Relationship="Self.FK_Usuario_Estado" FromRole="Mae_Usuario" ToRole="Ref_Estado" />
     <NavigationProperty Name="Ref_Role" Relationship="Self.FK_Usuario_Role" FromRole="Mae_Usuario" ToRole="Ref_Role" />
+    <Property Name="id_access_tipo" Type="Int32" />
+    <NavigationProperty Name="Ref_accessTipo" Relationship="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo" FromRole="Mae_Usuario" ToRole="Ref_accessTipo" />
+    <Property Name="id_sucursal" Type="Int32" />
+    <NavigationProperty Name="Mae_Sucursal" Relationship="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal" FromRole="Mae_Usuario" ToRole="Mae_Sucursal" />
+    <Property Name="cod_pais" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="Ref_DetalleAcceso">
     <Key>
@@ -409,6 +417,7 @@
       <Parameter Name="PASS" Mode="In" Type="String" />
       <Parameter Name="LATITUD" Mode="In" Type="String" />
       <Parameter Name="LONGITUD" Mode="In" Type="String" />
+      <Parameter Name="COD_PAIS" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="Sp_LoginUsuario" ReturnType="Collection(Int32)">
       <Parameter Name="mail" Mode="In" Type="String" />
@@ -436,6 +445,7 @@
       <Parameter Name="PASS" Mode="In" Type="String" />
       <Parameter Name="LATITUD" Mode="In" Type="String" />
       <Parameter Name="LONGITUD" Mode="In" Type="String" />
+      <Parameter Name="COD_PAIS" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <FunctionImport Name="SVC_DELETED_USUARIO">
@@ -462,6 +472,45 @@
       <Parameter Name="LATITUD" Mode="In" Type="String" />
       <Parameter Name="LONGITUD" Mode="In" Type="String" />
       <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="Ref_accessTipo" EntityType="axonAccessModel.Ref_accessTipo" />
+    <AssociationSet Name="FK_Mae_Usuario_Ref_accessTipo" Association="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo">
+      <End Role="Ref_accessTipo" EntitySet="Ref_accessTipo" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+    <FunctionImport Name="sp_upd_sucursal">
+      <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ESTADO" Mode="In" Type="Int32" />
+      <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+      <Parameter Name="DIRECCION" Mode="In" Type="String" />
+      <Parameter Name="LATITUD" Mode="In" Type="String" />
+      <Parameter Name="LONGITUD" Mode="In" Type="String" />
+      <Parameter Name="DESCRIPCION" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SVC_DELETED_SUCURSAL">
+      <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upd_estamento">
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_COMUNA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ESTAMENTO" Mode="In" Type="Int32" />
+      <Parameter Name="DESC_EMPRESA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SVC_DELETED_ESTAMENTO">
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Mae_Pais" EntityType="axonAccessModel.Mae_Pais" />
+    <AssociationSet Name="FK_Mae_Region_Mae_Pais" Association="axonAccessModel.FK_Mae_Region_Mae_Pais">
+      <End Role="Mae_Pais" EntitySet="Mae_Pais" />
+      <End Role="Mae_Region" EntitySet="Mae_Region" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mae_Usuario_Mae_Sucursal" Association="axonAccessModel.FK_Mae_Usuario_Mae_Sucursal">
+      <End Role="Mae_Sucursal" EntitySet="Mae_Sucursal" />
+      <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
+    </AssociationSet>
+    <FunctionImport Name="sp_upd_insersion_user">
+      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -503,4 +552,57 @@
     <Property Type="Int32" Name="id_estamento1" Nullable="false" />
     <Property Type="String" Name="desc_estamento" Nullable="true" MaxLength="20" />
   </ComplexType>
+  <EntityType Name="Ref_accessTipo">
+    <Key>
+      <PropertyRef Name="id_access_tipo" />
+    </Key>
+    <Property Name="id_access_tipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="desc_Access_tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Mae_Usuario" Relationship="axonAccessModel.FK_Mae_Usuario_Ref_accessTipo" FromRole="Ref_accessTipo" ToRole="Mae_Usuario" />
+  </EntityType>
+  <Association Name="FK_Mae_Usuario_Ref_accessTipo">
+    <End Type="axonAccessModel.Ref_accessTipo" Role="Ref_accessTipo" Multiplicity="0..1" />
+    <End Type="axonAccessModel.Mae_Usuario" Role="Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ref_accessTipo">
+        <PropertyRef Name="id_access_tipo" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_access_tipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Mae_Pais">
+    <Key>
+      <PropertyRef Name="id_pais" />
+    </Key>
+    <Property Name="id_pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="desc_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Mae_Region" Relationship="axonAccessModel.FK_Mae_Region_Mae_Pais" FromRole="Mae_Pais" ToRole="Mae_Region" />
+    <Property Name="cod_pais" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Mae_Region_Mae_Pais">
+    <End Type="axonAccessModel.Mae_Pais" Role="Mae_Pais" Multiplicity="0..1" />
+    <End Type="axonAccessModel.Mae_Region" Role="Mae_Region" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Pais">
+        <PropertyRef Name="id_pais" />
+      </Principal>
+      <Dependent Role="Mae_Region">
+        <PropertyRef Name="id_pais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mae_Usuario_Mae_Sucursal">
+    <End Type="axonAccessModel.Mae_Sucursal" Role="Mae_Sucursal" Multiplicity="0..1" />
+    <End Type="axonAccessModel.Mae_Usuario" Role="Mae_Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mae_Sucursal">
+        <PropertyRef Name="id_sucursal" />
+      </Principal>
+      <Dependent Role="Mae_Usuario">
+        <PropertyRef Name="id_sucursal" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

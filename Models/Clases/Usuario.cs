@@ -15,6 +15,7 @@ namespace AxonAccessMVC.Models.Clases
         public int Id_Estado { get; set; }
         public int Id_Comuna { get; set; }
         public int Id_Empresa { get; set; }
+        public int Id_Sucursal { get; set; }
         public int Rut { get; set; }
         public string Dv { get; set; }
         public string Nombre { get; set; }
@@ -31,8 +32,9 @@ namespace AxonAccessMVC.Models.Clases
 
         public string Cargo { get; set; }
         public string Desc_Role { get; set; }
+        public string Cod_Pais { get; set; }
 
- 
+
 
 
         axonAccessEntities1 db = new axonAccessEntities1();
@@ -44,7 +46,7 @@ namespace AxonAccessMVC.Models.Clases
             string userMail = HttpContext.Current.User.Identity.Name;
             AxonAccessMVC.Models.Mae_Usuario resss = db.Mae_Usuario.FirstOrDefault
                     (u => u.mail == userMail);
-            if (resss.id_role == 4 || resss.id_role == 5)
+             if (resss.id_role == 4 || resss.id_role == 5)
             {
                 return (from us in db.Mae_Usuario
                         join ro in db.Ref_Role
@@ -69,7 +71,8 @@ namespace AxonAccessMVC.Models.Clases
                             Pass = us.pass,
                             Latitud=us.latitud,
                             Longitud=us.longitud,
-                            Cargo=us.cargo
+                            Cargo=us.cargo,
+                            Cod_Pais=us.cod_pais
                         }).ToList();
             }
             else
@@ -96,7 +99,8 @@ namespace AxonAccessMVC.Models.Clases
                             Pass = us.pass,
                             Latitud = us.latitud,
                             Longitud = us.longitud,
-                            Cargo=us.cargo
+                            Cargo=us.cargo,
+                            Cod_Pais = us.cod_pais
                         }).ToList();
             }
            
@@ -131,10 +135,11 @@ namespace AxonAccessMVC.Models.Clases
 
            public bool Save()
         {
+
             try
             {
                 db.SP_INS_USUARIO_MASS(this.Id_Role, this.Id_Estado, this.Id_Comuna, this.Id_Empresa, this.Rut, this.Dv, this.Nombre, this.App_Pater,
-                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass,this.Latitud,this.Longitud);
+                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass,this.Latitud,this.Longitud,this.Cod_Pais);
                 return true;
 
             }
@@ -184,7 +189,8 @@ namespace AxonAccessMVC.Models.Clases
                 Mail = us.mail,
                 Pass = us.pass,
                 Latitud=us.latitud,
-                Longitud=us.longitud
+                Longitud=us.longitud,
+                Cod_Pais=us.cod_pais
             }).Where(us => us.Id == id).FirstOrDefault();
         }
 
@@ -193,7 +199,7 @@ namespace AxonAccessMVC.Models.Clases
             try
             {
                 db.sp_upd_user(this.Id,this.Id_Role,this.Id_Estado,this.Id_Comuna,this.Id_Empresa,this.Rut,this.Dv,
-                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass,this.Latitud,this.Longitud);
+                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass,this.Latitud,this.Longitud,this.Cod_Pais);
                 return true;
             }
             catch (Exception)

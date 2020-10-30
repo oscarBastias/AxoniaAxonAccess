@@ -70,7 +70,7 @@ namespace AxonAccessMVC.Models.Clases
                             desc_empresa = emp.desc_empresa,
                             id_estamento = (int)emp.id_estamento,
                             desc_estamento = est.desc_estamento
-                        }).ToList();
+                        }).OrderByDescending(x => x.id_estamento).ToList();
             
 
         }
@@ -81,6 +81,42 @@ namespace AxonAccessMVC.Models.Clases
                 db.SP_INS_EMPRESA(this.id_comuna,this.id_estamento,this.desc_empresa);
                 return true;
 
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public Mae_Empresa Find(int id)
+        {
+            return this.db.Mae_Empresa.Select(emp => new Mae_Empresa()
+            {
+                id_empresa = (int)emp.id_empresa,
+                id_comuna = (int)emp.id_comuna,
+                id_estamento=(int)emp.id_estamento,
+                desc_empresa = emp.desc_empresa
+            }).Where(us => us.id_empresa == id).FirstOrDefault();
+        }
+
+        public bool Update()
+        {
+            try
+            {
+                db.sp_upd_estamento(this.id_empresa,this.id_comuna, this.id_estamento, this.desc_empresa);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Delete(int id)
+        {
+            try
+            {
+                db.SVC_DELETED_ESTAMENTO(id);
+                return true;
             }
             catch (Exception)
             {

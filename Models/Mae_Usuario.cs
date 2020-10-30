@@ -37,6 +37,9 @@ namespace AxonAccessMVC.Models
         public string latitud { get; set; }
         public string longitud { get; set; }
         public string cargo { get; set; }
+        public Nullable<int> id_access_tipo { get; set; }
+        public Nullable<int> id_sucursal { get; set; }
+        public string cod_pais { get; set; }
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
         public virtual Mae_Empresa Mae_Empresa { get; set; }
@@ -44,5 +47,7 @@ namespace AxonAccessMVC.Models
         public virtual ICollection<Ref_UserAccess> Ref_UserAccess { get; set; }
         public virtual Ref_Estado Ref_Estado { get; set; }
         public virtual Ref_Role Ref_Role { get; set; }
+        public virtual Ref_accessTipo Ref_accessTipo { get; set; }
+        public virtual Mae_Sucursal Mae_Sucursal { get; set; }
     }
 }

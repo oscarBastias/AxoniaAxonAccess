@@ -27,19 +27,21 @@
                             <th>Desc_Estamento</th>
                             <th>id_estamento</th>
                             <th>Desc_Entidad</th>
+                            <th>Accion</th>
                         </tr>
 
                         @foreach (var entidad in entidades)
                         {
 
-                            <tr>
-                                <td>@entidad.id_empresa</td>
-                                <td>@entidad.id_comuna</td>
-                                <td>@entidad.desc_comuna</td>
-                                <td>@entidad.desc_empresa</td>
-                                <td>@entidad.id_estamento</td>
-                                <td>@entidad.desc_estamento</td>
-                            </tr>
+                    <tr>
+                        <td>@entidad.id_empresa</td>
+                        <td>@entidad.id_comuna</td>
+                        <td>@entidad.desc_comuna</td>
+                        <td>@entidad.desc_empresa</td>
+                        <td>@entidad.id_estamento</td>
+                        <td>@entidad.desc_estamento</td>
+                        <td>@Html.ActionLink("Modificar", "Edit", new { id = entidad.id_empresa })</td>
+                    </tr>
 
 
                         }
