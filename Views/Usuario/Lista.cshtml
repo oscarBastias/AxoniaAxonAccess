@@ -5,64 +5,64 @@
 }
 <!DOCTYPE html>
 <html>
-
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
 <body>
+    <div class="online-w3l-form">
+        @{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
+        <div class="main">
+            <div class="col-md-12">
+                <table class="table">
+                    <tr>
 
-    @{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table">
-                <tr>
-                    <th>Id_user</th>
-                    <th>Role</th>
-                    <th>Id_Estado</th>
-                    <th>Id_Comuna</th>
-                    <th>Id_Empresa</th>
-                    <th>Rut</th>
-                    <th>Dv</th>
-                    <th>Nombre</th>
-                    <th>App_Paterno</th>
-                    <th>App_Materno</th>
-                    <th>Direccion</th>
-                    <th>Latitud</th>
-                    <th>Longitud</th>
-                    <th>Codigo Pais</th>
-                    <th>Telefono</th>
-                    <th>Mail</th>
-                    <th>Password</th>
-                </tr>
+                        <th>Role</th>
+                        <th>Rut</th>
+                        <th>Dv</th>
+                        <th>Nombre</th>
+                        <th>App_Paterno</th>
+                        <th>App_Materno</th>
+                        <th>Direccion</th>
+                        <th>Codigo Pais</th>
+                        <th>Telefono</th>
+                        <th>Mail</th>
+                        <th>Desc Access</th>
+                        <th>Sucursal</th>
+                        <th>Accion</th>
+                        <th>Accion</th>
+                        <th>Accion</th>
+                    </tr>
 
-                @foreach (var usuario in usuarios)
-                {
+                    @foreach (var usuario in usuarios)
+                    {
 
-            <tr>
-                <td>@usuario.Id</td>
-                <td>@usuario.Desc_Role</td>
-                <td>@usuario.Id_Estado</td>
-                <td>@usuario.Id_Comuna</td>
-                <td>@usuario.Id_Empresa</td>
-                <td>@usuario.Rut</td>
-                <td>@usuario.Dv</td>
-                <td>@usuario.Nombre</td>
-                <td>@usuario.App_Pater</td>
-                <td>@usuario.App_Mater</td>
-                <td>@usuario.Direccion</td>
-                <td>@usuario.Latitud</td>
-                <td>@usuario.Longitud</td>
-                <td>@usuario.Cod_Pais</td>
-                <td>@usuario.Telefono</td>
-                <td>@usuario.Mail</td>
-                <td>@usuario.Pass</td>
-                <td>@Html.ActionLink("Eliminar", "Delete", new { id = usuario.Id })</td>
-                <td>@Html.ActionLink("Modificar", "Edit", new { id = usuario.Id })</td>
-            </tr>
+                        <tr>
+                            
+                            <td>@usuario.Desc_Role</td>
+                            <td>@usuario.Rut</td>
+                            <td>@usuario.Dv</td>
+                            <td>@usuario.Nombre</td>
+                            <td>@usuario.App_Pater</td>
+                            <td>@usuario.App_Mater</td>
+                            <td>@usuario.Direccion</td>
+                            <td>@usuario.Cod_Pais</td>
+                            <td>@usuario.Telefono</td>
+                            <td>@usuario.Mail</td>
+                            <td>@usuario.Desc_Access</td>
+                            <td>@usuario.Desc_Sucursal</td>
+                            <td>@Html.ActionLink("Eliminar", "Delete", new { id = usuario.Id })</td>
+                            <td>@Html.ActionLink("Modificar", "Edit", new { id = usuario.Id })</td>
+                            <td>@Html.ActionLink("Asignar Sucursal", "Asign", new { Id = usuario.Id, Id_Emp = usuario.Id_Empresa })</td>
+                        </tr>
 
 
-                }
-            </table>
+                    }
+                </table>
+            </div>
+
         </div>
-
-    </div>
+        </div>
 
 </body>
 </html>

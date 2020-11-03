@@ -124,7 +124,7 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
         }
     
-        public virtual int SP_INS_USUARIO_MASS(Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS)
+        public virtual int SP_INS_USUARIO_MASS(Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS, Nullable<int> cOD_SUCURSAL, Nullable<int> iD_ACCESSTIPO)
         {
             var iD_ROLEParameter = iD_ROLE.HasValue ?
                 new ObjectParameter("ID_ROLE", iD_ROLE) :
@@ -190,7 +190,15 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("COD_PAIS", cOD_PAIS) :
                 new ObjectParameter("COD_PAIS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_USUARIO_MASS", iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter);
+            var cOD_SUCURSALParameter = cOD_SUCURSAL.HasValue ?
+                new ObjectParameter("COD_SUCURSAL", cOD_SUCURSAL) :
+                new ObjectParameter("COD_SUCURSAL", typeof(int));
+    
+            var iD_ACCESSTIPOParameter = iD_ACCESSTIPO.HasValue ?
+                new ObjectParameter("ID_ACCESSTIPO", iD_ACCESSTIPO) :
+                new ObjectParameter("ID_ACCESSTIPO", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_USUARIO_MASS", iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter, cOD_SUCURSALParameter, iD_ACCESSTIPOParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> Sp_LoginUsuario(string mail, string pass)
@@ -445,13 +453,17 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_ESTAMENTO", iD_EMPRESAParameter);
         }
     
-        public virtual int sp_upd_insersion_user(Nullable<int> iD_EMPRESA)
+        public virtual int sp_upd_insersion_user(Nullable<int> iD_SUCU, Nullable<int> iD_USUARIO)
         {
-            var iD_EMPRESAParameter = iD_EMPRESA.HasValue ?
-                new ObjectParameter("ID_EMPRESA", iD_EMPRESA) :
-                new ObjectParameter("ID_EMPRESA", typeof(int));
+            var iD_SUCUParameter = iD_SUCU.HasValue ?
+                new ObjectParameter("ID_SUCU", iD_SUCU) :
+                new ObjectParameter("ID_SUCU", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_insersion_user", iD_EMPRESAParameter);
+            var iD_USUARIOParameter = iD_USUARIO.HasValue ?
+                new ObjectParameter("ID_USUARIO", iD_USUARIO) :
+                new ObjectParameter("ID_USUARIO", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_insersion_user", iD_SUCUParameter, iD_USUARIOParameter);
         }
     }
 }

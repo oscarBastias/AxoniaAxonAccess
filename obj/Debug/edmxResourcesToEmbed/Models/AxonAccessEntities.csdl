@@ -418,6 +418,8 @@
       <Parameter Name="LATITUD" Mode="In" Type="String" />
       <Parameter Name="LONGITUD" Mode="In" Type="String" />
       <Parameter Name="COD_PAIS" Mode="In" Type="String" />
+      <Parameter Name="COD_SUCURSAL" Mode="In" Type="Int32" />
+      <Parameter Name="ID_ACCESSTIPO" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="Sp_LoginUsuario" ReturnType="Collection(Int32)">
       <Parameter Name="mail" Mode="In" Type="String" />
@@ -510,7 +512,8 @@
       <End Role="Mae_Usuario" EntitySet="Mae_Usuario" />
     </AssociationSet>
     <FunctionImport Name="sp_upd_insersion_user">
-      <Parameter Name="ID_EMPRESA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_SUCU" Mode="In" Type="Int32" />
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">

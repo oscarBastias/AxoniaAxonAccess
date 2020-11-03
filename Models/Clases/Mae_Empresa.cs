@@ -20,12 +20,12 @@ namespace AxonAccessMVC.Models.Clases
         {
 
 
-            if (valor == 2)
+            if (valor == 2 || valor==3)
             {
                 return (from emp in db.Mae_Empresa
                        join est in db.Ref_Estamento on emp.id_estamento equals est.id_estamento
                         join com in db.Mae_Comuna on emp.id_comuna equals com.id_comuna
-                        where emp.id_estamento == (valor)
+                        where emp.id_estamento == 2
                        select new Models.Clases.Mae_Empresa
                        {
                            id_empresa = (int)emp.id_empresa,

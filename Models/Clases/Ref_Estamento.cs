@@ -18,7 +18,7 @@ namespace AxonAccessMVC.Models.Clases
             {
                 id_estamento = c.id_estamento,
                 desc_estamento = c.desc_estamento
-            }).ToList();
+            }).Where(est=>est.id_estamento != 3).ToList();
         }
     }
 }

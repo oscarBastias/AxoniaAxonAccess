@@ -16,6 +16,7 @@ namespace AxonAccessMVC.Models.Clases
         public int Id_Comuna { get; set; }
         public int Id_Empresa { get; set; }
         public int Id_Sucursal { get; set; }
+        public int id_access_tipo { get; set; }
         public int Rut { get; set; }
         public string Dv { get; set; }
         public string Nombre { get; set; }
@@ -34,24 +35,25 @@ namespace AxonAccessMVC.Models.Clases
         public string Desc_Role { get; set; }
         public string Cod_Pais { get; set; }
 
-
+        public string Desc_Sucursal { get; set; }
+        public string Desc_Access { get; set; }
 
 
         axonAccessEntities1 db = new axonAccessEntities1();
         AxonAccessMVC.Controllers.AuthController au = new Controllers.AuthController();
-        
-        
+
         public List<Usuario> ReadAll()
         {
             string userMail = HttpContext.Current.User.Identity.Name;
             AxonAccessMVC.Models.Mae_Usuario resss = db.Mae_Usuario.FirstOrDefault
                     (u => u.mail == userMail);
-             if (resss.id_role == 4 || resss.id_role == 5)
+             if (resss.id_role == 4)
             {
                 return (from us in db.Mae_Usuario
-                        join ro in db.Ref_Role
-                        on us.id_role equals ro.id_role
-                        where us.id_role==4 || us.id_role==5
+                        join ro in db.Ref_Role on us.id_role equals ro.id_role
+                        join suc in db.Mae_Sucursal on us.id_sucursal  equals suc.id_sucursal
+                        join acc in db.Ref_accessTipo on us.id_access_tipo equals acc.id_access_tipo
+                        where us.id_role==4 || us.id_role==5 
                         select new Models.Clases.Usuario
                         {
                             Id = (int)us.id_usuario,
@@ -72,14 +74,52 @@ namespace AxonAccessMVC.Models.Clases
                             Latitud=us.latitud,
                             Longitud=us.longitud,
                             Cargo=us.cargo,
-                            Cod_Pais=us.cod_pais
-                        }).ToList();
+                            Cod_Pais=us.cod_pais,
+                            Id_Sucursal=(int)us.id_sucursal,
+                            Desc_Sucursal=suc.descripcion,
+                            Desc_Access=acc.desc_Access_tipo
+                            
+                        }).OrderBy(x => x.Id_Role).ToList();
             }
-            else
+            else if ( resss.id_role == 5)
             {
                 return (from us in db.Mae_Usuario
+                        join ro in db.Ref_Role on us.id_role equals ro.id_role
+                        join suc in db.Mae_Sucursal on us.id_sucursal equals suc.id_sucursal
+                        join acc in db.Ref_accessTipo on us.id_access_tipo equals acc.id_access_tipo
+                        where  us.id_role == 5 && us.mail== userMail
+                        select new Models.Clases.Usuario
+                        {
+                            Id = (int)us.id_usuario,
+                            Id_Role = (int)us.id_role,
+                            Desc_Role = ro.desc_role,
+                            Id_Estado = (int)us.id_estado,
+                            Id_Comuna = (int)us.id_comuna,
+                            Id_Empresa = (int)us.id_empresa,
+                            Rut = (int)us.rut,
+                            Dv = us.dv,
+                            Nombre = us.nombre,
+                            App_Pater = us.app_pater,
+                            App_Mater = us.app_mater,
+                            Direccion = us.direccion,
+                            Telefono = (int)us.telefono,
+                            Mail = us.mail,
+                            Pass = us.pass,
+                            Latitud = us.latitud,
+                            Longitud = us.longitud,
+                            Cargo = us.cargo,
+                            Cod_Pais = us.cod_pais,
+                            Id_Sucursal = (int)us.id_sucursal,
+                            Desc_Sucursal = suc.descripcion,
+                            Desc_Access = acc.desc_Access_tipo
+
+                        }).OrderBy(x => x.Id_Role).ToList();
+            }
+           else {
+                return (from us in db.Mae_Usuario
                         join ro in db.Ref_Role
-                        on us.id_role equals ro.id_role
+                        on us.id_role equals ro.id_role  join suc in db.Mae_Sucursal on us.id_sucursal equals suc.id_sucursal
+                        join acc in db.Ref_accessTipo on us.id_access_tipo equals acc.id_access_tipo
                         select new Models.Clases.Usuario
                         {
                             Id = (int)us.id_usuario,
@@ -100,8 +140,11 @@ namespace AxonAccessMVC.Models.Clases
                             Latitud = us.latitud,
                             Longitud = us.longitud,
                             Cargo=us.cargo,
-                            Cod_Pais = us.cod_pais
-                        }).ToList();
+                            Cod_Pais = us.cod_pais,
+                            Id_Sucursal = (int)us.id_sucursal,
+                            Desc_Sucursal=suc.descripcion,
+                            Desc_Access=acc.desc_Access_tipo
+                        }).OrderBy(x => x.Id_Role).ToList();
             }
            
         }
@@ -135,11 +178,11 @@ namespace AxonAccessMVC.Models.Clases
 
            public bool Save()
         {
-
+            
             try
             {
                 db.SP_INS_USUARIO_MASS(this.Id_Role, this.Id_Estado, this.Id_Comuna, this.Id_Empresa, this.Rut, this.Dv, this.Nombre, this.App_Pater,
-                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass,this.Latitud,this.Longitud,this.Cod_Pais);
+                                        this.App_Mater, this.Direccion, this.Telefono, this.Mail, this.Pass,this.Latitud,this.Longitud,this.Cod_Pais,this.Id_Sucursal, this.id_access_tipo);
                 return true;
 
             }
@@ -212,6 +255,18 @@ namespace AxonAccessMVC.Models.Clases
             try
             {
                 db.SVC_DELETED_USUARIO(id);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        public bool Asign(int id_valor,int ArticleId)
+        {
+            try
+            {
+                db.sp_upd_insersion_user(id_valor, ArticleId);
                 return true;
             }
             catch (Exception)

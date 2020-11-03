@@ -49,6 +49,33 @@ namespace AxonAccessMVC.Models.Clases
                     }).OrderByDescending(x => x.id_empresa).ToList();
         }
 
+        public List<Ref_Sucursal> ReadAllFiltrado(int id)
+        {
+            return (from suc in db.Mae_Sucursal
+                    join est in db.Ref_Estado on suc.id_estado equals est.id_estado
+                    join com in db.Mae_Comuna on suc.id_comuna equals com.id_comuna
+                    join reg in db.Mae_Region on com.id_region equals reg.id_region
+                    join pa in db.Mae_Pais on reg.id_pais equals pa.id_pais
+                    join emp in db.Mae_Empresa on suc.id_empresa equals emp.id_empresa
+                    join sta in db.Ref_Estamento on emp.id_estamento equals sta.id_estamento
+                    select new Models.Clases.Ref_Sucursal
+                    {
+                        id_sucursal = (int)suc.id_sucursal,
+                        id_estado = (int)suc.id_estado,
+                        id_comuna = (int)suc.id_comuna,
+                        id_empresa = (int)suc.id_empresa,
+                        id_pais = (int)pa.id_pais,
+                        desc_pais = pa.desc_pais,
+                        desc_empresa = emp.desc_empresa,
+                        direccion = suc.direccion,
+                        latitud = suc.latitud,
+                        longitud = suc.longitud,
+                        desc_estamento = sta.desc_estamento,
+                        descripcion = suc.descripcion
+
+                    }).Where(p => p.id_empresa == id).OrderByDescending(x => x.id_sucursal).ToList();
+        }
+
         public bool Save()
         {
             try

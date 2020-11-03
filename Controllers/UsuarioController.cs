@@ -69,6 +69,9 @@ namespace AxonAccessMVC.Controllers
                             Pass = row.Split(';')[12],
                             Latitud=row.Split(';')[13],
                             Longitud= row.Split(';')[14],
+                            Cod_Pais=row.Split(';')[15],
+                            Id_Sucursal= Convert.ToInt32(row.Split(';')[16]),
+                            id_access_tipo=Convert.ToInt32(row.Split(';')[17])
 
                         });
                     }
@@ -88,9 +91,11 @@ namespace AxonAccessMVC.Controllers
         [HttpPost]
         public ActionResult Create(int id_valor,int id_valor2)
         {
+            ViewBag.id = 8;
             EnviarEstados();
             EnviarRoeles();
             EnviarEstamento();
+            EnviarAccessTipo();
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(id_valor);
             ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAllFiltrado(id_valor2);
             ViewBag.pais = new Models.Clases.Mae_Pais().ReadAllFiltrado(id_valor2);
@@ -99,7 +104,7 @@ namespace AxonAccessMVC.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud,Cod_Pais,Id_Sucursal")]Usuario usuario)
+        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud,Cod_Pais,Id_Sucursal,id_access_tipo")]Usuario usuario)
         {
             try
             {
@@ -140,6 +145,10 @@ namespace AxonAccessMVC.Controllers
         private void EnviarEmpresa()
         {
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(1);
+        }
+        private void EnviarAccessTipo()
+        {
+            ViewBag.accessTipos = new Models.Clases.Ref_AccessTipo().ReadAll();
         }
 
         public ActionResult Delete(int id)
@@ -185,6 +194,19 @@ namespace AxonAccessMVC.Controllers
             {
                 return View("Lista");
             }
+        }
+        public ActionResult Asign(int Id_Emp,int Id)
+        {
+            ViewBag.id = Id;
+            ViewBag.sucursals = new Models.Clases.Ref_Sucursal().ReadAllFiltrado(Id_Emp) ;
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Asign2(int id_valor,int ArticleId)
+        {
+            Usuario u = new Usuario();
+            u.Asign(id_valor, ArticleId);
+            return RedirectToAction("Lista");
         }
 
     }

@@ -1,3 +1,19 @@
+alter PROCEDURE dbo.sp_upd_insersion_user
+(
+@ID_EMPRESA INT,
+@ID_USUARIO INT
+)
+AS
+	BEGIN
+	declare @id_sucu int
+	select @id_sucu=(select b.id_sucursal from  Mae_Empresa a  join mae_sucursal b on a.id_empresa = b.id_empresa join Mae_Usuario c 
+						on c.id_empresa=a.id_empresa where b.id_empresa=1 and c.id_usuario=@ID_USUARIO)
+
+			UPDATE Mae_Usuario set id_sucursal=@id_sucu
+		    where id_empresa=@ID_EMPRESA
+	END
+GO
+
 CREATE PROCEDURE dbo.sp_upd_estamento
 (
 @ID_EMPRESA INT,
@@ -162,16 +178,18 @@ ALTER PROCEDURE [dbo].[SP_INS_USUARIO_MASS]
 @PASS VARCHAR(50),
 @LATITUD	VARCHAR(100),
 @LONGITUD	VARCHAR(100),
-@COD_PAIS	VARCHAR(4)
+@COD_PAIS	VARCHAR(4),
+@COD_SUCURSAL INT,
+@ID_ACCESSTIPO INT
 )
 AS
 	BEGIN
 		DECLARE @existe_usuario INT
 		SET @existe_usuario = (SELECT count(*) FROM Mae_Usuario where rut = @RUT)
 		IF @existe_usuario = 0
-			INSERT INTO Mae_Usuario(id_role,id_estado,id_comuna,id_empresa,rut,dv,nombre,app_pater,app_mater,direccion,telefono,mail,pass,latitud,longitud,cod_pais) 
+			INSERT INTO Mae_Usuario(id_role,id_estado,id_comuna,id_empresa,rut,dv,nombre,app_pater,app_mater,direccion,telefono,mail,pass,latitud,longitud,cod_pais,id_sucursal,id_access_tipo) 
 			values (UPPER(@ID_ROLE),UPPER(@ID_ESTADO),UPPER(@ID_COMUNA),UPPER(@ID_EMPRESA),UPPER(@RUT),UPPER(@DV),UPPER(@NOMBRE),UPPER(@APP_PATER),UPPER(@APP_MATER),
-			UPPER(@DIRECCION),UPPER(@TELEFONO),UPPER(@EMAIL),UPPER(@PASS),UPPER(@LATITUD),UPPER(@LONGITUD),UPPER(@COD_PAIS))
+			UPPER(@DIRECCION),UPPER(@TELEFONO),UPPER(@EMAIL),UPPER(@PASS),UPPER(@LATITUD),UPPER(@LONGITUD),UPPER(@COD_PAIS),UPPER(@COD_SUCURSAL),UPPER(@ID_ACCESSTIPO))
 	END
 GO
 
