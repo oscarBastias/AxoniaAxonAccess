@@ -388,6 +388,10 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="ID_ESTAMENTO" Type="int" Mode="In" />
           <Parameter Name="DESC_EMPRESA" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_INS_PUERTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
+          <Parameter Name="DESC_PUERTA" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_INS_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
           <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
@@ -439,6 +443,11 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="ID_SUCU" Type="int" Mode="In" />
           <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
         </Function>
+        <Function Name="sp_upd_puerta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_PUERTA" Type="int" Mode="In" />
+          <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
+          <Parameter Name="DESC_PUERTA" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="sp_upd_sucursal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
           <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
@@ -471,6 +480,9 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SVC_DELETED_ESTAMENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SVC_DELETED_PUERTA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_PUERTA" Type="int" Mode="In" />
         </Function>
         <Function Name="SVC_DELETED_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
@@ -1090,6 +1102,18 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="ID_SUCU" Mode="In" Type="Int32" />
             <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_INS_PUERTA">
+            <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+            <Parameter Name="DESC_PUERTA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upd_puerta">
+            <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+            <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+            <Parameter Name="DESC_PUERTA" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SVC_DELETED_PUERTA">
+            <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1398,6 +1422,9 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_upd_insersion_user" FunctionName="axonAccessModel.Store.sp_upd_insersion_user" />
+          <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
+          <FunctionImportMapping FunctionImportName="sp_upd_puerta" FunctionName="axonAccessModel.Store.sp_upd_puerta" />
+          <FunctionImportMapping FunctionImportName="SVC_DELETED_PUERTA" FunctionName="axonAccessModel.Store.SVC_DELETED_PUERTA" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

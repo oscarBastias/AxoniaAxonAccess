@@ -210,5 +210,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_upd_insersion_user" FunctionName="axonAccessModel.Store.sp_upd_insersion_user" />
+    <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
+    <FunctionImportMapping FunctionImportName="sp_upd_puerta" FunctionName="axonAccessModel.Store.sp_upd_puerta" />
+    <FunctionImportMapping FunctionImportName="SVC_DELETED_PUERTA" FunctionName="axonAccessModel.Store.SVC_DELETED_PUERTA" />
   </EntityContainerMapping>
 </Mapping>

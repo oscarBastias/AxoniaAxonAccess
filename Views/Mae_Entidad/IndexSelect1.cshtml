@@ -13,12 +13,12 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
+    <div class="online-w3l-form">
+        <form action="#" method="post">
+           
+                @{ List<Mae_Empresa> entidades = (List<Mae_Empresa>)ViewBag.entidades;}
 
-    <form action="#" method="post">
-        <div class="online-w3l-form">
-            @{ List<Mae_Empresa> entidades = (List<Mae_Empresa>)ViewBag.entidades;}
-            <div class="main">
-                <div class="col-md-12">
+                <div class="table-responsive">
                     <table class="table">
                         <tr>
                             <th>Id_Entidad</th>
@@ -33,24 +33,25 @@
                         @foreach (var entidad in entidades)
                         {
 
-                    <tr>
-                        <td>@entidad.id_empresa</td>
-                        <td>@entidad.id_comuna</td>
-                        <td>@entidad.desc_comuna</td>
-                        <td>@entidad.desc_empresa</td>
-                        <td>@entidad.id_estamento</td>
-                        <td>@entidad.desc_estamento</td>
-                        <td>@Html.ActionLink("Modificar", "Edit", new { id = entidad.id_empresa })</td>
-                    </tr>
+                            <tr>
+                                <td>@entidad.id_empresa</td>
+                                <td>@entidad.id_comuna</td>
+                                <td>@entidad.desc_comuna</td>
+                                <td>@entidad.desc_empresa</td>
+                                <td>@entidad.id_estamento</td>
+                                <td>@entidad.desc_estamento</td>
+                                <td>@Html.ActionLink("Modificar", "Edit", new { id = entidad.id_empresa })</td>
+                            </tr>
 
 
                         }
                     </table>
                 </div>
 
-            </div>
-        </div>
-    </form>
+
+
+        </form>
+    </div>
 
 </body>
 </html>

@@ -13,14 +13,14 @@
     <script type="text/javascript" src="js/jquery.js"></script>
 </head>
 <body>
+    <div class="online-w3l-form">
+        <form action="#" method="post">
 
-    <form action="#" method="post">
-        <div class="online-w3l-form">
             @{ List<Ref_Sucursal> sucursals = (List<Ref_Sucursal>)ViewBag.sucursals;}
-            <div class="main">
-                <div class="col-md-12">
+            <div class="table-responsive">
+                
                     <table class="table">
-                        <tr>
+                        <tr >
                             <th>Id_Sucursal</th>
                             <th>Id_Estado</th>
                             <th>Id_Comuna</th>
@@ -37,30 +37,31 @@
                         </tr>
 
                         @foreach (var sucursal in sucursals)
-                         {
+                        {
 
-                    <tr>
-                        <td>@sucursal.id_sucursal</td>
-                        <td>@sucursal.id_estado</td>
-                        <td>@sucursal.id_comuna</td>
-                        <td>@sucursal.id_empresa</td>
-                        <td>@sucursal.desc_empresa</td>
-                        <td>@sucursal.desc_estamento</td>
-                        <td>@sucursal.desc_pais</td>
-                        <td>@sucursal.direccion</td>
-                        <td>@sucursal.latitud</td>
-                        <td>@sucursal.longitud</td>
-                        <td>@sucursal.descripcion</td>
-                        <td>@Html.ActionLink("Eliminar", "Delete", new { id = sucursal.id_sucursal })</td>
-                        <td>@Html.ActionLink("Modificar", "Edit", new { id = sucursal.id_sucursal })</td>
-                    </tr>
-                         }
+                            <tr>
+                                <td>@sucursal.id_sucursal</td>
+                                <td>@sucursal.id_estado</td>
+                                <td>@sucursal.id_comuna</td>
+                                <td>@sucursal.id_empresa</td>
+                                <td>@sucursal.desc_empresa</td>
+                                <td>@sucursal.desc_estamento</td>
+                                <td>@sucursal.desc_pais</td>
+                                <td>@sucursal.direccion</td>
+                                <td>@sucursal.latitud</td>
+                                <td>@sucursal.longitud</td>
+                                <td>@sucursal.descripcion</td>
+                                <td>@Html.ActionLink("Eliminar", "Delete", new { id = sucursal.id_sucursal })</td>
+                                <td>@Html.ActionLink("Modificar", "Edit", new { id = sucursal.id_sucursal })</td>
+                            </tr>
+                        }
                     </table>
-                </div>
+                
 
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
+    
 
 </body>
 </html>

@@ -1,0 +1,47 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@{
+    ViewBag.Title = "Axonia";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+    <div class="online-w3l-form">
+        @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Nombre</th>
+                    <th>App_Paterno</th>
+                    <th>App_Materno</th>
+                    <th>Rut</th>
+                    <th>Dv</th>
+                    <th>Empresa</th>
+                    <th>Otorgar Accesos</th>
+                </tr>
+
+                @foreach (var usuario in usuarios)
+                {
+
+            <tr>
+                <td>@usuario.Nombre</td>
+                <td>@usuario.App_Pater</td>
+                <td>@usuario.App_Mater</td>
+                <td>@usuario.Rut</td>
+                <td>@usuario.Dv</td>
+                <td>@usuario.Desc_Empresa</td>
+                <td>@Html.ActionLink("Seleccionar", "Create", new { id = usuario.Id_Empresa })</td>
+            </tr>
+
+
+                }
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

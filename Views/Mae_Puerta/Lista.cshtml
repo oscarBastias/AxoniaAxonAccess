@@ -1,0 +1,47 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@{
+    ViewBag.Title = "Axonia";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+    <div class="online-w3l-form">
+        @{ List<Mae_Puerta> puertas = (List<Mae_Puerta>)ViewBag.puertas;}
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>id puerta</th>
+                    <th>id sucursal</th>
+                    <th>Desc puerta</th>
+                    <th>Desc sucursal</th>
+                    <th>Desc Empresa</th>
+                    <th>Accion</th>
+                    <th>Accion</th>
+                </tr>
+
+                @foreach (var puerta in puertas)
+                {
+
+                    <tr>
+                        <td>@puerta.id_puerta</td>
+                        <td>@puerta.id_sucursal</td>
+                        <td>@puerta.desc_puerta</td>
+                        <td>@puerta.desc_sucursal</td>
+                        <td>@puerta.desc_empresa</td>
+                        <td>@Html.ActionLink("Eliminar", "Delete", new { id = puerta.id_puerta })</td>
+                        <td>@Html.ActionLink("Modificar", "Edit", new { id = puerta.id_puerta })</td>
+                    </tr>
+
+
+                }
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

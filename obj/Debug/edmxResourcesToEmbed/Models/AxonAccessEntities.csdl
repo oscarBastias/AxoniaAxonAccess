@@ -515,6 +515,18 @@
       <Parameter Name="ID_SUCU" Mode="In" Type="Int32" />
       <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_INS_PUERTA">
+      <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+      <Parameter Name="DESC_PUERTA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upd_puerta">
+      <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+      <Parameter Name="ID_SUCURSAL" Mode="In" Type="Int32" />
+      <Parameter Name="DESC_PUERTA" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SVC_DELETED_PUERTA">
+      <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
     <Property Type="Int32" Name="version" Nullable="true" />

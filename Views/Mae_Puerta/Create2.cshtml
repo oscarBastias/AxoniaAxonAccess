@@ -1,0 +1,42 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Mae_Sucursal
+
+
+@{
+    ViewBag.Title = "Axonia";
+    List<SelectListItem> items = (List<SelectListItem>)ViewBag.items;
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="online-w3l-form">
+
+        <form action="~/Mae_Puerta/Create3" method="post">
+            @{ List<Mae_Empresa> empresa = (List<Mae_Empresa>)ViewBag.empresas;}
+
+
+            <div class="form-left-w3l">
+                <input type="text" class="top-up" name="Desc_Puerta" placeholder="Descripcion de Acceso" required="">
+            </div>
+                <div class="form-left-w3l">
+
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.id_sucursal, new SelectList(ViewBag.sucursals, "id_sucursal", "descripcion"))</select>
+
+                </div>
+
+            <div class="btnn">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

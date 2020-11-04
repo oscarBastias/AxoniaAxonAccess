@@ -134,8 +134,10 @@
     <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Mae_EntidadController.cs" />
+    <Compile Include="Controllers\Mae_PuertaController.cs" />
     <Compile Include="Controllers\Mae_SucursalController.cs" />
     <Compile Include="Controllers\Ref_RoleController.cs" />
+    <Compile Include="Controllers\Ref_UserAccessController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -158,11 +160,13 @@
     <Compile Include="Models\Clases\Mae_Comuna.cs" />
     <Compile Include="Models\Clases\Mae_Empresa.cs" />
     <Compile Include="Models\Clases\Mae_Pais.cs" />
+    <Compile Include="Models\Clases\Mae_Puerta.cs" />
     <Compile Include="Models\Clases\Ref_AccessTipo.cs" />
     <Compile Include="Models\Clases\Ref_Estado.cs" />
     <Compile Include="Models\Clases\Ref_Estamento.cs" />
     <Compile Include="Models\Clases\Ref_Role.cs" />
     <Compile Include="Models\Clases\Ref_Sucursal.cs" />
+    <Compile Include="Models\Clases\Ref_UserAccesscs.cs" />
     <Compile Include="Models\Clases\Usuario.cs" />
     <Compile Include="Models\Mae_Comuna.cs">
       <DependentUpon>AxonAccessEntities.tt</DependentUpon>
@@ -4797,6 +4801,14 @@
     <Content Include="Views\Mae_Sucursal\SelectPais.cshtml" />
     <Content Include="Views\Mae_Entidad\SelectPaisEst.cshtml" />
     <Content Include="Views\Usuario\Asign.cshtml" />
+    <Content Include="Views\Mae_Puerta\Index.cshtml" />
+    <Content Include="Views\Mae_Puerta\Create.cshtml" />
+    <Content Include="Views\Mae_Puerta\Create2.cshtml" />
+    <Content Include="Views\Mae_Puerta\Lista.cshtml" />
+    <Content Include="Views\Mae_Puerta\Edit.cshtml" />
+    <Content Include="Views\Ref_UserAccess\Index.cshtml" />
+    <Content Include="Views\Ref_UserAccess\Lista.cshtml" />
+    <Content Include="Views\Ref_UserAccess\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

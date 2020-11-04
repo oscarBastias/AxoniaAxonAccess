@@ -465,5 +465,44 @@ namespace AxonAccessMVC.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_insersion_user", iD_SUCUParameter, iD_USUARIOParameter);
         }
+    
+        public virtual int SP_INS_PUERTA(Nullable<int> iD_SUCURSAL, string dESC_PUERTA)
+        {
+            var iD_SUCURSALParameter = iD_SUCURSAL.HasValue ?
+                new ObjectParameter("ID_SUCURSAL", iD_SUCURSAL) :
+                new ObjectParameter("ID_SUCURSAL", typeof(int));
+    
+            var dESC_PUERTAParameter = dESC_PUERTA != null ?
+                new ObjectParameter("DESC_PUERTA", dESC_PUERTA) :
+                new ObjectParameter("DESC_PUERTA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_PUERTA", iD_SUCURSALParameter, dESC_PUERTAParameter);
+        }
+    
+        public virtual int sp_upd_puerta(Nullable<int> iD_PUERTA, Nullable<int> iD_SUCURSAL, string dESC_PUERTA)
+        {
+            var iD_PUERTAParameter = iD_PUERTA.HasValue ?
+                new ObjectParameter("ID_PUERTA", iD_PUERTA) :
+                new ObjectParameter("ID_PUERTA", typeof(int));
+    
+            var iD_SUCURSALParameter = iD_SUCURSAL.HasValue ?
+                new ObjectParameter("ID_SUCURSAL", iD_SUCURSAL) :
+                new ObjectParameter("ID_SUCURSAL", typeof(int));
+    
+            var dESC_PUERTAParameter = dESC_PUERTA != null ?
+                new ObjectParameter("DESC_PUERTA", dESC_PUERTA) :
+                new ObjectParameter("DESC_PUERTA", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_puerta", iD_PUERTAParameter, iD_SUCURSALParameter, dESC_PUERTAParameter);
+        }
+    
+        public virtual int SVC_DELETED_PUERTA(Nullable<int> iD_PUERTA)
+        {
+            var iD_PUERTAParameter = iD_PUERTA.HasValue ?
+                new ObjectParameter("ID_PUERTA", iD_PUERTA) :
+                new ObjectParameter("ID_PUERTA", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_PUERTA", iD_PUERTAParameter);
+        }
     }
 }

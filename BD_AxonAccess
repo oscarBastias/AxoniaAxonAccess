@@ -223,6 +223,37 @@ AS
 	END
 GO
 
+CREATE PROCEDURE [dbo].[SP_INS_PUERTA]
+(
+@ID_SUCURSAL INT,
+@DESC_PUERTA VARCHAR(100)
+)
+AS
+	BEGIN
+			INSERT INTO MAE_PUERTA(id_sucursal,desc_puerta) 
+			values (UPPER(@ID_SUCURSAL),UPPER(@DESC_PUERTA))
+	END
+GO
+create PROCEDURE [dbo].[SVC_DELETED_PUERTA]
+(@ID_PUERTA int)
+AS
+	BEGIN
+			delete from mae_puerta where id_puerta=@ID_PUERTA
+	END
+GO
+CREATE PROCEDURE dbo.sp_upd_puerta
+(
+@ID_PUERTA INT,
+@ID_SUCURSAL INT,
+@DESC_PUERTA VARCHAR(100)
+)
+AS
+	BEGIN
+			UPDATE mae_puerta set id_sucursal=UPPER(@ID_SUCURSAL),
+			desc_puerta=UPPER(@DESC_PUERTA)
+		    where id_puerta=@ID_PUERTA
+	END
+GO
 
 
 CREATE TABLE USUARIO_AUD

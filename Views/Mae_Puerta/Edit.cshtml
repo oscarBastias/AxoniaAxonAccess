@@ -1,0 +1,41 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@model AxonAccessMVC.Models.Clases.Mae_Puerta
+
+
+@{
+    ViewBag.Title = "Axonia";
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="online-w3l-form">
+
+        <form action="#" method="post">
+            @Html.HiddenFor(p => p.id_puerta)
+
+
+            <div class="form-left-w3l">
+                @Html.TextBoxFor(p => p.desc_puerta)
+            </div>
+            <div class="form-left-w3l">
+
+                <select class="form-control buttom" @Html.DropDownListFor(p => p.id_sucursal, new SelectList(ViewBag.sucursals, "id_sucursal", "descripcion"))</select>
+
+            </div>
+
+            <div class="btnn">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
