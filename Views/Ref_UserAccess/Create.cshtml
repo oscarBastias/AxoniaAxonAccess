@@ -11,32 +11,34 @@
 </head>
 <body>
     <div class="online-w3l-form">
-        @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
-        <div class="table-responsive">
-            <table class="table">
-                <tr>
-                    <th>Empresa</th>
-                    <th>Sucursal</th>
-                    <th>Puerta</th>
-                    <th>Seleccione</th>
-                </tr>
-
-                @foreach (var usuario in usuarios)
-                {
-
+        <form action="~/Usuario/Create2" method="post">
+            @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
+            <div class="table-responsive">
+                <table class="table">
                     <tr>
-                        <td>@usuario.Id_Empresa</td>
-                        <td>@usuario.Desc_Sucursal</td>
-                        <td>@usuario.desc_access</td>
-                        <td>@Html.CheckBox("Asignar", false)</td>
+                        <th>Empresa</th>
+                        <th>Sucursal</th>
+                        <th>Puerta</th>
+                        <th>Seleccione</th>
                     </tr>
 
-                }
-            </table>
-            <div class="btnn">
-                <input type="submit" value="Asignar Accesos">
+                    @foreach (var usuario in usuarios)
+                    {
+
+                        <tr>
+                            <td>@usuario.Id_Empresa</td>
+                            <td>@usuario.Desc_Sucursal</td>
+                            <td>@usuario.desc_access</td>
+                            <td>@Html.CheckBox("Asignar", false)</td>
+                        </tr>
+
+                    }
+                </table>
+                <div class="btnn">
+                    <input type="submit" value="Asignar Accesos">
+                </div>
             </div>
-        </div>
+            </form>
     </div>
 
 </body>
