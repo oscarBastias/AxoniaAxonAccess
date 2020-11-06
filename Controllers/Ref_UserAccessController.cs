@@ -10,6 +10,8 @@ using Ref_Estamento = AxonAccessMVC.Models.Clases.Ref_Estamento;
 using Mae_Empresa = AxonAccessMVC.Models.Clases.Mae_Empresa;
 using AxonAccessMVC.Models;
 using AxonAccessMVC.Models.Clases;
+using AxonAccessMVC.Views.Ref_UserAccess;
+using System.Web.UI.WebControls;
 
 namespace AxonAccessMVC.Controllers
 {
@@ -28,19 +30,28 @@ namespace AxonAccessMVC.Controllers
 
             return View();
         }
-        public ActionResult Create(int id)
+        public ActionResult Create(int id,int id_us)
         {
-            ViewBag.useraccess = new Ref_UserAccesscs().ReadAllAcc(id);
+            ViewBag.useraccess = new Ref_UserAccesscs().ReadAllAcc(id, id_us);
             return View();
         }
         [HttpPost]
-        public ActionResult Create(int id_valor, int id_valor2)
+        public ActionResult Create()
         {
-            ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAll(id_valor);
-            ViewBag.comunas = new Models.Clases.Mae_Comuna().ReadAllFiltrado(id_valor2);
-            ViewBag.pais = new Models.Clases.Mae_Pais().ReadAllFiltrado(id_valor2);
+            List<string> lst = new List<string>();
+            return View();
+        }
+
+        public ActionResult Test()
+        {
 
             return View();
+        }
+
+        public ActionResult Vista()
+        {
+
+            return View(new Vista());
         }
     }
 }

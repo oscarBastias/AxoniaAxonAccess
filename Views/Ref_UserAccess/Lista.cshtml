@@ -15,6 +15,7 @@
         <div class="table-responsive">
             <table class="table">
                 <tr>
+                    <th>Id</th>
                     <th>Nombre</th>
                     <th>App_Paterno</th>
                     <th>App_Materno</th>
@@ -28,13 +29,14 @@
                 {
 
             <tr>
+                <td>@usuario.id_usuario</td>
                 <td>@usuario.Nombre</td>
                 <td>@usuario.App_Pater</td>
                 <td>@usuario.App_Mater</td>
                 <td>@usuario.Rut</td>
                 <td>@usuario.Dv</td>
                 <td>@usuario.Desc_Empresa</td>
-                <td>@Html.ActionLink("Seleccionar", "Create", new { id = usuario.Id_Empresa })</td>
+                <td>@Html.ActionLink("Seleccionar", "Create", new { id = usuario.Id_Empresa, id_us = usuario.id_usuario })</td>
             </tr>
 
 

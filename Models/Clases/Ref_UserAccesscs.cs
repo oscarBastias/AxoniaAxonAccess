@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AxonAccessMVC.Models.Clases
 {
@@ -24,6 +25,10 @@ namespace AxonAccessMVC.Models.Clases
 
         public string Desc_Sucursal { get; set; }
 
+        public bool isChecked { get; set; }
+
+        public SelectList List { get; set; }
+
         axonAccessEntities1 db = new axonAccessEntities1();
 
         public List<Ref_UserAccesscs> ReadAllFiltrado(int id)
@@ -43,20 +48,24 @@ namespace AxonAccessMVC.Models.Clases
                         Dv=us.dv,
                         Desc_Empresa=emp.desc_empresa,
                         Desc_Sucursal=suc.descripcion,
-                        Id_Empresa=emp.id_empresa
+                        Id_Empresa=emp.id_empresa,
+                        id_usuario=us.id_usuario
                         
                     }).ToList();
         }
 
-        public List<Ref_UserAccesscs> ReadAllAcc(int id)
+        public List<Ref_UserAccesscs> ReadAllAcc(int id,int id_us)
         {
             return (from puer in db.Mae_Puerta join sucu in db.Mae_Sucursal on puer.id_sucursal equals sucu.id_sucursal
-                    where sucu.id_empresa == id
+                    join us in db.Mae_Usuario on sucu.id_sucursal equals us.id_sucursal
+                    where sucu.id_empresa == id && us.id_usuario==id_us
                     select new Models.Clases.Ref_UserAccesscs
                     {
                         Id_Empresa = (int)sucu.id_empresa,
                         Desc_Sucursal =sucu.descripcion,
-                        desc_access=puer.desc_puerta
+                        desc_access=puer.desc_puerta,
+                        id_usuario = us.id_usuario,
+                        isChecked=false
                     }).ToList();
         }
     }

@@ -1,4 +1,5 @@
 ﻿@using AxonAccessMVC.Models.Clases;
+@model List<string>
 @{
     ViewBag.Title = "Axonia";
 
@@ -11,12 +12,13 @@
 </head>
 <body>
     <div class="online-w3l-form">
-        <form action="~/Usuario/Create2" method="post">
+        <form action="~/Ref_UserAccess/Create" method="post">
             @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
             <div class="table-responsive">
-                <table class="table">
+                <table id="Guardado" class="table">
                     <tr>
                         <th>Empresa</th>
+                        <th>Usuario</th>
                         <th>Sucursal</th>
                         <th>Puerta</th>
                         <th>Seleccione</th>
@@ -24,12 +26,13 @@
 
                     @foreach (var usuario in usuarios)
                     {
-
+                        List<Ref_UserAccesscs> chklst = new List<Ref_UserAccesscs>();
                         <tr>
-                            <td>@usuario.Id_Empresa</td>
-                            <td>@usuario.Desc_Sucursal</td>
-                            <td>@usuario.desc_access</td>
-                            <td>@Html.CheckBox("Asignar", false)</td>
+                            <td name="chklst[]">@usuario.Id_Empresa</td>
+                            <td name="chklst[]">@usuario.id_usuario</td>
+                            <td name="chklst[]">@usuario.Desc_Sucursal</td>
+                            <td name="chklst[]">@usuario.desc_access</td>
+                            <td name="chklst[]">@Html.CheckBoxFor(x=> usuario.isChecked)</td>
                         </tr>
 
                     }
@@ -38,7 +41,7 @@
                     <input type="submit" value="Asignar Accesos">
                 </div>
             </div>
-            </form>
+        </form>
     </div>
 
 </body>
