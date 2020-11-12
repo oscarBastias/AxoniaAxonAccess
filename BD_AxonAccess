@@ -1,3 +1,19 @@
+CREATE PROCEDURE dbo.SP_INS_REFUSERACCESS
+(
+@ID_USUARIO INT,
+@ID_PUERTA INT,
+@DESC_ACCESS VARCHAR(100),
+@FECHA_ACCESS DATETIME
+)
+AS
+	BEGIN
+			INSERT INTO REF_USERACCESS(id_usuario,id_puerta,desc_access,fecha_acceso)
+			values(UPPER(@ID_USUARIO),UPPER(@ID_PUERTA),UPPER(@DESC_ACCESS),UPPER(@FECHA_ACCESS))
+	END
+GO
+
+
+
 alter PROCEDURE dbo.sp_upd_insersion_user
 (
 @ID_EMPRESA INT,
@@ -108,13 +124,14 @@ ALTER PROCEDURE dbo.sp_upd_user
 @PASS VARCHAR(50),
 @LATITUD VARCHAR(100),
 @LONGITUD VARCHAR(100),
-@COD_PAIS VARCHAR(4)
+@COD_PAIS VARCHAR(4),
+@ACCESS_TIPO INT
 )
 AS
 	BEGIN
 			UPDATE mae_usuario set id_role=UPPER(@ID_ROLE),id_estado=UPPER(@ID_ESTADO),id_comuna=UPPER(@ID_COMUNA),id_empresa=UPPER(@ID_EMPRESA),
 			rut=UPPER(@RUT),dv=UPPER(@DV),nombre=UPPER(@NOMBRE),app_pater=UPPER(@APP_PATER),app_mater=UPPER(@APP_MATER),direccion=UPPER(@DIRECCION),
-			telefono=UPPER(@TELEFONO),mail=UPPER(@EMAIL),pass=UPPER(@PASS),latitud=UPPER(@LATITUD),longitud=UPPER(@LONGITUD),cod_pais=UPPER(@COD_PAIS)
+			telefono=UPPER(@TELEFONO),mail=UPPER(@EMAIL),pass=UPPER(@PASS),latitud=UPPER(@LATITUD),longitud=UPPER(@LONGITUD),cod_pais=UPPER(@COD_PAIS),id_access_tipo=UPPER(@ACCESS_TIPO)
 		    where id_usuario=@ID_USUARIO
 	END
 GO

@@ -18,9 +18,15 @@ namespace AxonAccessMVC.Controllers
     public class Ref_UserAccessController : Controller
     {
         // GET: Ref_UserAccess
+        axonAccessEntities1 db = new axonAccessEntities1();
         public ActionResult Index()
         {
             ViewBag.empresas = new Mae_Empresa().ReadAllSinFiltro();
+            return View();
+        }
+        public ActionResult AccesList()
+        {
+            ViewBag.asignados = new Ref_UserAccesscs().ReadAllAcces();
             return View();
         }
         [HttpPost]
@@ -33,25 +39,52 @@ namespace AxonAccessMVC.Controllers
         public ActionResult Create(int id,int id_us)
         {
             ViewBag.useraccess = new Ref_UserAccesscs().ReadAllAcc(id, id_us);
+            ViewBag.id_empresa = id;
+            ViewBag.id_usuario = id_us;
             return View();
         }
         [HttpPost]
-        public ActionResult Create()
+        public ActionResult Create(int[]puerta, int id_empresa, int id_usuario)
         {
-            List<string> lst = new List<string>();
+            foreach(int id_puerta in puerta)
+            {
+                db.SP_INS_REFUSERACCESS(id_usuario, id_puerta, "ASIGNADO", DateTime.Now);
+            }
+            return RedirectToAction("AccesList");
+        }
+
+        public ActionResult listaXuser()
+        {
+            ViewBag.usu = new Ref_UserAccesscs().ReadUser();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult listaXuser(string nom)
+        {
+            ViewBag.usu = new Ref_UserAccesscs().Find(nom);
+            return View();
+        }
+        public ActionResult listaXuser2(int id)
+        {
+            ViewBag.usu = new Ref_UserAccesscs().ReadUser2(id);
             return View();
         }
 
-        public ActionResult Test()
+        public ActionResult listaXemp()
         {
-
+            ViewBag.emp = new Ref_UserAccesscs().ReadEmp();
             return View();
         }
-
-        public ActionResult Vista()
+        [HttpPost]
+        public ActionResult listaXemp(string nom)
         {
-
-            return View(new Vista());
+            ViewBag.emp = new Ref_UserAccesscs().FindEmp(nom);
+            return View();
+        }
+        public ActionResult listaXemp2(int id)
+        {
+            ViewBag.emp = new Ref_UserAccesscs().ReadEmp2(id);
+            return View();
         }
     }
 }

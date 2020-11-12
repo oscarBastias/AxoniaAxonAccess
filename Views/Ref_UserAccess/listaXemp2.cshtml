@@ -1,0 +1,50 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@{
+    ViewBag.Title = "Axonia";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+    <div class="online-w3l-form">
+        @{ List<Ref_UserAccesscs> empresas = (List<Ref_UserAccesscs>)ViewBag.emp;}
+        <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <th>Id_Usuario</th>
+                    <th>Id_Puerta</th>
+                    <th>Nombre</th>
+                    <th>Empresa</th>
+                    <th>Sucursal</th>
+                    <th>Desc_Puerta</th>
+                    <th>Desc_Access</th>
+                    <th>Fecha_Access</th>
+                </tr>
+
+                @foreach (var usuario in empresas)
+                {
+
+                    <tr>
+                        <td>@usuario.id_usuario</td>
+                        <td>@usuario.id_puerta</td>
+                        <td>@usuario.Nombre @usuario.App_Pater</td>
+                        <td>@usuario.Desc_Empresa</td>
+                        <td>@usuario.Desc_Sucursal</td>
+                        <td>@usuario.Desc_Puerta</td>
+                        <td>@usuario.desc_access</td>
+                        <td>@usuario.fecha_acceso</td>
+
+                    </tr>
+
+
+                }
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

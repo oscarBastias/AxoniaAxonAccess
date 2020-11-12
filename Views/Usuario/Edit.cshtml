@@ -45,55 +45,68 @@
             </div>
             <div class="main">
                 <div class="form-left-w3l">
-                    @Html.TextBoxFor(p => p.Mail)
+                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Cod_Pais, new SelectList(ViewBag.pais, "Cod_Pais", "cod_pais"))</select>
                 </div>
                 <div class="form-right-w3ls ">
                     @Html.TextBoxFor(p => p.Telefono)
                     <div class="clearfix"></div>
                 </div>
             </div>
-            <div class="form-add-w3ls">
-                @Html.TextBoxFor(p => p.Direccion)
-            </div>
-            <div class="form-add-w3ls">
-                @Html.TextBoxFor(p => p.Latitud)
-            </div>
-            <div class="form-add-w3ls">
-                @Html.TextBoxFor(p => p.Longitud)
-            </div>
-            <div class="form-add-w3ls">
-                @Html.TextBoxFor(p => p.Pass)
-            </div>
             <div class="main">
                 <div class="form-left-w3l">
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
+                    @Html.TextBoxFor(p => p.Mail)
                 </div>
                 <div class="form-right-w3ls">
-
-
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
-
+                    @Html.TextBoxFor(p => p.Direccion)
                 </div>
             </div>
 
             <div class="main">
                 <div class="form-left-w3l">
-
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
-
+                    @Html.TextBoxFor(p => p.Latitud)
                 </div>
                 <div class="form-right-w3ls">
-
-                    <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
-
-                    <div class="clearfix"></div>
+                    @Html.TextBoxFor(p => p.Longitud)
                 </div>
             </div>
-
-            <div class="btnn">
-                <input type="submit" value="Register">
+            <div class="main">
+                <div class="form-left-w3l">
+                    @Html.TextBoxFor(p => p.Pass)
+                </div>
+                    <div class="form-right-w3ls">
+                         <select class="form-control buttom" @Html.DropDownListFor(p => p.id_access_tipo, new SelectList(ViewBag.accessTipos, "id_access_tipo", "desc_accessTipo"))</select>
+                     </div>
             </div>
-        </form>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
+                    </div>
+                    <div class="form-right-w3ls">
+
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
+
+                    </div>
+                </div>
+
+                <div class="main">
+                    <div class="form-left-w3l">
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+
+                    </div>
+                    <div class="form-right-w3ls">
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.Id_Empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+                <div class="btnn">
+                    <input type="submit" value="Register">
+                </div>
+</form>
     </div>
     </div>
 </body>

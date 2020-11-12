@@ -392,6 +392,12 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
           <Parameter Name="DESC_PUERTA" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_INS_REFUSERACCESS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+          <Parameter Name="ID_PUERTA" Type="int" Mode="In" />
+          <Parameter Name="DESC_ACCESS" Type="varchar" Mode="In" />
+          <Parameter Name="FECHA_ACCESS" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="SP_INS_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
           <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
@@ -476,8 +482,12 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <Parameter Name="LATITUD" Type="varchar" Mode="In" />
           <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
           <Parameter Name="COD_PAIS" Type="varchar" Mode="In" />
+          <Parameter Name="ACCESS_TIPO" Type="int" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SVC_BRW_BUSQUEDAUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SVC_DELETED_ESTAMENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
         </Function>
@@ -1035,6 +1045,7 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="LATITUD" Mode="In" Type="String" />
             <Parameter Name="LONGITUD" Mode="In" Type="String" />
             <Parameter Name="COD_PAIS" Mode="In" Type="String" />
+            <Parameter Name="ACCESS_TIPO" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
           <FunctionImport Name="SVC_DELETED_USUARIO">
@@ -1112,7 +1123,16 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             <Parameter Name="DESC_PUERTA" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SVC_DELETED_PUERTA">
+          <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INS_REFUSERACCESS">
+            <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
             <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+            <Parameter Name="DESC_ACCESS" Mode="In" Type="String" />
+            <Parameter Name="FECHA_ACCESS" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SVC_BRW_BUSQUEDAUSUARIO" ReturnType="Collection(axonAccessModel.SVC_BRW_BUSQUEDAUSUARIO_Result)">
+          <Parameter Name="NOMBRE" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -1207,6 +1227,28 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="SVC_BRW_BUSQUEDAUSUARIO_Result">
+          <Property Type="Int32" Name="id_usuario" Nullable="false" />
+          <Property Type="Int32" Name="id_role" Nullable="true" />
+          <Property Type="Int32" Name="id_estado" Nullable="true" />
+          <Property Type="Int32" Name="id_comuna" Nullable="true" />
+          <Property Type="Int32" Name="id_empresa" Nullable="true" />
+          <Property Type="Int32" Name="rut" Nullable="true" />
+          <Property Type="String" Name="dv" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="app_pater" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="app_mater" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="telefono" Nullable="true" />
+          <Property Type="String" Name="mail" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="pass" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="latitud" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="longitud" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="id_access_tipo" Nullable="true" />
+          <Property Type="Int32" Name="id_sucursal" Nullable="true" />
+          <Property Type="String" Name="cod_pais" Nullable="true" MaxLength="4" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1425,6 +1467,33 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
           <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
           <FunctionImportMapping FunctionImportName="sp_upd_puerta" FunctionName="axonAccessModel.Store.sp_upd_puerta" />
           <FunctionImportMapping FunctionImportName="SVC_DELETED_PUERTA" FunctionName="axonAccessModel.Store.SVC_DELETED_PUERTA" />
+          <FunctionImportMapping FunctionImportName="SP_INS_REFUSERACCESS" FunctionName="axonAccessModel.Store.SP_INS_REFUSERACCESS" />
+          <FunctionImportMapping FunctionImportName="SVC_BRW_BUSQUEDAUSUARIO" FunctionName="axonAccessModel.Store.SVC_BRW_BUSQUEDAUSUARIO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="axonAccessModel.SVC_BRW_BUSQUEDAUSUARIO_Result">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+                <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+                <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+                <ScalarProperty Name="rut" ColumnName="rut" />
+                <ScalarProperty Name="dv" ColumnName="dv" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="app_pater" ColumnName="app_pater" />
+                <ScalarProperty Name="app_mater" ColumnName="app_mater" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="cargo" ColumnName="cargo" />
+                <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
+                <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+                <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

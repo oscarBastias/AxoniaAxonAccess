@@ -100,7 +100,7 @@ h1.header-w3ls {
 .online-w3l-form{   
 margin: 120px auto 30px;
 background-color:#2A3F54;
-padding: 40px 40px;
+padding: 50px 20px;
 -webkit-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
 -moz-box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);
 box-shadow: 3px 17px 43px 6px rgba(0,0,0,0.75);}
@@ -183,7 +183,7 @@ color: #fff;
 color: #fff;
 }
 select.form-control {
-height: 47px;
+    height: 42px;
 }
 option {
 background: #2A3F54;
@@ -232,7 +232,7 @@ text-decoration: none;
 /*--responsive--*/
 @media(max-width:1920px){
 .online-w3l-form {
-width: 1200px;
+width: 1500px;
 }
 }
 @media(max-width:1680px){
@@ -263,7 +263,7 @@ margin-top: 28px;
 }
 @media(max-width:1280px){
 .online-w3l-form {
-width: 649px;
+width: 800px;
 }
 .main-headder {
 margin: 0px 0px 18px;

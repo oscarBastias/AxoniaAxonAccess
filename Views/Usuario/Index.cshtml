@@ -5,64 +5,174 @@
 }
 <!DOCTYPE html>
 <html>
-<body>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="../../css/mdb.min.css">
 
 
+</head>
 
+<body class="fixed-sn white-skin">
     @{ List<Usuario> usuarios = (List<Usuario>)ViewBag.usuarios;}
 
     @foreach (var usuario in usuarios)
     {
-        <h1>@usuario.Nombre</h1>
-        <h1>@usuario.App_Pater @usuario.App_Mater</h1>
+
+        <main>
+            <div class="container-fluid">
+
+                <!-- Section: Team v.1 -->
+                <section class="section team-section">
+
+                    <!-- Grid row -->
+                    <div class="row text-center">
+
+                        <!-- Grid column -->
+                        <div class="col-md-8 mb-4">
+
+                            <!-- Card -->
+                            <div class="card card-cascade cascading-admin-card user-card">
+
+                                <!-- Card Data -->
+                                <div class="admin-up d-flex justify-content-start">
+                                    <i class="fas fa-users info-color py-4 mr-3 z-depth-2"></i>
+                                    <div class="data">
+                                        <h5 class="font-weight-bold dark-grey-text">
+                                             Perfil - <span class="text-muted">
+                                                Revisa tu
+                                                Perfil
+                                            </span>
+                                        </h5>
+                                    </div>
+                                </div>
+                                <div class="card-body card-body-cascade">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form3" class="form-control form-control-sm" value=@usuario.Mail  placeholder="Email" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form4" class="form-control form-control-sm" value="@usuario.Desc_Empresa"  placeholder="Compañia" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form5" class="form-control form-control-sm" value="@usuario.Nombre"  placeholder="Nombre" disabled>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form5" class="form-control form-control-sm" value="@usuario.App_Pater"  placeholder="Apellido" disabled>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form6" class="form-control form-control-sm" value="@usuario.Direccion"  placeholder="Direccion" disabled>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-md-12">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form7" class="form-control form-control-sm" value="@usuario.Desc_Comuna"  placeholder="Ciudad" disabled>
+                                            </div>
+
+                                        </div>
+                                        <!-- Grid column -->
+                                        <!-- Grid column -->
+                                        <div class="col-lg-4 col-md-6">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form8" class="form-control form-control-sm" value="@usuario.Desc_Pais"  placeholder="Pais" disabled>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+
+                                            <div class="md-form form-sm mb-0">
+                                                <input type="text" id="form9" class="form-control form-control-sm" value="@usuario.Desc_Region"  placeholder="Region" disabled>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- Grid row -->
+                                    <!-- Grid row -->
+                                    <div class="row">
+
+                                        <!-- Grid column -->
+                                        <div class="col-md-12">
+
+                                            <h4 class="text-muted text-left my-4">Informacion relevante</h4>
+
+                                            <!-- Basic textarea -->
+                                            <div class="md-form mb-0">
+                                                <textarea type="text" id="form10" class="md-textarea form-control" rows="3"></textarea>
+                                            </div>
+
+                                        </div>
+                                        <!-- Grid column -->
+
+                                    </div>
+                                    <!-- Grid row -->
+
+                                </div>
+                                <!-- Card content -->
+
+                            </div>
+                            <!-- Card -->
+
+                        </div>
+                        <!-- Grid column -->
+                        <!-- Grid column -->
+                        <div class="col-md-4 mb-4">
+
+                            <!-- Card -->
+                            <div class="card profile-card">
+
+                                <!-- Avatar -->
+                                <div class="avatar z-depth-1-half mb-4">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="rounded-circle" alt="First sample avatar image">
+                                </div>
+
+                                <div class="card-body pt-0 mt-0">
+
+                                    <!-- Name -->
+                                    <h3 class="mb-3 font-weight-bold"><strong>@usuario.Nombre @usuario.App_Pater</strong></h3>
+                                    <h6 class="font-weight-bold cyan-text mb-4">@usuario.Cargo</h6>
+
+
+                                    <a class="btn btn-info btn-rounded"> ACTUALIZAR</a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+        </main>
     }
-    
-
-    <!-- <div class="row">
-         <div class="col-md-12">
-             <table class="table">
-                 <tr>
-                     <th>Id_user</th>
-                     <th>Role</th>
-                     <th>Id_Estado</th>
-                     <th>Id_Comuna</th>
-                     <th>Id_Empresa</th>
-                     <th>Rut</th>
-                     <th>Dv</th>
-                     <th>Nombre</th>
-                     <th>App_Paterno</th>
-                     <th>App_Materno</th>
-                     <th>Direccion</th>
-                     <th>Telefono</th>
-                     <th
-                     <th>Password</th>
-                 </tr>
-
-                 @foreach (var usuario in usuarios)
-                 {
-                     <tr>
-                         <td>@usuario.Id</td>
-                         <td>@usuario.Desc_Role</td>
-                         <td>@usuario.Id_Estado</td>
-                         <td>@usuario.Id_Comuna</td>
-                         <td>@usuario.Id_Empresa</td>
-                         <td>@usuario.Rut</td>
-                         <td>@usuario.Dv</td>
-                         <td>@usuario.Nombre</td>
-                         <td>@usuario.App_Pater</td>
-                         <td>@usuario.App_Mater</td>
-                         <td>@usuario.Direccion</td>
-                         <td>@usuario.Telefono</td>
-                         <td>@usuario.Mail</td>
-                         <td>@usuario.Pass</td>
-                     </tr>
-                 }
-             </table>
-
-         </div>
-
-     </div>-->
-
 
 </body>
+
 </html>

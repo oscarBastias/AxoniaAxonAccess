@@ -1,0 +1,90 @@
+﻿@using AxonAccessMVC.Models.Clases;
+@{
+    ViewBag.Title = "Axonia";
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
+    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+</head>
+<body>
+    <div class="online-w3l-form">
+        @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.usu;}
+        <div class="table-responsive">
+            <table id="tablax" class="table" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>App_Paterno</th>
+                        <th>App_Materno</th>
+                        <th>Rut</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    @foreach (var usuario in usuarios)
+                    {
+
+                        <tr>
+                            <td>@usuario.id_usuario</td>
+                            <td>@usuario.Nombre</td>
+                            <td>@usuario.App_Pater</td>
+                            <td>@usuario.App_Mater</td>
+                            <td>@usuario.Rut</td>
+                            <td>@Html.ActionLink("Seleccionar", "listaXuser2", new { id = usuario.id_usuario })</td>
+                        </tr>
+
+
+                    }
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+    </script>
+    <!-- DATATABLES -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js">
+    </script>
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js">
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#tablax').DataTable({
+                language: {
+                    processing: "Tratamiento en curso...",
+                    search: "Buscar&nbsp;:",
+                    lengthMenu: "Agrupar de _MENU_ items",
+                    info: "Mostrando del item _START_ al _END_ de un total de _TOTAL_ items",
+                    infoEmpty: "No existen datos.",
+                    infoFiltered: "(filtrado de _MAX_ elementos en total)",
+                    infoPostFix: "",
+                    loadingRecords: "Cargando...",
+                    zeroRecords: "No se encontraron datos con tu busqueda",
+                    emptyTable: "No hay datos disponibles en la tabla.",
+                    paginate: {
+                        first: "Primero",
+                        previous: "Anterior",
+                        next: "Siguiente",
+                        last: "Ultimo"
+                    },
+                    aria: {
+                        sortAscending: ": active para ordenar la columna en orden ascendente",
+                        sortDescending: ": active para ordenar la columna en orden descendente"
+                    }
+                },
+                scrollY: 250,
+                lengthMenu: [[5, 10, 20, 30, -1], [5, 10, 20, 30, "All"]],
+                search: 1000
+            });
+        });
+    </script>
+</body>
+</html>

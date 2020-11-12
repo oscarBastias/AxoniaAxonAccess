@@ -448,6 +448,7 @@
       <Parameter Name="LATITUD" Mode="In" Type="String" />
       <Parameter Name="LONGITUD" Mode="In" Type="String" />
       <Parameter Name="COD_PAIS" Mode="In" Type="String" />
+      <Parameter Name="ACCESS_TIPO" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="sp_upgraddiagrams" />
     <FunctionImport Name="SVC_DELETED_USUARIO">
@@ -526,6 +527,15 @@
     </FunctionImport>
     <FunctionImport Name="SVC_DELETED_PUERTA">
       <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_INS_REFUSERACCESS">
+      <Parameter Name="ID_USUARIO" Mode="In" Type="Int32" />
+      <Parameter Name="ID_PUERTA" Mode="In" Type="Int32" />
+      <Parameter Name="DESC_ACCESS" Mode="In" Type="String" />
+      <Parameter Name="FECHA_ACCESS" Mode="In" Type="DateTime" />
+    </FunctionImport>
+    <FunctionImport Name="SVC_BRW_BUSQUEDAUSUARIO" ReturnType="Collection(axonAccessModel.SVC_BRW_BUSQUEDAUSUARIO_Result)">
+      <Parameter Name="NOMBRE" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -620,4 +630,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="SVC_BRW_BUSQUEDAUSUARIO_Result">
+    <Property Type="Int32" Name="id_usuario" Nullable="false" />
+    <Property Type="Int32" Name="id_role" Nullable="true" />
+    <Property Type="Int32" Name="id_estado" Nullable="true" />
+    <Property Type="Int32" Name="id_comuna" Nullable="true" />
+    <Property Type="Int32" Name="id_empresa" Nullable="true" />
+    <Property Type="Int32" Name="rut" Nullable="true" />
+    <Property Type="String" Name="dv" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="nombre" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="app_pater" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="app_mater" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="direccion" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="telefono" Nullable="true" />
+    <Property Type="String" Name="mail" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="pass" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="latitud" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="longitud" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="cargo" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="id_access_tipo" Nullable="true" />
+    <Property Type="Int32" Name="id_sucursal" Nullable="true" />
+    <Property Type="String" Name="cod_pais" Nullable="true" MaxLength="4" />
+  </ComplexType>
 </Schema>

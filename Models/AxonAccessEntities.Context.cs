@@ -231,7 +231,7 @@ namespace AxonAccessMVC.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
         }
     
-        public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS)
+        public virtual int sp_upd_user(Nullable<int> iD_USUARIO, Nullable<int> iD_ROLE, Nullable<int> iD_ESTADO, Nullable<int> iD_COMUNA, Nullable<int> iD_EMPRESA, Nullable<int> rUT, string dV, string nOMBRE, string aPP_PATER, string aPP_MATER, string dIRECCION, Nullable<int> tELEFONO, string eMAIL, string pASS, string lATITUD, string lONGITUD, string cOD_PAIS, Nullable<int> aCCESS_TIPO)
         {
             var iD_USUARIOParameter = iD_USUARIO.HasValue ?
                 new ObjectParameter("ID_USUARIO", iD_USUARIO) :
@@ -301,7 +301,11 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("COD_PAIS", cOD_PAIS) :
                 new ObjectParameter("COD_PAIS", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter);
+            var aCCESS_TIPOParameter = aCCESS_TIPO.HasValue ?
+                new ObjectParameter("ACCESS_TIPO", aCCESS_TIPO) :
+                new ObjectParameter("ACCESS_TIPO", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upd_user", iD_USUARIOParameter, iD_ROLEParameter, iD_ESTADOParameter, iD_COMUNAParameter, iD_EMPRESAParameter, rUTParameter, dVParameter, nOMBREParameter, aPP_PATERParameter, aPP_MATERParameter, dIRECCIONParameter, tELEFONOParameter, eMAILParameter, pASSParameter, lATITUDParameter, lONGITUDParameter, cOD_PAISParameter, aCCESS_TIPOParameter);
         }
     
         public virtual int sp_upgraddiagrams()
@@ -503,6 +507,36 @@ namespace AxonAccessMVC.Models
                 new ObjectParameter("ID_PUERTA", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SVC_DELETED_PUERTA", iD_PUERTAParameter);
+        }
+    
+        public virtual int SP_INS_REFUSERACCESS(Nullable<int> iD_USUARIO, Nullable<int> iD_PUERTA, string dESC_ACCESS, Nullable<System.DateTime> fECHA_ACCESS)
+        {
+            var iD_USUARIOParameter = iD_USUARIO.HasValue ?
+                new ObjectParameter("ID_USUARIO", iD_USUARIO) :
+                new ObjectParameter("ID_USUARIO", typeof(int));
+    
+            var iD_PUERTAParameter = iD_PUERTA.HasValue ?
+                new ObjectParameter("ID_PUERTA", iD_PUERTA) :
+                new ObjectParameter("ID_PUERTA", typeof(int));
+    
+            var dESC_ACCESSParameter = dESC_ACCESS != null ?
+                new ObjectParameter("DESC_ACCESS", dESC_ACCESS) :
+                new ObjectParameter("DESC_ACCESS", typeof(string));
+    
+            var fECHA_ACCESSParameter = fECHA_ACCESS.HasValue ?
+                new ObjectParameter("FECHA_ACCESS", fECHA_ACCESS) :
+                new ObjectParameter("FECHA_ACCESS", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INS_REFUSERACCESS", iD_USUARIOParameter, iD_PUERTAParameter, dESC_ACCESSParameter, fECHA_ACCESSParameter);
+        }
+    
+        public virtual ObjectResult<SVC_BRW_BUSQUEDAUSUARIO_Result> SVC_BRW_BUSQUEDAUSUARIO(string nOMBRE)
+        {
+            var nOMBREParameter = nOMBRE != null ?
+                new ObjectParameter("NOMBRE", nOMBRE) :
+                new ObjectParameter("NOMBRE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SVC_BRW_BUSQUEDAUSUARIO_Result>("SVC_BRW_BUSQUEDAUSUARIO", nOMBREParameter);
         }
     }
 }

@@ -213,5 +213,32 @@
     <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
     <FunctionImportMapping FunctionImportName="sp_upd_puerta" FunctionName="axonAccessModel.Store.sp_upd_puerta" />
     <FunctionImportMapping FunctionImportName="SVC_DELETED_PUERTA" FunctionName="axonAccessModel.Store.SVC_DELETED_PUERTA" />
+    <FunctionImportMapping FunctionImportName="SP_INS_REFUSERACCESS" FunctionName="axonAccessModel.Store.SP_INS_REFUSERACCESS" />
+    <FunctionImportMapping FunctionImportName="SVC_BRW_BUSQUEDAUSUARIO" FunctionName="axonAccessModel.Store.SVC_BRW_BUSQUEDAUSUARIO">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="axonAccessModel.SVC_BRW_BUSQUEDAUSUARIO_Result">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_role" ColumnName="id_role" />
+          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
+          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
+          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
+          <ScalarProperty Name="rut" ColumnName="rut" />
+          <ScalarProperty Name="dv" ColumnName="dv" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="app_pater" ColumnName="app_pater" />
+          <ScalarProperty Name="app_mater" ColumnName="app_mater" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="mail" ColumnName="mail" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+          <ScalarProperty Name="latitud" ColumnName="latitud" />
+          <ScalarProperty Name="longitud" ColumnName="longitud" />
+          <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

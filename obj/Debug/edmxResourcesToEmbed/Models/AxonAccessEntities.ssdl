@@ -387,6 +387,12 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="ID_SUCURSAL" Type="int" Mode="In" />
     <Parameter Name="DESC_PUERTA" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_INS_REFUSERACCESS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID_USUARIO" Type="int" Mode="In" />
+    <Parameter Name="ID_PUERTA" Type="int" Mode="In" />
+    <Parameter Name="DESC_ACCESS" Type="varchar" Mode="In" />
+    <Parameter Name="FECHA_ACCESS" Type="datetime" Mode="In" />
+  </Function>
   <Function Name="SP_INS_SUCURSAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID_ESTADO" Type="int" Mode="In" />
     <Parameter Name="ID_COMUNA" Type="int" Mode="In" />
@@ -471,8 +477,12 @@ advertencia 6002: La tabla o vista 'axonAccess.dbo.USUARIO_AUD' no tiene definid
     <Parameter Name="LATITUD" Type="varchar" Mode="In" />
     <Parameter Name="LONGITUD" Type="varchar" Mode="In" />
     <Parameter Name="COD_PAIS" Type="varchar" Mode="In" />
+    <Parameter Name="ACCESS_TIPO" Type="int" Mode="In" />
   </Function>
   <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SVC_BRW_BUSQUEDAUSUARIO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NOMBRE" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SVC_DELETED_ESTAMENTO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ID_EMPRESA" Type="int" Mode="In" />
   </Function>

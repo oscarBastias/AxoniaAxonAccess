@@ -13,6 +13,8 @@
 <body>
     <div class="online-w3l-form">
         <form action="~/Ref_UserAccess/Create" method="post">
+            <input type="hidden" name="id_empresa" value="@ViewBag.id_empresa" />
+            <input type="hidden" name="id_usuario" value="@ViewBag.id_usuario" />
             @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
             <div class="table-responsive">
                 <table id="Guardado" class="table">
@@ -32,7 +34,9 @@
                             <td name="chklst[]">@usuario.id_usuario</td>
                             <td name="chklst[]">@usuario.Desc_Sucursal</td>
                             <td name="chklst[]">@usuario.desc_access</td>
-                            <td name="chklst[]">@Html.CheckBoxFor(x=> usuario.isChecked)</td>
+                            <td> 
+                                <input type="checkbox" name="puerta[]" value="@usuario.id_puerta"/>
+                            </td>
                         </tr>
 
                     }

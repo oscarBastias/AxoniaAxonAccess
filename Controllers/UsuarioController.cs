@@ -175,6 +175,8 @@ namespace AxonAccessMVC.Controllers
                 TempData["Mensaje"]="El usuario no existe";
                 return RedirectToAction("Lista");
             }
+            EnviarAccessTipo();
+            EnviarPais();
             EnviarComuna();
             ViewBag.empresas = new Models.Clases.Mae_Empresa().ReadAllSinFiltro();
             EnviarEstados();

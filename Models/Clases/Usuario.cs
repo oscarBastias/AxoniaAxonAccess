@@ -37,6 +37,11 @@ namespace AxonAccessMVC.Models.Clases
 
         public string Desc_Sucursal { get; set; }
         public string Desc_Access { get; set; }
+        public string Desc_Empresa { get; set; }
+        public string Desc_Comuna { get; set; }
+        public string Desc_Region { get; set; }
+        public string Desc_Pais { get; set; }
+
 
 
         axonAccessEntities1 db = new axonAccessEntities1();
@@ -53,6 +58,7 @@ namespace AxonAccessMVC.Models.Clases
                         join ro in db.Ref_Role on us.id_role equals ro.id_role
                         join suc in db.Mae_Sucursal on us.id_sucursal  equals suc.id_sucursal
                         join acc in db.Ref_accessTipo on us.id_access_tipo equals acc.id_access_tipo
+                        join emp in db.Mae_Empresa on us.id_empresa equals emp.id_empresa
                         where us.id_role==4 || us.id_role==5 
                         select new Models.Clases.Usuario
                         {
@@ -77,7 +83,8 @@ namespace AxonAccessMVC.Models.Clases
                             Cod_Pais=us.cod_pais,
                             Id_Sucursal=(int)us.id_sucursal,
                             Desc_Sucursal=suc.descripcion,
-                            Desc_Access=acc.desc_Access_tipo
+                            Desc_Access=acc.desc_Access_tipo,
+                            Desc_Empresa=emp.desc_empresa
                             
                         }).OrderBy(x => x.Id_Role).ToList();
             }
@@ -153,9 +160,12 @@ namespace AxonAccessMVC.Models.Clases
         {
             
             string userMail = HttpContext.Current.User.Identity.Name;
-            return (from us in db.Mae_Usuario
-                    join ro in db.Ref_Role
-                    on us.id_role equals ro.id_role
+            return (from us in db.Mae_Usuario 
+                    join ro in db.Ref_Role on us.id_role equals ro.id_role
+                    join emp in db.Mae_Empresa on us.id_empresa equals emp.id_empresa
+                    join com in db.Mae_Comuna on us.id_comuna equals com.id_comuna
+                    join reg in db.Mae_Region on com.id_region equals reg.id_region
+                    join pa in db.Mae_Pais on reg.id_pais equals pa.id_pais
                     where us.mail == userMail
                     select new Models.Clases.Usuario
                     {
@@ -172,7 +182,12 @@ namespace AxonAccessMVC.Models.Clases
                         Direccion = us.direccion,
                         Telefono = (int)us.telefono,
                         Mail = us.mail,
-                        Pass = us.pass
+                        Pass = us.pass,
+                        Desc_Empresa=emp.desc_empresa,
+                        Desc_Comuna=com.desc_comuna,
+                        Desc_Pais=pa.desc_pais,
+                        Desc_Region=reg.desc_region,
+                        Cargo=us.cargo
                     }).ToList();
         }
 
@@ -242,7 +257,7 @@ namespace AxonAccessMVC.Models.Clases
             try
             {
                 db.sp_upd_user(this.Id,this.Id_Role,this.Id_Estado,this.Id_Comuna,this.Id_Empresa,this.Rut,this.Dv,
-                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass,this.Latitud,this.Longitud,this.Cod_Pais);
+                                this.Nombre,this.App_Pater,this.App_Mater,this.Direccion,this.Telefono,this.Mail,this.Pass,this.Latitud,this.Longitud,this.Cod_Pais, this.id_access_tipo);
                 return true;
             }
             catch (Exception)

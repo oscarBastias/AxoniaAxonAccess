@@ -78,7 +78,15 @@
                                         <li>@Html.ActionLink("LIsta de Accesos por estamento", "Lista", "Mae_Puerta", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
                                         <li>@Html.ActionLink("Crear nuevo Acceso", "Index", "Mae_Puerta", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
                                         <li>@Html.ActionLink("Asignar Accesos", "Index", "Ref_UserAccess", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+                                        <li>@Html.ActionLink("Accesos activos", "AccesList", "Ref_UserAccess", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
 
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-laptop"></i>Panel Visualizador <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>@Html.ActionLink("VIsualizar asignaciones por Usuario", "listaXuser", "Ref_UserAccess", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
+                                        <li>@Html.ActionLink("Visualizar asignaciones por Empresa", "listaXemp", "Ref_UserAccess", new { area = "" }, new { @class = "mr-lg-4 mr-3" })</li>
                                     </ul>
                                 </li>
                                 <li>
