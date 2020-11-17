@@ -26,15 +26,11 @@ namespace AxonAccessMVC.Models.Clases
         public int Telefono { get; set; }
         public string Mail { get; set; }
         public string Pass { get; set; }
-
         public string Latitud { get; set; }
-
         public string Longitud { get; set; }
-
         public string Cargo { get; set; }
         public string Desc_Role { get; set; }
         public string Cod_Pais { get; set; }
-
         public string Desc_Sucursal { get; set; }
         public string Desc_Access { get; set; }
         public string Desc_Empresa { get; set; }

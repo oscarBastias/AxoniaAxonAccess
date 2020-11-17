@@ -209,6 +209,7 @@ namespace AxonAccessMVC.Controllers
             Usuario u = new Usuario();
             u.Asign(id_valor, ArticleId);
             return RedirectToAction("Lista");
+
         }
 
     }
