@@ -14,7 +14,6 @@
     <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
     <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
 
-
 </head>
 <body>
 
@@ -25,25 +24,25 @@
 
                 <input type="hidden" id="Id_Sucursal" name="Id_Sucursal" value="@ViewBag.id" />
                 <div class="form-left-w3l">
-                    <input type="text" class="top-up" name="Nombre" placeholder="Nombre" required="">
+                    <input type="text" class="top-up" name="Nombre" placeholder="Nombre" minlength="3" maxlength="12" required pattern="[A-Za-z]+" title="Solo Texto. Tamaño máximo: largo de 12 caracteres">
                 </div>
                 <div class="main">
                     <div class="form-left-w3l">
 
-                        <input type="text" class="top-up" name="app_pater" placeholder="A.paterno" required="">
+                        <input type="text" class="top-up" name="app_pater" placeholder="A.paterno" maxlength="12" required pattern="[A-Za-z]+" title="Solo Texto. Tamaño máximo: largo de 12 caracteres">
                     </div>
                     <div class="form-right-w3ls ">
-                        <input type="text" class="top-up" name="app_mater" placeholder="A.Materno" required="">
+                        <input type="text" class="top-up" name="app_mater" placeholder="A.Materno" maxlength="12" required pattern="[A-Za-z]+" title="Solo Texto. Tamaño máximo: largo de 12 caracteres">
                         <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="main">
                     <div class="form-right-w3ls ">
-                        <input type="text" class="top-up" name="Rut" placeholder="Rut" required="">
+                        <input type="text" class="top-up" name="Rut" placeholder="Rut" minlength="6" maxlength="8" required pattern="[0-9]+" title="Solo números. Tamaño mínimo: 7. Tamaño máximo: 8">
                         <div class="clearfix"></div>
                     </div>
                     <div class="form-left-w3l">
-                        <input type="text" class="top-up" name="Dv" placeholder="Digito Verificador" required="">
+                        <input type="text" class="top-up" name="Dv" placeholder="Digito Verificador" maxlength="1" required pattern="[A-Za-z0-9]+" title="número o letra. Tamaño mínimo: 1. Tamaño máximo: 1">
                     </div>
                 </div>
                 <div class="main">
@@ -51,30 +50,30 @@
                         <select name="Cod_Pais" class="form-control buttom" @Html.DropDownListFor(p => p.Mae_Comuna.Mae_Region.Mae_Pais.cod_pais, new SelectList(ViewBag.pais, "Cod_Pais", "cod_pais")) </select>
                     </div>
                     <div class="form-right-w3ls ">
-                        <input class="buttom" type="text" name="telefono" placeholder="Phone Number" required="">
+                        <input class="buttom" type="text" name="telefono" placeholder=" Numero de telefono" minlength="9" maxlength="9" required pattern="[0-9]+" title="Solo números. Tamaño de 9 digitos">
                         <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="main">
                     <div class="form-left-w3l">
-                        <input type="email" name="Mail" placeholder="Email" required="">
+                        <input type="email" name="Mail" placeholder="Email" maxlength="30" required title="Tamaño máximo: largo de 30 caracteres">
                     </div>
                     <div class="form-right-w3ls">
-                        <input type="text" name="direccion" placeholder="Direccion" required="">
+                        <input type="text" name="direccion" placeholder="Direccion" maxlength="100" required title="Solo Texto. Tamaño máximo: largo de 100 caracteres">
                     </div>
                 </div>
                 <div class="main">
                     <div class="form-left-w3l">
-                        <input type="text" name="latitud" placeholder="Latitud" required="">
+                        <input type="text" name="latitud" placeholder="Latitud" maxlength="15" required title="números o letra.Tamaño máximo: 15 caracteres">
                     </div>
                     <div class="form-right-w3ls ">
-                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" required="">
+                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" maxlength="15" required title="números o letra.Tamaño máximo: 15 caracteres">
                         <div class="clearfix"></div>
                     </div>
                 </div>
                 <div class="main">
                     <div class="form-left-w3l">
-                        <input type="text" name="Pass" placeholder="Password" required="">
+                        <input type="text" name="Pass" placeholder="Password" minlength="6" maxlength="15" required pattern="[A-Za-z][A-Za-z0-9]*[0-9][A-Za-z0-9]*" title="La contraseña debe empezar con una letra y contener al menos un dígito contemplando un minimo de 6 caracteres y maximo de 15">
                     </div>
                     <div class="form-right-w3ls">
 
@@ -85,41 +84,39 @@
                 </div>
 
 
-                    <div class="main">
-                        <div class="form-left-w3l">
-                            <select class="form-control buttom" @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
-                        </div>
-                        <div class="form-right-w3ls">
-
-
-                            <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
-
-                        </div>
+                <div class="main">
+                    <div class="form-left-w3l">
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_role, new SelectList(ViewBag.roles, "Id_Role", "desc_role")) </select>
                     </div>
+                    <div class="form-right-w3ls">
 
-                    <div class="main">
-                        <div class="form-left-w3l">
 
-                            <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_estado, new SelectList(ViewBag.estados, "Id_Estado", "desc_estado"))</select>
 
-                        </div>
-                        <div class="form-right-w3ls">
-
-                            <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
-
-                            <div class="clearfix"></div>
-                        </div>
                     </div>
+                </div>
 
+                <div class="main">
+                    <div class="form-left-w3l">
 
-                    <div class="btnn">
-                        <input type="submit" value="Register">
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_comuna, new SelectList(ViewBag.comunas, "Id_Comuna", "desc_comuna"))</select>
+
                     </div>
+                    <div class="form-right-w3ls">
+
+                        <select class="form-control buttom" @Html.DropDownListFor(p => p.id_empresa, new SelectList(ViewBag.empresas, "id_empresa", "desc_empresa"))</select>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+
+                <div class="btnn">
+                    <input type="submit" value="Register" class="boton primario">
+                </div>
             </form>
-
-
-
         </div>
     </div>
+   
 </body>
 </html>

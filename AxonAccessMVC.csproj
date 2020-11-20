@@ -5497,7 +5497,10 @@
     <Content Include="styles\style.css" />
     <Content Include="styles\style2.css" />
     <Content Include="SwetAlert\index.js" />
+    <Content Include="SwetAlert\main.js" />
+    <Content Include="SwetAlert\opciones.js" />
     <Content Include="SwetAlert\Swal.js" />
+    <Content Include="SwetAlert\sweetAlert.js" />
     <Content Include="Views\Ref_UserAccess\Vista.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

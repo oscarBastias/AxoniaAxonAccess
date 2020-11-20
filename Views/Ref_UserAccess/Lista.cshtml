@@ -8,11 +8,23 @@
 <head>
     <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
     <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 <body>
     <div class="online-w3l-form">
         @{ List<Ref_UserAccesscs> usuarios = (List<Ref_UserAccesscs>)ViewBag.useraccess;}
         <div class="table-responsive">
+
+            <button onClick="mensaje()">Botón 1</button>
+            swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+            button: "Aww yiss!",
+            });
+
+
             <table id="tablax" class="table" style="width:100%">
                 <thead>
                     <tr>
@@ -26,7 +38,7 @@
                         <th>Otorgar Accesos</th>
                     </tr>
                 </thead>
-                
+
                 <tbody>
                     @foreach (var usuario in usuarios)
                     {
@@ -86,6 +98,18 @@
                 search: 1000
             });
         });
+
+
     </script>
+    <script type="text/javascript">
+        document.querySelector(".boton.primario").addEventListener('click', function () {
+            Swal.fire("Our First Alert", "With some body text and success icon!", "success");
+        });
+    </script>
+
+
+    <script src="~/SwetAlert/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="~/SwetAlert/sweetAlert.js"></script>
 </body>
 </html>

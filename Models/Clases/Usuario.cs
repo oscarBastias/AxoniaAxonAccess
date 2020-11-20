@@ -189,7 +189,7 @@ namespace AxonAccessMVC.Models.Clases
 
            public bool Save()
         {
-            
+           
             try
             {
                 db.SP_INS_USUARIO_MASS(this.Id_Role, this.Id_Estado, this.Id_Comuna, this.Id_Empresa, this.Rut, this.Dv, this.Nombre, this.App_Pater,
@@ -202,6 +202,30 @@ namespace AxonAccessMVC.Models.Clases
                 return false;
             }
         }
+        public bool FindRut(int Rut)
+        {
+            AxonAccessMVC.Models.Mae_Usuario ru = db.Mae_Usuario.FirstOrDefault(u => u.rut == Rut);
+            try
+            {
+                if (ru==null)
+                {
+                    return true;
+                }else if(ru.rut == Rut)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+                
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
 
         public class SimpleFileMove
         {

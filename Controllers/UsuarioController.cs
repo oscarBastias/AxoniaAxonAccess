@@ -104,13 +104,22 @@ namespace AxonAccessMVC.Controllers
         }
         
         [HttpPost]
-        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud,Cod_Pais,Id_Sucursal,id_access_tipo")]Usuario usuario)
+        public ActionResult Create2([Bind(Include = "Id_Role,Id_Estado,Id_Comuna,Id_Empresa,Rut,Dv,Nombre,App_Pater,App_Mater,Direccion,Telefono,Mail,Pass,Latitud,Longitud,Cod_Pais,Id_Sucursal,id_access_tipo")]Usuario usuario,int Rut)
         {
             try
             {
-                usuario.Save();
-                TempData["mensaje"] = "Guardado correctamente";
-                return RedirectToAction("Lista");
+                if ( usuario.FindRut(Rut) == true)
+                {
+                    usuario.Save();
+                    TempData["mensaje"] = "Guardado correctamente";
+                    return RedirectToAction("Lista");
+                }
+                else
+                {
+                    TempData["mensaje"] = "El rut ya existe en el sistema";
+                    return RedirectToAction("IndexRegistrado", "Home");
+                }
+
             }
             catch
             {

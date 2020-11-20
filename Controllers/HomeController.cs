@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-
+using Usuario = AxonAccessMVC.Models.Clases.Usuario;
 namespace AxonAccessMVC.Controllers
 {
 
@@ -13,6 +13,7 @@ namespace AxonAccessMVC.Controllers
         
         public ActionResult Index()
         {
+            
             return View();
         }
 
@@ -33,6 +34,7 @@ namespace AxonAccessMVC.Controllers
 
         public ActionResult IndexRegistrado()
         {
+            ViewBag.usuarios = new Usuario().ReadOne();
             ViewBag.Message = "AxonAccess.";
             return View();
         }
