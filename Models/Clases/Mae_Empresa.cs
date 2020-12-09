@@ -15,7 +15,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_comuna { get; set; }
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public List<Mae_Empresa> ReadAll(int valor)
         {
 

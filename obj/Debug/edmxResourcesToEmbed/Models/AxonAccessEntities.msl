@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities1">
+  <EntityContainerMapping StorageEntityContainer="axonAccessModelStoreContainer" CdmEntityContainer="axonAccessEntities2">
     <EntitySetMapping Name="Mae_Comuna">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Comuna">
         <MappingFragment StoreEntitySet="Mae_Comuna">
@@ -13,10 +13,19 @@
     <EntitySetMapping Name="Mae_Empresa">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Empresa">
         <MappingFragment StoreEntitySet="Mae_Empresa">
-          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
           <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
           <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
           <ScalarProperty Name="desc_empresa" ColumnName="desc_empresa" />
+          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Mae_Pais">
+      <EntityTypeMapping TypeName="axonAccessModel.Mae_Pais">
+        <MappingFragment StoreEntitySet="Mae_Pais">
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
+          <ScalarProperty Name="desc_pais" ColumnName="desc_pais" />
+          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -32,9 +41,9 @@
     <EntitySetMapping Name="Mae_Region">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Region">
         <MappingFragment StoreEntitySet="Mae_Region">
-          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
           <ScalarProperty Name="id_region" ColumnName="id_region" />
           <ScalarProperty Name="desc_region" ColumnName="desc_region" />
+          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,9 +64,6 @@
     <EntitySetMapping Name="Mae_Usuario">
       <EntityTypeMapping TypeName="axonAccessModel.Mae_Usuario">
         <MappingFragment StoreEntitySet="Mae_Usuario">
-          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
-          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
-          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
           <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
           <ScalarProperty Name="id_role" ColumnName="id_role" />
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
@@ -75,6 +81,17 @@
           <ScalarProperty Name="latitud" ColumnName="latitud" />
           <ScalarProperty Name="longitud" ColumnName="longitud" />
           <ScalarProperty Name="cargo" ColumnName="cargo" />
+          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
+          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
+          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_accessTipo">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_accessTipo">
+        <MappingFragment StoreEntitySet="Ref_accessTipo">
+          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
+          <ScalarProperty Name="desc_Access_tipo" ColumnName="desc_Access_tipo" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -94,6 +111,14 @@
         <MappingFragment StoreEntitySet="Ref_Estado">
           <ScalarProperty Name="id_estado" ColumnName="id_estado" />
           <ScalarProperty Name="desc_estado" ColumnName="desc_estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ref_Estamento">
+      <EntityTypeMapping TypeName="axonAccessModel.Ref_Estamento">
+        <MappingFragment StoreEntitySet="Ref_Estamento">
+          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
+          <ScalarProperty Name="desc_estamento" ColumnName="desc_estamento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -160,20 +185,11 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_INS_EMPRESA" FunctionName="axonAccessModel.Store.SP_INS_EMPRESA" />
+    <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
+    <FunctionImportMapping FunctionImportName="SP_INS_REFUSERACCESS" FunctionName="axonAccessModel.Store.SP_INS_REFUSERACCESS" />
+    <FunctionImportMapping FunctionImportName="SP_INS_SUCURSAL" FunctionName="axonAccessModel.Store.SP_INS_SUCURSAL" />
     <FunctionImportMapping FunctionImportName="SP_INS_USUARIO_MASS" FunctionName="axonAccessModel.Store.SP_INS_USUARIO_MASS" />
-    <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
-    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
-    <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
-    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
-    <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
-    <EntitySetMapping Name="Ref_Estamento">
-      <EntityTypeMapping TypeName="axonAccessModel.Ref_Estamento">
-        <MappingFragment StoreEntitySet="Ref_Estamento">
-          <ScalarProperty Name="desc_estamento" ColumnName="desc_estamento" />
-          <ScalarProperty Name="id_estamento" ColumnName="id_estamento" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="Sp_List_Emp" FunctionName="axonAccessModel.Store.Sp_List_Emp">
       <ResultMapping>
         <ComplexTypeMapping TypeName="axonAccessModel.Sp_List_Emp_Result">
@@ -186,59 +202,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SP_INS_EMPRESA" FunctionName="axonAccessModel.Store.SP_INS_EMPRESA" />
-    <FunctionImportMapping FunctionImportName="SP_INS_SUCURSAL" FunctionName="axonAccessModel.Store.SP_INS_SUCURSAL" />
-    <EntitySetMapping Name="Ref_accessTipo">
-      <EntityTypeMapping TypeName="axonAccessModel.Ref_accessTipo">
-        <MappingFragment StoreEntitySet="Ref_accessTipo">
-          <ScalarProperty Name="desc_Access_tipo" ColumnName="desc_Access_tipo" />
-          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="sp_upd_sucursal" FunctionName="axonAccessModel.Store.sp_upd_sucursal" />
-    <FunctionImportMapping FunctionImportName="SVC_DELETED_SUCURSAL" FunctionName="axonAccessModel.Store.SVC_DELETED_SUCURSAL" />
+    <FunctionImportMapping FunctionImportName="Sp_LoginUsuario" FunctionName="axonAccessModel.Store.Sp_LoginUsuario" />
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="axonAccessModel.Store.sp_renamediagram" />
     <FunctionImportMapping FunctionImportName="sp_upd_estamento" FunctionName="axonAccessModel.Store.sp_upd_estamento" />
-    <FunctionImportMapping FunctionImportName="SVC_DELETED_ESTAMENTO" FunctionName="axonAccessModel.Store.SVC_DELETED_ESTAMENTO" />
-    <EntitySetMapping Name="Mae_Pais">
-      <EntityTypeMapping TypeName="axonAccessModel.Mae_Pais">
-        <MappingFragment StoreEntitySet="Mae_Pais">
-          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
-          <ScalarProperty Name="desc_pais" ColumnName="desc_pais" />
-          <ScalarProperty Name="id_pais" ColumnName="id_pais" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_upd_insersion_user" FunctionName="axonAccessModel.Store.sp_upd_insersion_user" />
-    <FunctionImportMapping FunctionImportName="SP_INS_PUERTA" FunctionName="axonAccessModel.Store.SP_INS_PUERTA" />
     <FunctionImportMapping FunctionImportName="sp_upd_puerta" FunctionName="axonAccessModel.Store.sp_upd_puerta" />
+    <FunctionImportMapping FunctionImportName="sp_upd_sucursal" FunctionName="axonAccessModel.Store.sp_upd_sucursal" />
+    <FunctionImportMapping FunctionImportName="sp_upd_user" FunctionName="axonAccessModel.Store.sp_upd_user" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="axonAccessModel.Store.sp_upgraddiagrams" />
+    <FunctionImportMapping FunctionImportName="SVC_DELETED_ESTAMENTO" FunctionName="axonAccessModel.Store.SVC_DELETED_ESTAMENTO" />
     <FunctionImportMapping FunctionImportName="SVC_DELETED_PUERTA" FunctionName="axonAccessModel.Store.SVC_DELETED_PUERTA" />
-    <FunctionImportMapping FunctionImportName="SP_INS_REFUSERACCESS" FunctionName="axonAccessModel.Store.SP_INS_REFUSERACCESS" />
-    <FunctionImportMapping FunctionImportName="SVC_BRW_BUSQUEDAUSUARIO" FunctionName="axonAccessModel.Store.SVC_BRW_BUSQUEDAUSUARIO">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="axonAccessModel.SVC_BRW_BUSQUEDAUSUARIO_Result">
-          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
-          <ScalarProperty Name="id_role" ColumnName="id_role" />
-          <ScalarProperty Name="id_estado" ColumnName="id_estado" />
-          <ScalarProperty Name="id_comuna" ColumnName="id_comuna" />
-          <ScalarProperty Name="id_empresa" ColumnName="id_empresa" />
-          <ScalarProperty Name="rut" ColumnName="rut" />
-          <ScalarProperty Name="dv" ColumnName="dv" />
-          <ScalarProperty Name="nombre" ColumnName="nombre" />
-          <ScalarProperty Name="app_pater" ColumnName="app_pater" />
-          <ScalarProperty Name="app_mater" ColumnName="app_mater" />
-          <ScalarProperty Name="direccion" ColumnName="direccion" />
-          <ScalarProperty Name="telefono" ColumnName="telefono" />
-          <ScalarProperty Name="mail" ColumnName="mail" />
-          <ScalarProperty Name="pass" ColumnName="pass" />
-          <ScalarProperty Name="latitud" ColumnName="latitud" />
-          <ScalarProperty Name="longitud" ColumnName="longitud" />
-          <ScalarProperty Name="cargo" ColumnName="cargo" />
-          <ScalarProperty Name="id_access_tipo" ColumnName="id_access_tipo" />
-          <ScalarProperty Name="id_sucursal" ColumnName="id_sucursal" />
-          <ScalarProperty Name="cod_pais" ColumnName="cod_pais" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SVC_DELETED_SUCURSAL" FunctionName="axonAccessModel.Store.SVC_DELETED_SUCURSAL" />
+    <FunctionImportMapping FunctionImportName="SVC_DELETED_USUARIO" FunctionName="axonAccessModel.Store.SVC_DELETED_USUARIO" />
   </EntityContainerMapping>
 </Mapping>

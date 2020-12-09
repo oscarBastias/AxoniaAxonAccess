@@ -17,7 +17,7 @@ namespace AxonAccessMVC.Controllers
         public ActionResult Index()
         {
             List<Models.Clases.Ref_Role> lst;
-            using (axonAccessEntities1 db=new axonAccessEntities1())
+            using (axonAccessEntities2 db =new axonAccessEntities2())
             {
                 lst = (from d in db.Ref_Role
                        select new Models.Clases.Ref_Role

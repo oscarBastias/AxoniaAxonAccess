@@ -14,7 +14,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_pais { get; set; }
         public int id_pais { get; set; }
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public List<Mae_Comuna> ReadAll()
         {
             return db.Mae_Comuna.Select(c => new Mae_Comuna()

@@ -27,10 +27,10 @@ namespace AxonAccessMVC.Models
         public Nullable<int> id_estamento { get; set; }
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
+        public virtual Ref_Estamento Ref_Estamento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mae_Sucursal> Mae_Sucursal { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Mae_Usuario> Mae_Usuario { get; set; }
-        public virtual Ref_Estamento Ref_Estamento { get; set; }
     }
 }

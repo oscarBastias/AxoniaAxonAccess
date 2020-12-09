@@ -11,7 +11,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_accessTipo { get; set; }
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public List<Ref_AccessTipo> ReadAll()
         {
             return db.Ref_accessTipo.Select(c => new Ref_AccessTipo()

@@ -11,7 +11,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_estamento { get; set; }
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public List<Ref_Estamento> ReadAll()
         {
             return db.Ref_Estamento.Select(c => new Ref_Estamento()

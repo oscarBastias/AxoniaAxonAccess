@@ -12,7 +12,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_role { get; set; }
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public List<Ref_Role> ReadAll()
         {
             return db.Ref_Role.Select(c => new Ref_Role()

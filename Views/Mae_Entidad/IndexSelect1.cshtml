@@ -10,6 +10,8 @@
 <head>
     <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
     <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+
+
 </head>
 <body>
     <div class="online-w3l-form">
@@ -47,6 +49,21 @@
                         }
                     </tbody>
                 </table>
+                @{
+
+                    if (@TempData.Count > 0)
+                    {
+                        <script type="text/javascript">
+                    var texto = ' @TempData["mensaje"]';
+                    swal({
+                        title: '',
+                        text: texto,
+                        type: 'success'
+                    });
+
+                        </script>
+                    }
+                }
             </div>
         </form>
     </div>

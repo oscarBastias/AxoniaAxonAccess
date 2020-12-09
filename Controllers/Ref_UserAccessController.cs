@@ -18,7 +18,7 @@ namespace AxonAccessMVC.Controllers
     public class Ref_UserAccessController : Controller
     {
         // GET: Ref_UserAccess
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         public ActionResult Index()
         {
             ViewBag.empresas = new Mae_Empresa().ReadAllSinFiltro();

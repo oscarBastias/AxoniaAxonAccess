@@ -27,7 +27,7 @@ namespace AxonAccessMVC.Models.Clases
         public string Desc_Puerta { get; set; }
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
 
         public List<Ref_UserAccesscs> ReadAllFiltrado(int id)
         {

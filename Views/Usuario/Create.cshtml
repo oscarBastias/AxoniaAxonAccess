@@ -12,7 +12,7 @@
 <html lang="en">
 <head>
     <link href="~/styles/css/style.css" rel='stylesheet' type='text/css' media="all">
-    <link href="//fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
+    <link href="/fonts.googleapis.com/css?family=Saira+Condensed:400,500,600,700" rel="stylesheet">
 
 </head>
 <body>
@@ -64,10 +64,10 @@
                 </div>
                 <div class="main">
                     <div class="form-left-w3l">
-                        <input type="text" name="latitud" placeholder="Latitud" maxlength="15" required title="números o letra.Tamaño máximo: 15 caracteres">
+                        <input type="text" name="latitud" placeholder="Latitud" maxlength="15" required pattern="[A-Za-z0-9]+" title="números o letra.Tamaño máximo: 15 caracteres">
                     </div>
                     <div class="form-right-w3ls ">
-                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" maxlength="15" required title="números o letra.Tamaño máximo: 15 caracteres">
+                        <input class="buttom" type="text" name="longitud" placeholder="Longitud" maxlength="15" required pattern="[A-Za-z0-9]+" title="números o letra.Tamaño máximo: 15 caracteres">
                         <div class="clearfix"></div>
                     </div>
                 </div>

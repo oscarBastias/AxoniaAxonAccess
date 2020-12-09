@@ -142,20 +142,20 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccessEntities.Context.cs">
+    <Compile Include="Models\axonAccessEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccessEntities.Context.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccessEntities.cs">
+    <Compile Include="Models\axonAccessEntities.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AxonAccessEntities.Designer.cs">
+    <Compile Include="Models\axonAccessEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
+      <DependentUpon>axonAccessEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Clases\Mae_Comuna.cs" />
     <Compile Include="Models\Clases\Mae_Empresa.cs" />
@@ -169,61 +169,58 @@
     <Compile Include="Models\Clases\Ref_UserAccesscs.cs" />
     <Compile Include="Models\Clases\Usuario.cs" />
     <Compile Include="Models\Mae_Comuna.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Empresa.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Pais.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Puerta.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Region.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Sucursal.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Mae_Usuario.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_accessTipo.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_DetalleAcceso.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_Estado.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_Estamento.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_Role.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Ref_UserAccess.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Sp_List_Emp_Result.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SVC_BRW_BUSQUEDAUSUARIO_Result.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIO_AUD.cs">
-      <DependentUpon>AxonAccessEntities.tt</DependentUpon>
+      <DependentUpon>axonAccessEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\Ref_UserAccess\Vista.aspx.cs">
@@ -4478,15 +4475,15 @@
     <Content Include="js\vendor\tinymce\tinymce.min.js" />
     <Content Include="mdb-addons\mdb-lightbox-ui.html" />
     <Content Include="mdb-addons\preloader.html" />
-    <Content Include="Models\AxonAccessEntities.Context.tt">
+    <Content Include="Models\axonAccessEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
-      <LastGenOutput>AxonAccessEntities.Context.cs</LastGenOutput>
+      <DependentUpon>axonAccessEntities.edmx</DependentUpon>
+      <LastGenOutput>axonAccessEntities.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\AxonAccessEntities.tt">
+    <Content Include="Models\axonAccessEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
-      <LastGenOutput>AxonAccessEntities.cs</LastGenOutput>
+      <DependentUpon>axonAccessEntities.edmx</DependentUpon>
+      <LastGenOutput>axonAccessEntities.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -5378,13 +5375,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Scripts\jquery-2.2.4.min.map" />
     <Content Include="CargasMasivas\CargaMasiva.csv" />
-    <EntityDeploy Include="Models\AxonAccessEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>AxonAccessEntities.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\AxonAccessEntities.edmx.diagram">
-      <DependentUpon>AxonAccessEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="font\roboto\Roboto-Bold.eot" />
     <Content Include="font\roboto\Roboto-Bold.ttf" />
     <Content Include="font\roboto\Roboto-Bold.woff" />
@@ -5415,6 +5405,13 @@
     <Content Include="js\vendor\tinymce\skins\lightgray\fonts\tinymce.eot" />
     <Content Include="js\vendor\tinymce\skins\lightgray\fonts\tinymce.ttf" />
     <Content Include="js\vendor\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <EntityDeploy Include="Models\axonAccessEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>axonAccessEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\axonAccessEntities.edmx.diagram">
+      <DependentUpon>axonAccessEntities.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\globalize.js" />
     <Content Include="Scripts\html2canvas.js" />

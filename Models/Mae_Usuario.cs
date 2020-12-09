@@ -43,11 +43,11 @@ namespace AxonAccessMVC.Models
     
         public virtual Mae_Comuna Mae_Comuna { get; set; }
         public virtual Mae_Empresa Mae_Empresa { get; set; }
+        public virtual Mae_Sucursal Mae_Sucursal { get; set; }
+        public virtual Ref_accessTipo Ref_accessTipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ref_UserAccess> Ref_UserAccess { get; set; }
         public virtual Ref_Estado Ref_Estado { get; set; }
         public virtual Ref_Role Ref_Role { get; set; }
-        public virtual Ref_accessTipo Ref_accessTipo { get; set; }
-        public virtual Mae_Sucursal Mae_Sucursal { get; set; }
     }
 }

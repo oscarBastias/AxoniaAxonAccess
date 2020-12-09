@@ -20,7 +20,7 @@ namespace AxonAccessMVC.Models.Clases
         public string desc_empresa { get; set; }
         public string desc_pais { get; set; }
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
 
         public List<Ref_Sucursal> ReadAll()
         {

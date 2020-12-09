@@ -40,7 +40,7 @@ namespace AxonAccessMVC.Models.Clases
 
 
 
-        axonAccessEntities1 db = new axonAccessEntities1();
+        axonAccessEntities2 db = new axonAccessEntities2();
         AxonAccessMVC.Controllers.AuthController au = new Controllers.AuthController();
 
         public List<Usuario> ReadAll()
